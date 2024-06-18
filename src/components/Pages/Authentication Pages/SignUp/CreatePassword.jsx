@@ -1,19 +1,20 @@
-import { useFormik } from "formik";
+//App
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 //Component(s)
-import { ScaleLoader } from "react-spinners"; // loading animantion component used for buttons
+import { useFormik } from "formik";
+import { useFormContext } from "./FormContext";
 import PasswordField from "../../../formFields/PasswordField";
 import { createPassword } from "../../../../Data/formikUtils";
 import ProgressBar from "../../../Page Components/ProgressBar";
-import axios from "axios";
 import FormButton from "../../../Buttons/FormButton";
+import { useNavigate } from "react-router-dom";
+//import axios from "axios";
 
 const CreatePassword = () => {
   const [loading, setLoading] = useState(false);
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+  const navigate = useNavigate();
+  const { dispatch } = useFormContext();
 
   const formik = useFormik({
     initialValues: {
@@ -23,11 +24,15 @@ const CreatePassword = () => {
     validationSchema: createPassword,
     onSubmit: (values) => {
       setLoading(true);
-      // Simulate a delay for form submission
-      setTimeout(() => {
+        dispatch({ type: 'SET_PASSWORD', payload: values.password });
+        dispatch({ type: 'SET_CONFIRM_PASSWORD', payload: values.confirmPassword });
         setLoading(false);
         navigate("/sign-up/identification");
-      }, 1000);
+      // Simulate a delay for form submission
+      // setTimeout(() => {
+      //   setLoading(false);
+      //   navigate("/sign-up/identification");
+      // }, 1000);
     },
   });
   return (
