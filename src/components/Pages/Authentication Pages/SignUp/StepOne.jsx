@@ -95,7 +95,7 @@ const StepOne = () => {
           />
         </form>
         <div className="w-full text-center text-[1rem] leading-6 font-normal flex flex-col sm:flex-row gap-x-3 justify-center items-center">
-          <p className="text-[#101010]">Already have an account</p>
+          <p className="text-[#101010]">Already have an account?</p>
           <Link className="text-[#2F4EED]" to="/sign-in">
             Sign In
           </Link>
