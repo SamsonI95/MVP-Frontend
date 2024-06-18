@@ -14,9 +14,10 @@ import ForgotPassword from "./components/Pages/Authentication Pages/forgotPasswo
 import NewPassword from "./components/Pages/Authentication Pages/NewPassword";
 import PasswordVerificationCheck from "./components/Pages/Authentication Pages/PasswordVerificationCheck";
 import SuccessVerificationCheck from "./components/Pages/Authentication Pages/SuccessVerificationCheck";
-import Layout from './components/Pages/Layout'
+import Layout from "./components/Pages/Layout";
 
 //Page Component
+import { FormProvider } from "./components/Pages/Authentication Pages/SignUp/FormContext";
 // import Header from "./components/Page Components/Header";
 // import Footer from "./components/Page Components/Footer";
 // import HideHeaderFooter from "./components/Page Components/HideHeaderFooter";
@@ -32,8 +33,9 @@ import AdminLayout from "./components/Pages/AdminDashboard/AdminLayout";
 function App() {
   return (
     <>
-      <Router>
-        {/* <HideHeaderFooter HeaderComponent={Header} FooterComponent={Footer}> */}
+      <FormProvider>
+        <Router>
+          {/* <HideHeaderFooter HeaderComponent={Header} FooterComponent={Footer}> */}
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Landing />} />
@@ -56,16 +58,16 @@ function App() {
                 <Route path="organization" element={<Organization />} />
               </Route>
             </Route>
-            
 
             {/* Dashboard */}
-            <Route path="/" element={<AdminLayout/>}>
+            <Route path="/" element={<AdminLayout />}>
               <Route path="dashboard" element={<Dashboard />}></Route>
-              <Route path="employees" element={<Employees/>}></Route>
+              <Route path="employees" element={<Employees />}></Route>
             </Route>
           </Routes>
-        {/* </HideHeaderFooter> */}
-      </Router>
+          {/* </HideHeaderFooter> */}
+        </Router>
+      </FormProvider>
     </>
   );
 }
