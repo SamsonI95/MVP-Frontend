@@ -1,0 +1,11 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="eth">
+<path id="Vector" d="M16 32C24.8365 32 32 24.8365 32 16C32 7.16344 24.8365 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8365 7.16344 32 16 32Z" fill="#627EEA"/>
+<path id="Vector_2" d="M16 5.33325V13.2193L22.6653 16.1978L16 5.33325Z" fill="white" fill-opacity="0.602"/>
+<path id="Vector_3" d="M15.9993 5.33325L9.33301 16.1978L15.9993 13.2193V5.33325Z" fill="white"/>
+<path id="Vector_4" d="M16 21.3079V26.6665L22.6699 17.4387L16 21.3079Z" fill="white" fill-opacity="0.602"/>
+<path id="Vector_5" d="M15.9993 26.6665V21.3071L9.33301 17.4387L15.9993 26.6665Z" fill="white"/>
+<path id="Vector_6" d="M16 20.0682L22.6653 16.1981L16 13.2214V20.0682Z" fill="white" fill-opacity="0.2"/>
+<path id="Vector_7" d="M9.33301 16.1981L15.9993 20.0682V13.2214L9.33301 16.1981Z" fill="white" fill-opacity="0.602"/>
+</g>
+</svg>

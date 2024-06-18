@@ -10,7 +10,7 @@ const Asidebar = ({clicked, setClicked}) => {
   const { pathname } = location;
 
   return (
-    <aside id='sidebar' className={`fixed h-full bg-[#F7F7F7] z-50 top-0 left-0 overflow-x-hidden transition-width duration-300 ${clicked ? 'w-[65px]' : 'w-[260px]'}`}>
+    <aside id='sidebar' className={`hidden lg:flex flex-col fixed h-full bg-[#F7F7F7] z-50 top-0 left-0 overflow-x-hidden transition-width duration-300 ${clicked ? 'w-[65px]' : 'w-[260px]'}`}>
       <Link to={'/dashboard'} className={`flex justify-between items-center py-[40px] ${clicked ? 'px-[4px]' : 'px-[24px]'} h-[120px] ${clicked ? 'gap-[6px]' : 'gap-[24px]'} whitespace-nowrap`}>
         <RxHamburgerMenu onClick={() => setClicked(prev => !prev)} className='text-[1.25rem]' />
         {

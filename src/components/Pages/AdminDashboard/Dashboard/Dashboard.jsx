@@ -1,15 +1,17 @@
-import React from 'react'
-import DashboardHeader from '../../../Page Components/DashboardHeader'
+import React, { useState } from 'react'
 import { HiOutlineEyeSlash } from 'react-icons/hi2'
 import { RxArrowBottomLeft, RxArrowTopRight } from 'react-icons/rx'
 import AssetsTable from '../../../Page Components/AssetsTable'
+import TransactionsTable from '../../../Page Components/TransactionsTable'
 
 const Dashboard = () => {
+
+  const [isClicked, setIsClicked] = useState('Assets')
   return (
-    <section className=''>
-      <DashboardHeader></DashboardHeader>
+    <section className='w-full lg:w-auto'>
 
       <div className='gap-[24px] py-[16px] px-[32px] flex flex-col justify-center items-start self-stretch'>
+        <h1 className='text-[#151515] flex lg:hidden text-[1.75rem] font-bold leading-9 tracking-[-0.56px] py-[16px]'>Hey there, Daniel!</h1>
 
         <div className='flex flex-col justify-center items-start gap-[16px]'>
           <h2 className='text-[#9C9C9C] text-[1.125rem] font-semibold leading-7'>Total Balance</h2>
@@ -30,12 +32,24 @@ const Dashboard = () => {
       </div>
       <div className='py-[16px] px-0 gap-[10px] flex flex-col justify-center items-start self-stretch'>
         <div className='gap-[24px] flex items-start px-[32px] py-0 self-stretch border-b border-[#E9E9E9]'>
-          <h1 className='text-[#9C9C9C] text-[1rem] font-semibold leading-6 gap-2 pb-2'>Assets</h1>
-          <h1 className='text-[#9C9C9C] text-[1rem] font-semibold leading-6 gap-2 pb-2'>Transactions</h1>
+          <h1 onClick={() => setIsClicked('Assets')} className={`text-[1rem] font-semibold leading-6 gap-2 pb-2 duration-200 relative cursor-pointer ${isClicked === 'Assets' ? `text-[#2F4EED]` : `text-[#9C9C9C]`}`}>
+            Assets
+            {
+              isClicked === 'Assets' && (<div className='bg-[#2F4EED] rounded-full w-[50px] h-[2px] absolute bottom-[-1px]'></div>)
+            }
+          </h1>
+          <h1 onClick={() => setIsClicked('Transactions')} className={`text-[1rem] font-semibold leading-6 gap-2 pb-2 duration-200 relative cursor-pointer ${isClicked === 'Transactions' ? `text-[#2F4EED]` : `text-[#9C9C9C]`}`}>
+            Transactions
+            {
+              isClicked === 'Transactions' && (<div className='bg-[#2F4EED] rounded-full w-[100px] h-[2px] absolute bottom-[-1px]'></div>)
+            }
+          </h1>
         </div>
       </div>
       <div className='pt-[16px] flex items-start self-stretch w-full'>
-        <AssetsTable/>
+        {
+          isClicked === 'Assets' ? (<AssetsTable/>) : (<TransactionsTable/>)
+        }
       </div>
     </section>
   )
