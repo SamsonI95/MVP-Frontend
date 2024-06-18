@@ -31,12 +31,13 @@ const Header = () => {
     location.pathname !== "/success-verification";
 
   return (
+    <>
     <div>
       <Link to="/home" className="flex items-center justify-center sm:py-[16px] py-[24px]">
         <img src={HeaderLogo} alt="logo-icon" />
       </Link>
     </div>
-    <>
+   
       <div className="flex items-center justify-between sm:py-4 sm:px-5 md:py-6 md:px-8 lg:px-[100px]">
         <div>
           <Link to="/home" className="sm:py-[16px] py-[24px]">
