@@ -8,10 +8,12 @@ import InputField from "../../../formFields/InputField";
 import ProgressBar from "../../../Page Components/ProgressBar";
 import axios from "axios";
 import FormButton from "../../../Buttons/FormButton";
+import { useNavigate } from "react-router-dom";
 
 const Organization = () => {
   const [loading, setLoading] = useState(false);
   const { state, dispatch } = useFormContext();
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   axios.get();
@@ -21,25 +23,43 @@ const Organization = () => {
     initialValues: {
       organization: "",
     },
-    onSubmit: (values) => {
+    onSubmit: (values, { setSubmitting, setErrors }) => {
       setLoading(true);
       dispatch({ type: "SET_ORGANIZATION", payload: values.organization });
       const payload = {
         email: state.email,
-        password: state.password,
         firstName: state.firstName,
         lastName: state.lastName,
-        organization: values.organization,
+        organizationName: values.organization,
+        password: state.password,
       };
+      console.log(payload);
       axios
-        .post("/api/employerauth/signup/employer-detail", payload)
-        .then(() => {
+        .post("/api/employerauth/signup/employer-details", payload)
+        .then((response) => {
           setLoading(false);
+          console.log("Signup successful:", response.data);
           navigate("/sign-in");
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
           setLoading(false);
+          if (error.response) {
+            // Server responded with a non-2xx status code
+            setErrors({
+              organization: "Failed to submit form. Please try again later.",
+            });
+          } else if (error.request) {
+            // The request was made but no response was received
+            setErrors({
+              organization:
+                "Network error. Please check your internet connection.",
+            });
+          } else {
+            // Something else happened while setting up the request
+            setErrors({ organization: "An unexpected error occurred." });
+          }
+          setSubmitting(false);
         });
 
       // setTimeout(() => {
