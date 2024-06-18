@@ -3,12 +3,12 @@ import * as Yup from "yup";
 
 axios.defaults.baseURL = `https://mvp-backend-bzvi.onrender.com/v1`;
 
-// const passwordRegExp =
-//   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#;:])[A-Za-z\d@$!%*?&#;:]{6,12}$/;
+const passwordRegExp =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#;:])[A-Za-z\d@$!%*?&#;:]{6,12}$/;
 
-// const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-// const codeRegex = /^[0-9]*$/
+const codeRegex = /^[0-9]*$/
 
 export const signIn = Yup.object({
   email: Yup.string().email("Invalid Email Address").required("required"),
@@ -34,6 +34,13 @@ export const signIn = Yup.object({
 //     .oneOf([Yup.ref("password")], "Password must match!")
 //     .required("required"),
 // });
+
+export const OrgEmail = Yup.object({
+  email: Yup.string()
+    .email("Enter Your E-mail Address")
+    .matches(emailRegExp, "Invalid E-mail Address")
+    .required("required"),
+});
 
 export const verifyEmail = Yup.object({
   code: Yup.string().required("required"),

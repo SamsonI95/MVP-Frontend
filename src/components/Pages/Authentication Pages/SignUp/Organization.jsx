@@ -1,9 +1,9 @@
-import { useFormik } from "formik";
+//App
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 //Component(s)
-import { ScaleLoader } from "react-spinners"; // loading animantion component used for buttons
+import { useFormik } from "formik";
+import { useFormContext } from "./FormContext";
 import InputField from "../../../formFields/InputField";
 import ProgressBar from "../../../Page Components/ProgressBar";
 import axios from "axios";
@@ -11,20 +11,41 @@ import FormButton from "../../../Buttons/FormButton";
 
 const Organization = () => {
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    axios.get();
-  });
+  const { state, dispatch } = useFormContext();
+
+  // useEffect(() => {
+  //   axios.get();
+  // });
+
   const formik = useFormik({
     initialValues: {
       organization: "",
     },
     onSubmit: (values) => {
       setLoading(true);
-      // Simulate a delay for form submission
-      setTimeout(() => {
-        setLoading(false);
-        // Handle final submission, perhaps show a success message or navigate elsewhere
-      }, 1000);
+      dispatch({ type: "SET_ORGANIZATION", payload: values.organization });
+      const payload = {
+        email: state.email,
+        password: state.password,
+        firstName: state.firstName,
+        lastName: state.lastName,
+        organization: values.organization,
+      };
+      console.log('Datails', payload)
+      axios
+        .post("/api/employerauth/signup/employer-detail", payload)
+        .then(() => {
+          setLoading(false);
+          navigate("/sign-in");
+        })
+        .catch((error) => {
+          console.error("Error submitting form:", error);
+          setLoading(false);
+        });
+
+      // setTimeout(() => {
+      //   setLoading(false);
+      // }, 1000);
     },
   });
   return (
@@ -52,7 +73,11 @@ const Organization = () => {
           //   error={formik.touched.firstName && formik.errors.firstName}
           //   errorText={formik.errors.firstName}
         />
-        <FormButton btnName={"Complete"} value={formik.values.organization} loading={loading} />
+        <FormButton
+          btnName={"Complete"}
+          value={formik.values.organization}
+          loading={loading}
+        />
       </form>
     </section>
   );
