@@ -3,16 +3,18 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 
 //Component(s)
-import { ScaleLoader } from "react-spinners"; // loading animantion component used for buttons
 import { signIn } from "../../../Data/formikUtils";
 import InputField from "../../formFields/InputField";
 import PasswordField from "../../formFields/PasswordField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormButton from "../../Buttons/FormButton";
+import axios from "axios";
 
 const SignIn = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -20,8 +22,30 @@ const SignIn = () => {
       password: "",
     },
     validationSchema: signIn,
-    onSubmit: (values) => {
-      // api and co
+    onSubmit: async (values) => {
+      setLoading(true);
+      setError(null);
+      const data = {
+        email: values.email,
+        password: values.password,
+      };
+
+      try {
+        const response = await axios.post(
+          "/api/employerauth/login",
+          data
+        );
+        console.log(JSON.stringify(response.data));
+        setLoading(false);
+        // Redirect to another page after successful login
+        navigate("/dashboard"); // Replace with your desired path
+      } catch (error) {
+        console.error("Error signing in:", error);
+        setLoading(false);
+        setError(
+          "Failed to sign in. Please check your credentials and try again."
+        );
+      }
     },
   });
   return (
@@ -63,8 +87,12 @@ const SignIn = () => {
         >
           Forgot Password?
         </Link>
-        <FormButton loading={loading} btnName={'Submit'} value={formik.values.email}/>
-        
+        <FormButton
+          loading={loading}
+          btnName={"Submit"}
+          value={formik.values.email}
+        />
+
         <div className="w-full text-center text-[1rem] leading-6 font-normal flex flex-col sm:flex-row gap-x-3 justify-center items-center">
           <p className="text-[#101010]">Don’t have an account?</p>
           <Link className="text-[#2F4EED]" to={`/sign-up/step-1`}>

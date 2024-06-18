@@ -1,30 +1,70 @@
-import { useFormik } from "formik";
+//App
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 //Component(s)
-import { ScaleLoader } from "react-spinners"; // loading animantion component used for buttons
+import { useFormik } from "formik";
+import { useFormContext } from "./FormContext";
 import InputField from "../../../formFields/InputField";
 import ProgressBar from "../../../Page Components/ProgressBar";
 import axios from "axios";
 import FormButton from "../../../Buttons/FormButton";
+import { useNavigate } from "react-router-dom";
 
 const Organization = () => {
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    axios.get();
-  });
+  const { state, dispatch } = useFormContext();
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   axios.get();
+  // });
+
   const formik = useFormik({
     initialValues: {
       organization: "",
     },
-    onSubmit: (values) => {
+    onSubmit: (values, { setSubmitting, setErrors }) => {
       setLoading(true);
-      // Simulate a delay for form submission
-      setTimeout(() => {
-        setLoading(false);
-        // Handle final submission, perhaps show a success message or navigate elsewhere
-      }, 1000);
+      dispatch({ type: "SET_ORGANIZATION", payload: values.organization });
+      const payload = {
+        email: state.email,
+        firstName: state.firstName,
+        lastName: state.lastName,
+        organizationName: values.organization,
+        password: state.password,
+      };
+      console.log(payload);
+      axios
+        .post("/api/employerauth/signup/employer-details", payload)
+        .then((response) => {
+          setLoading(false);
+          console.log("Signup successful:", response.data);
+          navigate("/sign-in");
+        })
+        .catch((error) => {
+          console.error("Error submitting form:", error);
+          setLoading(false);
+          if (error.response) {
+            // Server responded with a non-2xx status code
+            setErrors({
+              organization: "Failed to submit form. Please try again later.",
+            });
+          } else if (error.request) {
+            // The request was made but no response was received
+            setErrors({
+              organization:
+                "Network error. Please check your internet connection.",
+            });
+          } else {
+            // Something else happened while setting up the request
+            setErrors({ organization: "An unexpected error occurred." });
+          }
+          setSubmitting(false);
+        });
+
+      // setTimeout(() => {
+      //   setLoading(false);
+      // }, 1000);
     },
   });
   return (
@@ -52,7 +92,11 @@ const Organization = () => {
           //   error={formik.touched.firstName && formik.errors.firstName}
           //   errorText={formik.errors.firstName}
         />
-        <FormButton btnName={"Complete"} value={formik.values.organization} loading={loading} />
+        <FormButton
+          btnName={"Complete"}
+          value={formik.values.organization}
+          loading={loading}
+        />
       </form>
     </section>
   );
