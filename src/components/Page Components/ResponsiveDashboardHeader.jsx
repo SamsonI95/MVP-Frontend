@@ -1,11 +1,15 @@
 import React from 'react'
 import { HiMiniUser, HiOutlineBell } from 'react-icons/hi2'
 import { RxHamburgerMenu } from 'react-icons/rx'
+import { Link } from 'react-router-dom'
+import logo from '/Coinnomad Frame.svg'
 
-const DashboardHeader = ({menuClicked, setMenuClicked}) => {
+const ResponsiveDashboardHeader = ({menuClicked, setMenuClicked}) => {
   return (
-    <header className='p-[32px] hidden lg:flex justify-between items-center w-full'>
-      <h1 className='text-[#151515] text-[1.75rem] font-bold leading-9 tracking-[-0.56px]'>Hey there, Daniel!</h1>
+    <header className='p-[32px] flex lg:hidden justify-between items-center w-full'>
+        <Link to={'/dashboard'}>
+            <img className='w-[159.846px] h-[34.615px] object-cover' src={logo} alt="Coinomad Logo" />
+        </Link>
 
       <div className='flex items-center gap-[24px]'>
         <div className='w-[40px] h-[40px] bg-[#F7F7F7] rounded-[50px] px-[8px] py-[0px] flex justify-center items-center relative'>
@@ -24,4 +28,4 @@ const DashboardHeader = ({menuClicked, setMenuClicked}) => {
   )
 }
 
-export default DashboardHeader
+export default ResponsiveDashboardHeader

@@ -31,7 +31,9 @@ const StepOne = () => {
         .catch((error) => {
           console.error("Error submitting form:", error);
           setLoading(false);
-        });
+        }).finally(() => {
+          setLoading(false);
+        })
 
       // const config = {
       //   method: "post",

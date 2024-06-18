@@ -21,7 +21,7 @@ const VerifyEmail = () => {
   // const { email } = location.state || {};
   // const [code, setCode] = useState("");
 
- ;
+//  ;
   const formik = useFormik({
     initialValues: {
       code: "",

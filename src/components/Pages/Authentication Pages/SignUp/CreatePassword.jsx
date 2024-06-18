@@ -36,7 +36,7 @@ const CreatePassword = () => {
     },
   });
   return (
-    <section className="flex flex-col justify-center items-center w-full h-screen gap-[]">
+    <section className="flex flex-col justify-center items-center w-full h-screen">
       <ProgressBar currentStep={2} totalSteps={4} />
       <form
         onSubmit={formik.handleSubmit}
