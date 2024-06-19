@@ -1,20 +1,28 @@
-//App
 import { useFormik } from "formik";
 import React, { useState } from "react";
-
-//Component(s)
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import useAuth from "../../../hooks/useAuth";
 import { signIn } from "../../../Data/formikUtils";
 import InputField from "../../formFields/InputField";
 import PasswordField from "../../formFields/PasswordField";
-import { Link, useNavigate } from "react-router-dom";
 import FormButton from "../../Buttons/FormButton";
-import axios from "axios";
-
+import secureLocalStorage from "react-secure-storage";
+// SignIn.jsx
 const SignIn = () => {
+  const { setAuth } = useAuth();
+  const location = useLocation();
+  // console.log('Location', location)
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/dashboard";
+  // console.log('Redirecting to', from);
+  
+
   const [isClicked, setIsClicked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  // const [email, setEmail] = useState(null);
+  // const [pwd, setPwd] = useState(null);
 
   const formik = useFormik({
     initialValues: {
@@ -29,25 +37,28 @@ const SignIn = () => {
         email: values.email,
         password: values.password,
       };
-
+    
       try {
-        const response = await axios.post(
-          "/api/employerauth/login",
-          data
-        );
-        console.log(JSON.stringify(response.data));
+        const response = await axios.post("/api/employerauth/login", data, {
+          'Content-Type': 'application/json'
+        });
+        console.log('Sign-in Response', response?.data)
+        const accessToken = response?.data?.data?.accessToken;
+        const user = response?.data?.data?.firstName;
+        console.log('Login response', response);
+        setAuth({ user, accessToken });
+        secureLocalStorage.setItem('token', JSON.stringify(accessToken))
         setLoading(false);
-        // Redirect to another page after successful login
-        navigate("/dashboard"); // Replace with your desired path
+        console.log('Navigating to', from);
+        navigate(from, { replace: true });
       } catch (error) {
         console.error("Error signing in:", error);
         setLoading(false);
-        setError(
-          "Failed to sign in. Please check your credentials and try again."
-        );
+        setError("Failed to sign in. Please check your credentials and try again.");
       }
     },
   });
+
   return (
     <section className="w-full flex justify-center items-center">
       <form
@@ -92,7 +103,6 @@ const SignIn = () => {
           btnName={"Submit"}
           value={formik.values.email}
         />
-
         <div className="w-full text-center text-[1rem] leading-6 font-normal flex flex-col sm:flex-row gap-x-3 justify-center items-center">
           <p className="text-[#101010]">Don’t have an account?</p>
           <Link className="text-[#2F4EED]" to={`/sign-up/step-1`}>

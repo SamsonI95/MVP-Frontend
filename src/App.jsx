@@ -30,6 +30,9 @@ import Dashboard from "./components/Pages/AdminDashboard/Dashboard/Dashboard";
 import Employees from "./components/Pages/AdminDashboard/Employees/Employees";
 import AdminLayout from "./components/Pages/AdminDashboard/AdminLayout";
 
+// Protected Routing
+import RequireAuth from "./components/RequireAuth";
+
 function App() {
   return (
     <>
@@ -60,10 +63,13 @@ function App() {
             </Route>
 
             {/* Dashboard */}
-            <Route path="/" element={<AdminLayout />}>
-              <Route path="dashboard" element={<Dashboard />}></Route>
-              <Route path="employees" element={<Employees />}></Route>
+            <Route element={<RequireAuth />}>
+              <Route path="/" element={<AdminLayout />}>
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="employees" element={<Employees />} />
+              </Route>
             </Route>
+
           </Routes>
           {/* </HideHeaderFooter> */}
         </Router>
