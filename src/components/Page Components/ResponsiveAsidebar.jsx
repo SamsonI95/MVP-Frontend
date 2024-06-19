@@ -1,13 +1,24 @@
 import React from "react";
 import { links } from "../../Data/links";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 // import logo from '/Coinnomad Frame.svg';
 import { HiOutlineXMark } from "react-icons/hi2";
+import { IoLogOutOutline, IoMoonSharp } from "react-icons/io5";
+import { BsChat } from "react-icons/bs";
+import secureLocalStorage from "react-secure-storage";
 // import { RxHamburgerMenu } from 'react-icons/rx';
 
 const ResponsiveAsidebar = ({ menuClicked, setMenuClicked }) => {
   const location = useLocation();
   const { pathname } = location;
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    secureLocalStorage.removeItem('token');
+    secureLocalStorage.removeItem('user');
+
+    navigate('/sign-in');
+  }
 
   return (
     <>
@@ -47,6 +58,44 @@ const ResponsiveAsidebar = ({ menuClicked, setMenuClicked }) => {
               </NavLink>
             ))}
           </ul>
+
+          <div className='my-4 flex flex-col self-stretch items-start bg-[#E5E5E5] h-[1px] w-full'>
+          </div>
+
+          <ul className='flex items-start flex-col self-stretch w-full'>
+            <div className='cursor-pointer text-[#6E6E6E] border-none font-semibold leading-4 flex pl-[24px] pr-[0px] py-[12px] justify-between items-center w-full relative whitespace-nowrap'>
+              <div className='gap-[16px] flex items-center'>
+                {/* {link.icon} */}
+                <IoMoonSharp className='text-[1.35rem]' />
+                <span className='text-[.875rem]'>
+                  {/* {link.name} */}
+                  Dark mode
+                </span>
+              </div>
+            </div>
+            
+            <NavLink to={'/'} className={({ isActive }) => isActive ? 'text-[#2F4EED] rounded-r-sm font-semibold leading-4 flex px-[24px] py-[12px] justify-between items-center w-full relative whitespace-nowrap' : 'text-[#6E6E6E] border-none font-semibold leading-4 flex pl-[24px] pr-[0px] py-[12px] justify-between items-center w-full relative whitespace-nowrap'}>
+              <div className='gap-[16px] flex items-center'>
+                {/* {link.icon} */}
+                <BsChat className='text-[1.35rem]' />
+                <span className='text-[.875rem]'>
+                  {/* {link.name} */}
+                  Support
+                </span>
+              </div>
+              {/* <div className={`absolute rounded-full bg-[#2F4EED] w-[4px] h-[32px] right-0 top-auto ${pathname === link.route ? 'flex' : 'hidden'}`}></div> */}
+            </NavLink>
+
+            <div onClick={handleLogout} className='cursor-pointer text-[#6E6E6E] border-none font-semibold leading-4 flex pl-[24px] pr-[0px] py-[12px] justify-between items-center w-full relative whitespace-nowrap'>
+              <div className='gap-[16px] flex items-center'>
+                {/* {link.icon} */}
+                <IoLogOutOutline className='text-[1.35rem] text-[#ED2F2F]' />
+                <span className='text-[.875rem]'>
+                  Logout
+                </span>
+              </div>
+            </div>
+          </ul>
         </aside>
       ) : (
         <aside
@@ -83,6 +132,44 @@ const ResponsiveAsidebar = ({ menuClicked, setMenuClicked }) => {
                 ></div>
               </NavLink>
             ))}
+          </ul>
+
+
+          <div className='my-4 flex flex-col self-stretch items-start bg-[#E5E5E5] h-[1px] w-full'></div>
+
+          <ul className='flex items-start flex-col self-stretch w-full'>
+            <div className='cursor-pointer text-[#6E6E6E] border-none font-semibold leading-4 flex pl-[24px] pr-[0px] py-[12px] justify-between items-center w-full relative whitespace-nowrap'>
+              <div className='gap-[16px] flex items-center'>
+                {/* {link.icon} */}
+                <IoMoonSharp className='text-[1.35rem]' />
+                <span className='text-[.875rem]'>
+                  {/* {link.name} */}
+                  Dark mode
+                </span>
+              </div>
+            </div>
+            
+            <NavLink to={'/'} className={({ isActive }) => isActive ? 'text-[#2F4EED] rounded-r-sm font-semibold leading-4 flex px-[24px] py-[12px] justify-between items-center w-full relative whitespace-nowrap' : 'text-[#6E6E6E] border-none font-semibold leading-4 flex pl-[24px] pr-[0px] py-[12px] justify-between items-center w-full relative whitespace-nowrap'}>
+              <div className='gap-[16px] flex items-center'>
+                {/* {link.icon} */}
+                <BsChat className='text-[1.35rem]' />
+                <span className='text-[.875rem]'>
+                  {/* {link.name} */}
+                  Support
+                </span>
+              </div>
+              {/* <div className={`absolute rounded-full bg-[#2F4EED] w-[4px] h-[32px] right-0 top-auto ${pathname === link.route ? 'flex' : 'hidden'}`}></div> */}
+            </NavLink>
+
+            <div onClick={handleLogout} className='cursor-pointer text-[#6E6E6E] border-none font-semibold leading-4 flex pl-[24px] pr-[0px] py-[12px] justify-between items-center w-full relative whitespace-nowrap'>
+              <div className='gap-[16px] flex items-center'>
+                {/* {link.icon} */}
+                <IoLogOutOutline className='text-[1.35rem] text-[#ED2F2F]' />
+                <span className='text-[.875rem]'>
+                  Logout
+                </span>
+              </div>
+            </div>
           </ul>
         </aside>
       )}

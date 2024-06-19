@@ -3,15 +3,19 @@ import { HiOutlineEyeSlash } from 'react-icons/hi2'
 import { RxArrowBottomLeft, RxArrowTopRight } from 'react-icons/rx'
 import AssetsTable from '../../../Page Components/AssetsTable'
 import TransactionsTable from '../../../Page Components/TransactionsTable'
+import secureLocalStorage from 'react-secure-storage'
 
 const Dashboard = () => {
 
+
+  const storedUser = secureLocalStorage.getItem('user');
+  const user = storedUser ? JSON.parse(storedUser) : null;
   const [isClicked, setIsClicked] = useState('Assets')
   return (
     <section className='w-full lg:w-auto'>
 
       <div className='gap-[24px] py-[16px] px-[32px] flex flex-col justify-center items-start self-stretch'>
-        <h1 className='text-[#151515] flex lg:hidden text-[1.75rem] font-bold leading-9 tracking-[-0.56px] py-[16px]'>Hey there, Daniel!</h1>
+        <h1 className='text-[#151515] flex lg:hidden text-[1.75rem] font-bold leading-9 tracking-[-0.56px] py-[16px]'>Hey there, {user}!</h1>
 
         <div className='flex flex-col justify-center items-start gap-[16px]'>
           <h2 className='text-[#9C9C9C] text-[1.125rem] font-semibold leading-7'>Total Balance</h2>

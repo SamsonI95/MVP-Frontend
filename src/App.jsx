@@ -34,10 +34,25 @@ import AdminLayout from "./components/Pages/AdminDashboard/AdminLayout";
 
 // Protected Routing
 import RequireAuth from "./components/RequireAuth";
+import { ToastContainer } from "react-toastify";
+import NotFound from "./components/Pages/NotFound";
 
 function App() {
   return (
     <>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <FormProvider>
         <Router>
           {/* <HideHeaderFooter HeaderComponent={Header} FooterComponent={Footer}> */}
@@ -71,6 +86,9 @@ function App() {
                 <Route path="employees" element={<Employees />} />
               </Route>
             </Route>
+
+            {/* 404 Page */}
+            <Route path="*" element={<NotFound/>}></Route>
 
           </Routes>
           {/* </HideHeaderFooter> */}
