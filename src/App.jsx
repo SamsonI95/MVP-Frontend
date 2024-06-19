@@ -2,8 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-//Page(s)
-import Landing from "./components/Pages/Landing";
+//Authentication Page(s)
 import SignIn from "./components/Pages/Authentication Pages/SignIn";
 import VerifyEmail from "./components/Pages/Authentication Pages/SignUp/VerifyEmail";
 import StepOne from "./components/Pages/Authentication Pages/SignUp/StepOne";
@@ -14,6 +13,9 @@ import ForgotPassword from "./components/Pages/Authentication Pages/forgotPasswo
 import NewPassword from "./components/Pages/Authentication Pages/NewPassword";
 import PasswordVerificationCheck from "./components/Pages/Authentication Pages/PasswordVerificationCheck";
 import SuccessVerificationCheck from "./components/Pages/Authentication Pages/SuccessVerificationCheck";
+
+//Page(s)
+import Landing from "./components/Pages/Landing";
 import Layout from "./components/Pages/Layout";
 
 //Page Component
