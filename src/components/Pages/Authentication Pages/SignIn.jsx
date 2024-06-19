@@ -49,7 +49,7 @@ const SignIn = () => {
     },
   });
   return (
-    <section className="w-full h-screen flex justify-center items-center">
+    <section className="w-full flex justify-center items-center">
       <form
         className="flex flex-col justify-start items-start w-[21.875em] h-[27.75em] gap-[40px]"
         onSubmit={formik.handleSubmit}

@@ -67,7 +67,7 @@ const StepOne = () => {
     },
   });
   return (
-    <section className="flex justify-center items-center gap-[96px] w-full h-[90vh]">
+    <section className="flex justify-center items-center gap-[96px] w-full h-[80vh]">
       <div className="flex flex-col justify-start items-start w-[21.875em] h-[19.75em] gap-[40px]">
         <h1 className="text-[2.25rem] font-bold leading-[44px] tracking-[-0.72px]">
           Sign Up

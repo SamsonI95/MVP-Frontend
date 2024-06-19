@@ -104,7 +104,7 @@ const VerifyEmail = () => {
   // };
 
   return (
-    <section className="flex flex-col justify-center items-center w-full h-screen gap-[96px]">
+    <section className="flex flex-col justify-center items-center w-full h-[80vh] gap-[96px]">
       <form
         onSubmit={formik.handleSubmit}
         className="flex flex-col justify-center items-start gap-[40px] w-[21.875em] h-[24.25em]"

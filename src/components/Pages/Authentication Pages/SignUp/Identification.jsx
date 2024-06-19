@@ -37,7 +37,7 @@ const Identification = () => {
     },
   });
   return (
-    <section className="flex flex-col justify-center items-center w-full h-screen">
+    <section className="flex flex-col justify-center items-center w-full">
       <ProgressBar currentStep={3} totalSteps={4} />
       <form
         onSubmit={formik.handleSubmit}

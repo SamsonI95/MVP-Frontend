@@ -68,7 +68,7 @@ const Organization = () => {
     },
   });
   return (
-    <section className="flex flex-col justify-center items-center w-full h-screen">
+    <section className="flex flex-col justify-center items-center w-full">
       <div className="translate-y-[4rem]">
         <ProgressBar currentStep={4} totalSteps={4} />
       </div>
