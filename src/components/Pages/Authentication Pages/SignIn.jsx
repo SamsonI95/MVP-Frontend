@@ -7,16 +7,22 @@ import { signIn } from "../../../Data/formikUtils";
 import InputField from "../../formFields/InputField";
 import PasswordField from "../../formFields/PasswordField";
 import FormButton from "../../Buttons/FormButton";
+import secureLocalStorage from "react-secure-storage";
 // SignIn.jsx
 const SignIn = () => {
   const { setAuth } = useAuth();
   const location = useLocation();
+  // console.log('Location', location)
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/dashboard";
+  // console.log('Redirecting to', from);
+  
 
   const [isClicked, setIsClicked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  // const [email, setEmail] = useState(null);
+  // const [pwd, setPwd] = useState(null);
 
   const formik = useFormik({
     initialValues: {
@@ -31,20 +37,24 @@ const SignIn = () => {
         email: values.email,
         password: values.password,
       };
-
+    
       try {
-        const response = await axios.post("/api/employerauth/login", data);
-        const accessToken = response?.data?.accessToken;
-        const user = response?.data?.firstName;
+        const response = await axios.post("/api/employerauth/login", data, {
+          'Content-Type': 'application/json'
+        });
+        console.log('Sign-in Response', response?.data)
+        const accessToken = response?.data?.data?.accessToken;
+        const user = response?.data?.data?.firstName;
+        console.log('Login response', response);
         setAuth({ user, accessToken });
+        secureLocalStorage.setItem('token', JSON.stringify(accessToken))
         setLoading(false);
+        console.log('Navigating to', from);
         navigate(from, { replace: true });
       } catch (error) {
         console.error("Error signing in:", error);
         setLoading(false);
-        setError(
-          "Failed to sign in. Please check your credentials and try again."
-        );
+        setError("Failed to sign in. Please check your credentials and try again.");
       }
     },
   });

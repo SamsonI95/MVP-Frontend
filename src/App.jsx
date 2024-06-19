@@ -29,6 +29,8 @@ import "./App.css";
 import Dashboard from "./components/Pages/AdminDashboard/Dashboard/Dashboard";
 import Employees from "./components/Pages/AdminDashboard/Employees/Employees";
 import AdminLayout from "./components/Pages/AdminDashboard/AdminLayout";
+
+// Protected Routing
 import RequireAuth from "./components/RequireAuth";
 
 function App() {
