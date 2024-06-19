@@ -22,7 +22,7 @@ const ResponsiveDashboardHeader = ({menuClicked, setMenuClicked}) => {
         <HiMiniUser className='text-[1.45rem] text-white' />
         </div>
 
-        <RxHamburgerMenu onClick={() => setMenuClicked(true)} className='text-[1.25rem] cursor-pointer' /> 
+        <RxHamburgerMenu onClick={() => setMenuClicked(true)} className='text-[1.25rem] cursor-pointer flex lg:hidden' /> 
       </div>
     </header>
   )

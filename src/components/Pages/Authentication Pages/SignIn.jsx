@@ -47,9 +47,9 @@ const SignIn = () => {
         const user = response?.data?.data?.firstName;
         console.log('Login response', response);
         setAuth({ user, accessToken });
-        secureLocalStorage.setItem('token', JSON.stringify(accessToken))
+        secureLocalStorage.setItem('token', JSON.stringify(accessToken));
+        secureLocalStorage.setItem('user', JSON.stringify(user));
         setLoading(false);
-        console.log('Navigating to', from);
         navigate(from, { replace: true });
       } catch (error) {
         console.error("Error signing in:", error);
