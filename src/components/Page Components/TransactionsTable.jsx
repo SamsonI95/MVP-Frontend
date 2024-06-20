@@ -7,11 +7,11 @@ import { RxArrowTopRight } from 'react-icons/rx'
 import { IoSwapVerticalOutline } from 'react-icons/io5'
 
 const TransactionsTable = () => {
-  const [existData, setExistData] = useState(false);
+  const [existData, setExistData] = useState(true);
   return (
     <section className='w-full gap-[10px]'>
-      <div className='py-[16px] pr-[32px] flex justify-between items-center gap-6'>
-        <div className='flex px-[32px] gap-2 items-center'>
+      <div className='py-[16px] pr-[32px] flex justify-between items-center flex-wrap gap-6'>
+        <div className='flex px-[32px] gap-2 items-center flex-wrap'>
           <button className='py-[4px] px-[16px] gap-[8px] flex justify-center items-center bg-[#2F4EED] text-white rounded-[50px] text-[1rem] font-semibold leading-6'>All</button>
           <button className='py-[4px] px-[16px] gap-[8px] flex justify-center items-center text-[#9C9C9C] text-[1rem] font-semibold leading-6'>Bitcoin</button>
           <button className='py-[4px] px-[16px] gap-[8px] flex justify-center items-center text-[#9C9C9C] text-[1rem] font-semibold leading-6'>Ethereum</button>
@@ -24,8 +24,8 @@ const TransactionsTable = () => {
       <>
         {
             existData ? (
-              <div>
-                  <p className='pl-[32px] pr-[10px] py-[16px] gap-[10px] text-[.875rem] text-[#9C9C9C] font-semibold leading-4'>Today</p>
+              <div className='whitespace-nowrap overflow-auto w-full'>
+                  <p className='w-full pl-[32px] pr-[10px] py-[16px] gap-[10px] text-[.875rem] text-[#9C9C9C] font-semibold leading-4'>Today</p>
                   <table className='w-full'>
                     <tbody className='w-full'>
                         <tr className='flex items-center self-stretch gap-[12px] w-full'>
@@ -39,11 +39,11 @@ const TransactionsTable = () => {
                                     <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>10:27 pm</p>
                                 </div>
                             </td>
-                            <td className='flex flex-col justify-center px-[12px] py-[10px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[32px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7'>From</h1>
                               <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>0xdac0...80037e</p>
                             </td>
-                            <td className='flex flex-col justify-center px-[32px] py-[12px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[32px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#23AE5E] leading-7'>+$100.00</h1>
                               <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>0.05 ETH</p>
                             </td>
@@ -60,21 +60,17 @@ const TransactionsTable = () => {
                                     <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>10:27 pm</p>
                                 </div>
                             </td>
-                            <td className='flex flex-col justify-center px-[12px] py-[10px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[32px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7'>To</h1>
                               <p className='bg-[#EAEDFD] py-[4px] px-[8px] gap-[10px] flex justify-center items-start rounded-[50px] text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>Daniel Adegoke</p>
                             </td>
-                            <td className='flex flex-col justify-center px-[12px] py-[10px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[30px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#ED2F2F] leading-7'>-$100.00</h1>
                               <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>0.05 BTC</p>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
 
-                <p className='pl-[32px] pr-[10px] py-[16px] gap-[10px] text-[.875rem] text-[#9C9C9C] font-semibold leading-4'>Yesterday</p>
-                <table className='w-full'>
-                    <tbody className='w-full'>
+                        <p className='pl-[32px] pr-[10px] py-[16px] gap-[10px] text-[.875rem] text-[#9C9C9C] font-semibold leading-4'>Yesterday</p>
                         <tr className='flex items-center self-stretch gap-[12px] w-full'>
                             <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
                                 <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
@@ -86,66 +82,62 @@ const TransactionsTable = () => {
                                     <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>10:27 pm</p>
                                 </div>
                             </td>
-                            <td className='flex flex-col justify-center px-[12px] py-[10px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[32px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7'>To</h1>
                               <p className='bg-[#EAEDFD] py-[4px] px-[8px] gap-[10px] flex justify-center items-start rounded-[50px] text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>Daniel Adegoke</p>
                             </td>
-                            <td className='flex flex-col justify-center px-[12px] py-[10px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[32px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#ED2F2F] leading-7'>-$100.00</h1>
                               <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>0.05 BTC</p>
                             </td>
                         </tr>
 
                         <tr className='flex items-center self-stretch gap-[12px] w-full'>
-                            <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
-                                <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
-                                  <RxArrowTopRight className='text-[1.25rem]' />
-                                  <img className='absolute w-[16px] top-[-5px] left-[-6px] h-[16px] object-contain' src={bitcoin} alt="Bitcoin" />
-                                </div>
-                                <div className='flex flex-col justify-center items-start'>
-                                    <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7'>Sent</h1>
-                                    <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>10:27 pm</p>
-                                </div>
-                            </td>
-                            <td className='flex flex-col justify-center px-[12px] py-[10px] w-full items-start self-stretch'>
-                              <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7'>To</h1>
-                              <p className='bg-[#EAEDFD] py-[4px] px-[8px] gap-[10px] flex justify-center items-start rounded-[50px] text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>Daniel Adegoke</p>
-                            </td>
-                            <td className='flex flex-col justify-center px-[12px] py-[10px] w-full items-start self-stretch'>
-                              <h1 className='text-[1.125rem] font-bold text-[#ED2F2F] leading-7'>-$100.00</h1>
-                              <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>0.05 BTC</p>
-                            </td>
+                          <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
+                              <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
+                                <RxArrowTopRight className='text-[1.25rem]' />
+                                <img className='absolute w-[16px] top-[-5px] left-[-6px] h-[16px] object-contain' src={bitcoin} alt="Bitcoin" />
+                              </div>
+                              <div className='flex flex-col justify-center items-start'>
+                                  <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7'>Sent</h1>
+                                  <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>10:27 pm</p>
+                              </div>
+                          </td>
+                          <td className='flex flex-col justify-center px-[32px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
+                            <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7'>To</h1>
+                            <p className='bg-[#EAEDFD] py-[4px] px-[8px] gap-[10px] flex justify-center items-start rounded-[50px] text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>Daniel Adegoke</p>
+                          </td>
+                          <td className='flex flex-col justify-center px-[32px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
+                            <h1 className='text-[1.125rem] font-bold text-[#ED2F2F] leading-7'>-$100.00</h1>
+                            <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>0.05 BTC</p>
+                          </td>
                         </tr>
-                    </tbody>
-                </table>
 
 
-                <p className='pl-[32px] pr-[10px] py-[16px] gap-[10px] text-[.875rem] text-[#9C9C9C] font-semibold leading-4'>May 3, 2024</p>
-                <table className='w-full'>
-                    <tbody className='w-full'>
+                        <p className='pl-[32px] pr-[10px] py-[16px] gap-[10px] text-[.875rem] text-[#9C9C9C] font-semibold leading-4 w-full'>May 3, 2024</p>
                         <tr className='flex items-center self-stretch gap-[12px] w-full'>
-                            <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
-                                <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
-                                  <RxArrowTopRight className='text-[1.25rem]' />
-                                  <img className='absolute w-[16px] top-[-5px] left-[-6px] h-[16px] object-contain' src={bitcoin} alt="Bitcoin" />
-                                </div>
-                                <div className='flex flex-col justify-center items-start'>
-                                    <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7'>Sent</h1>
-                                    <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>10:27 pm</p>
-                                </div>
+                            <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] sm:px-[32px]'>
+                              <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
+                                <RxArrowTopRight className='text-[1.25rem]' />
+                                <img className='absolute w-[16px] top-[-5px] left-[-6px] h-[16px] object-contain' src={bitcoin} alt="Bitcoin" />
+                              </div>
+                              <div className='flex flex-col justify-center items-start'>
+                                  <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7 w-full'>Sent</h1>
+                                  <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>10:27 pm</p>
+                              </div>
                             </td>
-                            <td className='flex flex-col justify-center px-[12px] py-[10px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[32px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7'>To</h1>
                               <p className='bg-[#EAEDFD] py-[4px] px-[8px] gap-[10px] flex justify-center items-start rounded-[50px] text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>Daniel Adegoke</p>
                             </td>
-                            <td className='flex flex-col justify-center px-[12px] py-[10px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[32px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#ED2F2F] leading-7'>-$100.00</h1>
                               <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>0.05 BTC</p>
                             </td>
                         </tr>
 
                         <tr className='flex items-center self-stretch gap-[12px] w-full'>
-                            <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
+                            <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px]'>
                                 <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
                                   <RxArrowTopRight className='text-[1.25rem]' />
                                   <img className='absolute w-[16px] top-[-5px] left-[-6px] h-[16px] object-contain' src={ethereum} alt="Ethereum" />
@@ -155,11 +147,11 @@ const TransactionsTable = () => {
                                     <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>10:27 pm</p>
                                 </div>
                             </td>
-                            <td className='flex flex-col justify-center px-[12px] py-[10px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[30px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7'>From</h1>
                               <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>0xdac0...80037e</p>
                             </td>
-                            <td className='flex flex-col justify-center px-[32px] py-[12px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[30px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#23AE5E] leading-7'>+$100.00</h1>
                               <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>0.05 ETH</p>
                             </td>
@@ -177,11 +169,11 @@ const TransactionsTable = () => {
                                     <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>10:27 pm</p>
                                 </div>
                             </td>
-                            <td className='flex flex-col justify-center px-[12px] py-[10px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[30px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7'>From</h1>
                               <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>0xdac0...80037e</p>
                             </td>
-                            <td className='flex flex-col justify-center px-[32px] py-[12px] w-full items-start self-stretch'>
+                            <td className='flex flex-col justify-center px-[30px] md:px-[12px] py-[10px] w-full items-start self-stretch'>
                               <h1 className='text-[1.125rem] font-bold text-[#23AE5E] leading-7'>+$100.00</h1>
                               <p className='text-[#9C9C9C] text-[.875rem] font-semibold leading-4'>0.05 ETH</p>
                             </td>
