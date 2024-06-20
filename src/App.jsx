@@ -79,12 +79,12 @@ function App() {
             </Route>
 
             {/* Dashboard */}
-            <Route element={<RequireAuth />}>
+            {/* <Route element={<RequireAuth />}> */}
               <Route path="/" element={<AdminLayout />}>
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="employees" element={<Employees />} />
               </Route>
-            </Route>
+            {/* </Route> */}
 
             {/* 404 Page */}
             <Route path="*" element={<NotFound/>}></Route>

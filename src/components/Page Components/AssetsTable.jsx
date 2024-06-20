@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import bitcoin from '/svg/Bitcoin Badge.svg'
 import polygon from '/svg/Coinnomad logo.svg'
 import ethereum from '/svg/Eth (1).svg'
+import { IoSwapVerticalOutline } from 'react-icons/io5'
 
 const AssetsTable = () => {
 
     const [existData, setExistData] = useState(false)
   return (
-    <div>
+    <>
         {
             existData ? (
                 <div>
@@ -66,16 +67,15 @@ const AssetsTable = () => {
                     </table>
                 </div>
             ) : (
-                <div>
-                    <table className='w-full'>
-                        <tbody className='w-full'>
-                            
-                        </tbody>
-                    </table>
+                <div className='flex flex-col justify-start items-center px-[10px] py-[80px] md:h-[612px] w-full gap-[10px]'>
+                    <div className=' rounded-full p-[10px] bg-[#F7F7F7] gap-[10px] flex justify-center items-center'>
+                        <IoSwapVerticalOutline className='text-[1.25rem] rotate-[45deg]' />
+                    </div>
+                    <p className='text-[#000000] text-[1.125rem] font-semibold leading-7'>No Activity</p>
                 </div>
             )
         }
-    </div>
+    </>
   )
 }
 
