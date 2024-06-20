@@ -56,11 +56,9 @@ const SignIn = () => {
       } catch (error) {
         console.error("Error signing in:", error);
         setLoading(false);
-        if(error.response.status === 400){
-          toast.error('Invalid credentials. Please try again.', {
+          toast.error(error.response.data.message, {
             transition: Bounce
           })
-        }
         // setError("Failed to sign in. Please check your credentials and try again.");
       }
     },
