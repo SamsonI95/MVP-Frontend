@@ -34,14 +34,11 @@ const StepOne = () => {
         .catch((error) => {
           console.error("Error submitting form:", error);
           setLoading(false);
-<<<<<<< HEAD
-=======
           toast.error(error.data.message, {
             transition: Bounce
           })
         }).finally(() => {
           setLoading(false);
->>>>>>> 769adf5b8136425bf8bedd79bc94d8063f6a0faa
         })
         .finally(() => {
           setLoading(false);
