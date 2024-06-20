@@ -11,7 +11,7 @@ import Identification from "./components/Pages/Authentication Pages/SignUp/Ident
 import Organization from "./components/Pages/Authentication Pages/SignUp/Organization";
 import ForgotPassword from "./components/Pages/Authentication Pages/forgotPassword";
 import NewPassword from "./components/Pages/Authentication Pages/NewPassword";
-import PasswordVerificationCheck from "./components/Pages/Authentication Pages/PasswordVerificationCheck";
+import VerifyResetPassword from "./components/Pages/Authentication Pages/VerifyResetPassword";
 import SuccessVerificationCheck from "./components/Pages/Authentication Pages/SuccessVerificationCheck";
 
 //Page(s)
@@ -61,11 +61,11 @@ function App() {
               <Route path="/" element={<Landing />} />
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/new-password" element={<NewPassword />} />
               <Route
                 path="/password-verification-check"
-                element={<PasswordVerificationCheck />}
+                element={<VerifyResetPassword />}
               />
+              <Route path="/new-password" element={<NewPassword />} />
               <Route
                 path="/success-verification"
                 element={<SuccessVerificationCheck />}

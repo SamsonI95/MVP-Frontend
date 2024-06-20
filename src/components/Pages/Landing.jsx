@@ -12,7 +12,7 @@ import landingCardCompData from "../../Data/landingCardCompData.json";
 import landingCardCompData2 from "../../Data/landingCardCompData2.json";
 
 // Footer
-import Footer from '../Page Components/Footer'
+import Footer from "../Page Components/Footer";
 
 //Image(s)
 import LandingImageOneM from "../../../public/CardComponentImages/LandingImageOneM.png";
@@ -22,6 +22,7 @@ import LandingImageTwoL from "../../../public/CardComponentImages/LandingImageTw
 import checkCircle from "../../../public/svg/checkCircle.svg";
 import exclamation from "../../../public/svg/exclamation.svg";
 import exclamationCircle from "../../../public/svg/exclamationCircle.svg";
+import BitcoinStartup from "../../../public/svg/BitcoinStartup.svg";
 
 const Landing = () => {
   const [email, setEmail] = useState("");
@@ -214,6 +215,10 @@ const Landing = () => {
             />
           </div>
         </section>
+        <section className="flex items-center justify-center space-x-4 sm:mt-[79.38px] md:mt-[64px] lg:mt-[72px]">
+          <span className="text-lg font-semibold">Backed by</span>
+          <img src={BitcoinStartup} alt="bitcoin startup" />
+        </section>
         <section className="flex flex-col items-center justify-center sm:mt-[123px] md:my-[64px] lg:my-[80px]">
           <h3 className="font-bold sm:text-[36px] md:text-[52px] sm:w-[335px] md:w-[613px] text-center">
             Unlock the Future of Payroll
@@ -343,7 +348,7 @@ const Landing = () => {
         </section>
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   );
 };

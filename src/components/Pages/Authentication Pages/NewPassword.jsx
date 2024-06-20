@@ -1,30 +1,69 @@
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 //Component(s)
-import { ScaleLoader } from "react-spinners"; // loading animantion component used for buttons
 import PasswordField from "../../formFields/PasswordField";
 import { createPassword } from "../../../Data/formikUtils";
 import axios from "axios";
+import FormButton from "../../Buttons/FormButton";
+import { useFormContext } from "./SignUp/FormContext";
 
 const NewPassword = () => {
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
+  const { state, dispatch } = useFormContext();
   const formik = useFormik({
     initialValues: {
-      password: "",
+      newPassword: "",
       confirmPassword: "",
     },
     validationSchema: createPassword,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       setLoading(true);
-      // Simulate a delay for form submission
-      setTimeout(() => {
+      console.log("Form values:", values); // Log the form values
+      console.log("Token:", state.token); // Log the token
+
+      try {
+        const response = await axios.patch("/api/employerauth/reset", {
+          token: state.token, // Pass the token
+          newPassword: values.newPassword,
+          confirmPassword: values.confirmPassword,
+        });
+
+        console.log("Response from server:", response.data); // Log the response from the server
         setLoading(false);
-        navigate("/sign-up/identification");
-      }, 1000);
+        navigate("/success-verification");
+      } catch (error) {
+        console.error("Error resetting password:", error);
+        setLoading(false);
+      }
     },
+    // onSubmit: (values) => {
+    //   setLoading(true);
+    //   console.log('Token:', state.token);
+    //   console.log('Password:', values.password);
+    //   console.log('Confirm Password:', values.confirmPassword);
+    //   axios
+    //     .patch("/api/employerauth/reset", {
+    //       token: state.token,
+    //       password: values.newPassword,
+    //       confirmPassword: values.confirmPassword,
+    //     })
+    //     .then(() => {
+    //       setLoading(false);
+    //       dispatch({ type: "SET_PASSWORD", payload: values.newPassword });
+    //       dispatch({
+    //         type: "SET_CONFIRM_PASSWORD",
+    //         payload: values.confirmPassword,
+    //       });
+    //       navigate("/success-verification");
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error resetting password:", error);
+    //       setLoading(false);
+    //     });
+    // },
   });
   return (
     <section className="flex flex-col justify-center items-center w-full h-screen gap-[]">
@@ -42,14 +81,14 @@ const NewPassword = () => {
             </p>
           </div>
           <PasswordField
-            label="Password"
-            placeholder="Enter your password"
+            label="New Password"
+            placeholder="Enter your new password"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-            name="password"
-            value={formik.values.password}
-            error={formik.touched.password && formik.errors.password}
-            errorText={formik.errors.password}
+            name="newPassword"
+            value={formik.values.newPassword}
+            error={formik.touched.newPassword && formik.errors.newPassword}
+            errorText={formik.errors.newPassword}
           />
           <PasswordField
             label="Confirm Password"
@@ -63,17 +102,11 @@ const NewPassword = () => {
             }
             errorText={formik.errors.confirmPassword}
           />
-          <button
-            type="submit"
-            className={`${
-              loading || !formik.values.code
-                ? "bg-[#2F4EED]/30"
-                : "bg-[#2F4EED]"
-            } px-2 py-2 rounded-lg w-full text-white h-[3.5em] flex justify-center items-center mt-[40px]`}
-            disabled={loading || !formik.values.code}
-          >
-            {loading ? <ScaleLoader /> : "Reset Password"}
-          </button>
+          <FormButton
+            btnName={"Next"}
+            value={formik.values.password}
+            loading={loading}
+          />
         </div>
       </form>
     </section>

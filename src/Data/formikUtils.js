@@ -46,6 +46,10 @@ export const verifyEmail = Yup.object({
   code: Yup.string().required("required"),
 });
 
+export const verifyResetEmail = Yup.object({
+  token: Yup.string().required("Token is required"),
+});
+
 export const createPassword = Yup.object({
   password: Yup.string()
     .min(6, "Password must contain at least 6 characters!")
@@ -64,3 +68,10 @@ export const validateName = Yup.object({
     .max(50, "Must be 50 characters or less")
     .required("Required"),
 });
+
+export const emailPasswordReset = Yup.string({
+  email: Yup.string()
+   .email("Enter Your E-mail Address")
+   .matches(emailRegExp, "Invalid E-mail Address")
+   .required("required")
+})
