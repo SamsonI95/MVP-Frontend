@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import { useFormContext } from "./FormContext";
 import FormButton from "../../../Buttons/FormButton";
 import { OrgEmail } from "../../../../Data/formikUtils";
+import { Bounce, toast } from "react-toastify";
 
 const StepOne = () => {
   const navigate = useNavigate();
@@ -23,14 +24,24 @@ const StepOne = () => {
       setLoading(true);
       axios
         .post("/api/employerauth/signup/email", { email: values.email })
-        .then(() => {
+        .then((res) => {
+          console.log('Email', res.data)
           dispatch({ type: "SET_EMAIL", payload: values.email });
           setLoading(false);
           navigate("/sign-up/verify-email");
+          toast.success(res.data.message)
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
           setLoading(false);
+<<<<<<< HEAD
+=======
+          toast.error(error.data.message, {
+            transition: Bounce
+          })
+        }).finally(() => {
+          setLoading(false);
+>>>>>>> 769adf5b8136425bf8bedd79bc94d8063f6a0faa
         })
         .finally(() => {
           setLoading(false);

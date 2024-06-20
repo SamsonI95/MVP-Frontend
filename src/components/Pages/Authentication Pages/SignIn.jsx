@@ -8,6 +8,7 @@ import InputField from "../../formFields/InputField";
 import PasswordField from "../../formFields/PasswordField";
 import FormButton from "../../Buttons/FormButton";
 import secureLocalStorage from "react-secure-storage";
+import { Bounce, toast } from "react-toastify";
 // SignIn.jsx
 const SignIn = () => {
   const { setAuth } = useAuth();
@@ -51,10 +52,16 @@ const SignIn = () => {
         secureLocalStorage.setItem('user', JSON.stringify(user));
         setLoading(false);
         navigate(from, { replace: true });
+        toast.success(response.data.message);
       } catch (error) {
         console.error("Error signing in:", error);
         setLoading(false);
-        setError("Failed to sign in. Please check your credentials and try again.");
+        if(error.response.status === 400){
+          toast.error('Invalid credentials. Please try again.', {
+            transition: Bounce
+          })
+        }
+        // setError("Failed to sign in. Please check your credentials and try again.");
       }
     },
   });

@@ -9,6 +9,7 @@ import InputField from "../../../formFields/InputField";
 import { verifyEmail } from "../../../../Data/formikUtils";
 import FormButton from "../../../Buttons/FormButton";
 import axios from "axios";
+import { Bounce, toast } from "react-toastify";
 // import axios from "axios";
 //import { HiOutlinePencil } from "react-icons/hi2";
 
@@ -34,13 +35,19 @@ const VerifyEmail = () => {
           email: state.email,
           code: values.code,
         })
-        .then(() => {
+        .then((res) => {
           dispatch({ type: "SET_CODE", payload: values.code });
           setLoading(false);
           navigate("/sign-up/create-password");
+          toast.success(res.data.message);
         })
         .catch((error) => {
           console.error("Error verifying code:", error);
+          if(error.response.status === 400){
+            toast.error('Wrong verification code provided', {
+              transition: Bounce
+            })
+          }
           setLoading(false);
         });
 
@@ -71,12 +78,18 @@ const VerifyEmail = () => {
     setLoading(true);
     axios
       .post("/api/employerauth/signup/resend-token", { email: state.email })
-      .then(() => {
+      .then((res) => {
         setLoading(false);
+        toast.success(res.data.message)
       })
       .catch((error) => {
         console.error("Error resending code:", error);
         setLoading(false);
+        if(error.response.status === 400){
+          toast.error('Something went wrong!', {
+            transition: Bounce
+          })
+        }
       });
   };
 
