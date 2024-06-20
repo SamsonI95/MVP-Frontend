@@ -36,6 +36,7 @@ import AdminLayout from "./components/Pages/AdminDashboard/AdminLayout";
 import RequireAuth from "./components/RequireAuth";
 import { ToastContainer } from "react-toastify";
 import NotFound from "./components/Pages/NotFound";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
