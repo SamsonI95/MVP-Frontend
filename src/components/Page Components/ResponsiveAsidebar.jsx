@@ -100,7 +100,7 @@ const ResponsiveAsidebar = ({ menuClicked, setMenuClicked }) => {
       ) : (
         <aside
           id="sidebar"
-          className={`lg:hidden flex flex-col fixed h-full bg-[#F7F7F7] z-50 transition-all duration-300 ease-in-out transform left-[-100%] w-[375px] md:w-[744px]`}
+          className={`lg:hidden flex flex-col fixed h-full bg-[#F7F7F7] z-50 transition-all duration-300 ease-in-out transform left-[-400%] sm:left-[-100%] w-[375px] md:w-[744px]`}
         >
           {/* <Link to={'/dashboard'} className={`flex justify-between items-center py-[40px] px-[24px] h-[120px] gap-[24px]`}>
                             <img className='w-[159.846px] h-[34.615px] object-cover' src={logo} alt='Coinomad Logo' />
