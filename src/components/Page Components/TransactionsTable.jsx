@@ -10,14 +10,14 @@ const TransactionsTable = () => {
   const [existData, setExistData] = useState(true);
   return (
     <section className='w-full gap-[10px]'>
-      <div className='py-[16px] pr-[32px] flex justify-between items-center flex-wrap gap-6'>
-        <div className='flex px-[32px] gap-2 items-center flex-wrap'>
+      <div className='px-[16px] py-[4px] md:py-[16px] md:pr-[32px] flex justify-between items-center gap-3 md:gap-6 whitespace-nowrap overflow-auto w-full scroll'>
+        <div className='flex justify-center md:justify-between md:px-[32px] gap-2 items-center'>
           <button className='py-[4px] px-[16px] gap-[8px] flex justify-center items-center bg-[#2F4EED] text-white rounded-[50px] text-[1rem] font-semibold leading-6'>All</button>
-          <button className='py-[4px] px-[16px] gap-[8px] flex justify-center items-center text-[#9C9C9C] text-[1rem] font-semibold leading-6'>Bitcoin</button>
-          <button className='py-[4px] px-[16px] gap-[8px] flex justify-center items-center text-[#9C9C9C] text-[1rem] font-semibold leading-6'>Ethereum</button>
-          <button className='py-[4px] px-[16px] gap-[8px] flex justify-center items-center text-[#9C9C9C] text-[1rem] font-semibold leading-6'>Polygon</button>
+          <button className='py-[4px] px-[16px] gap-[8px] flex justify-center items-center text-[#9C9C9C] text-[1rem] rounded-[50px] font-semibold leading-6'>Bitcoin</button>
+          <button className='py-[4px] px-[16px] gap-[8px] flex justify-center items-center text-[#9C9C9C] text-[1rem] rounded-[50px] font-semibold leading-6'>Ethereum</button>
+          <button className='py-[4px] px-[16px] gap-[8px] flex justify-center items-center text-[#9C9C9C] text-[1rem] rounded-[50px] font-semibold leading-6'>Polygon</button>
         </div>
-        <div className='bg-[#E9E9E9] w-10 h-10 rounded-full px-[8px] flex justify-center items-center cursor-pointer'>
+        <div className='bg-[#E9E9E9] w-10 h-10 rounded-full px-[10px] md:px-[8px] flex justify-center items-center cursor-pointer'>
           <BsDownload className='text-[1rem] text-[#1F2937] font-black' />
         </div>
       </div>

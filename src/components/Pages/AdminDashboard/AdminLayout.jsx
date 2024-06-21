@@ -11,11 +11,11 @@ const AdminLayout = () => {
   const [menuClicked, setMenuClicked] = useState(false)
   return (
     <main className={`${clicked ? `lg:w-[95%] xl:w-[89%] lg:left-[60px]` : `lg:w-[80%] xl:w-[78%] lg:left-[260px]`} w-full duration-300 lg:relative`}>
-        <Asidebar clicked={clicked} setClicked={setClicked}/>
-        <ResponsiveAsidebar menuClicked={menuClicked} setMenuClicked={setMenuClicked}/>
-        <DashboardHeader menuClicked={menuClicked} setMenuClicked={setMenuClicked}></DashboardHeader>
-        <ResponsiveDashboardHeader menuClicked={menuClicked} setMenuClicked={setMenuClicked}/>
-        <Outlet/>
+      <Asidebar clicked={clicked} setClicked={setClicked}/>
+      <ResponsiveAsidebar menuClicked={menuClicked} setMenuClicked={setMenuClicked}/>
+      <DashboardHeader menuClicked={menuClicked} setMenuClicked={setMenuClicked}></DashboardHeader>
+      <ResponsiveDashboardHeader menuClicked={menuClicked} setMenuClicked={setMenuClicked}/>
+      <Outlet/>
     </main>
   )
 }
