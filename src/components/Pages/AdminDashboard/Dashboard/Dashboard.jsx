@@ -14,13 +14,13 @@ const Dashboard = () => {
   return (
     <section className='w-full lg:w-auto'>
 
-      <div className='gap-[24px] py-[16px] px-[32px] flex flex-col justify-center items-start self-stretch'>
+      <div className='gap-[24px] py-[16px] px-[10px] md:px-[32px] flex flex-col justify-center items-start self-stretch'>
         <h1 className='text-[#151515] flex lg:hidden text-[1.75rem] font-bold leading-9 tracking-[-0.56px] py-[16px]'>Hey there, {user}!</h1>
 
         <div className='flex flex-col justify-center items-start gap-[16px]'>
           <h2 className='text-[#9C9C9C] text-[1.125rem] font-semibold leading-7'>Total Balance</h2>
           <div className='flex justify-start items-center gap-[16px]'>
-            <h1 className='text-[4rem] text-[#151515] font-semibold leading-[48px] tracking-[-0.88px]'>$1,200.00</h1>
+            <h1 className='text-[2.25rem] md:text-[4rem] text-[#151515] font-semibold leading-[48px] tracking-[-0.88px]'>$1,200.00</h1>
             <HiOutlineEyeSlash className='text-[1.125rem] text-[#151515]'/>
           </div>
         </div>
@@ -35,7 +35,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div className='py-[16px] px-0 gap-[10px] flex flex-col justify-center items-start self-stretch'>
-        <div className='gap-[24px] flex items-start px-[32px] py-0 self-stretch border-b border-[#E9E9E9]'>
+        <div className='gap-[24px] flex items-start px-[10px] md:px-[32px] py-0 self-stretch border-b border-[#E9E9E9]'>
           <h1 onClick={() => setIsClicked('Assets')} className={`text-[1rem] font-semibold leading-6 gap-2 pb-2 duration-200 relative cursor-pointer ${isClicked === 'Assets' ? `text-[#2F4EED]` : `text-[#9C9C9C]`}`}>
             Assets
             {

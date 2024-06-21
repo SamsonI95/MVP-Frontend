@@ -3,13 +3,15 @@ import { HiMiniUser, HiOutlineBell } from 'react-icons/hi2'
 import { RxHamburgerMenu } from 'react-icons/rx'
 import { Link } from 'react-router-dom'
 import logo from '/Coinnomad Frame.svg'
+import smallLogo from '../../assets/Logo.svg'
 
 const ResponsiveDashboardHeader = ({menuClicked, setMenuClicked}) => {
   return (
     <header className='p-[32px] flex lg:hidden justify-between items-center w-full'>
-        <Link to={'/dashboard'}>
-            <img className='w-[159.846px] h-[34.615px] object-cover' src={logo} alt="Coinomad Logo" />
-        </Link>
+      <Link to={'/dashboard'}>
+        <img className='w-[159.846px] h-[34.615px] object-cover hidden md:flex' src={logo} alt="Coinomad Logo" />
+        <img className='h-[34px] object-cover flex md:hidden' src={smallLogo} alt="Coinomad Logo" />
+      </Link>
 
       <div className='flex items-center gap-[24px]'>
         <div className='w-[40px] h-[40px] bg-[#F7F7F7] rounded-[50px] px-[8px] py-[0px] flex justify-center items-center relative'>

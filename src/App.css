@@ -10,6 +10,13 @@ body {
   @apply h-5 w-5 focus:outline-none checked:border-transparent checked:bg-[#2F4EED] bg-transparent appearance-none border border-[#E7E7E7] rounded-full;
 }
 
+.scroll::-webkit-scrollbar{
+  display: none;
+}
+
+.trans{
+  transition: all .5s ease-in-out;
+}
 
 @media screen and (min-width: 768px) {
   body {

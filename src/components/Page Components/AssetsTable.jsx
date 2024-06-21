@@ -15,14 +15,14 @@ const AssetsTable = () => {
                     <table className='w-full'>
                         <thead className='w-full'>
                             <tr className='border-b border-[#E9E9E9] flex justify-between items-start self-stretch gap-[10px] w-full'>
-                                <th className='pt-0 px-[40px] md:pl-[32px] pb-[16px] md:pr-[10px] flex items-start w-full self-stretch gap-[10px] text-[#9C9C9C] text-[.875rem] font-semibold leading-[1rem]' scope='col'>Asset</th>
-                                <th className='pt-0 px-[40px] md:pl-[12px] pb-[16px] flex items-start w-full self-stretch gap-[10px] text-[#9C9C9C] text-[.875rem] font-semibold leading-[1rem]' scope='col'>Price</th>
-                                <th className='pt-0 px-[40px] md:pl-[12px] pb-[16px] flex items-start w-full self-stretch gap-[10px] text-[#9C9C9C] text-[.875rem] font-semibold leading-[1rem]' scope='col'>Balance</th>
+                                <th className='pt-0 px-[20px] md:px-[40px] md:pl-[32px] pb-[16px] md:pr-[10px] flex items-start w-full self-stretch gap-[10px] text-[#9C9C9C] text-[.875rem] font-semibold leading-[1rem]' scope='col'>Asset</th>
+                                <th className='pt-0 px-[20px] md:px-[40px] md:pl-[12px] pb-[16px] flex items-start w-full self-stretch gap-[10px] text-[#9C9C9C] text-[.875rem] font-semibold leading-[1rem]' scope='col'>Price</th>
+                                <th className='pt-0 px-[20px] md:px-[40px] md:pl-[12px] pb-[16px] flex items-start w-full self-stretch gap-[10px] text-[#9C9C9C] text-[.875rem] font-semibold leading-[1rem]' scope='col'>Balance</th>
                             </tr>
                         </thead>
                         <tbody className='w-full'>
                             <tr className='border-b border-[#E9E9E9] flex items-center self-stretch gap-[12px] w-full'>
-                                <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] md:px-[32px] '>
+                                <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[25px] md:px-[32px] '>
                                     <img className='w-[32px] h-[32px] object-contain' src={bitcoin} alt="Bitcoin" />
                                     <div className='flex flex-col justify-center items-start'>
                                         <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7 uppercase'>btc</h1>
@@ -38,7 +38,7 @@ const AssetsTable = () => {
                                 </td>
                             </tr>
                             <tr className='border-b border-[#E9E9E9] flex items-center self-stretch gap-[12px] w-full'>
-                                <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
+                                <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[25px] md:px-[32px] '>
                                     <img className='w-[32px] h-[32px] object-contain' src={polygon} alt="Polygon" />
                                     <div className='flex flex-col justify-center items-start'>
                                         <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7 uppercase'>Matic</h1>
@@ -54,7 +54,7 @@ const AssetsTable = () => {
                                 </td>
                             </tr>
                             <tr className='border-b border-[#E9E9E9] flex items-center self-stretch gap-[12px] w-full'>
-                                <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
+                                <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[25px] md:px-[32px] '>
                                     <img className='w-[32px] h-[32px] object-contain' src={ethereum} alt="Ethereum" />
                                     <div className='flex flex-col justify-center items-start'>
                                         <h1 className='text-[1.125rem] font-bold text-[#151515] leading-7 uppercase'>eth</h1>
