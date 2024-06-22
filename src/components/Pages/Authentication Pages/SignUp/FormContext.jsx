@@ -5,6 +5,7 @@ import React, { createContext, useReducer, useContext } from "react";
 const initialState = {
   email: "",
   code: "",
+  token: "",
   password: "",
   confirmPassword: "",
   firstName: "",
@@ -19,6 +20,8 @@ const formReducer = (state, action) => {
       return { ...state, email: action.payload };
     case "SET_CODE":
       return { ...state, code: action.payload };
+    case "SET_TOKEN":
+      return { ...state, token: action.payload };  
     case "SET_PASSWORD":
       return { ...state, password: action.payload };
     case "SET_CONFIRM_PASSWORD":
