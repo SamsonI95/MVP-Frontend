@@ -9,6 +9,7 @@ import ProgressBar from "../../../Page Components/ProgressBar";
 import axios from "axios";
 import FormButton from "../../../Buttons/FormButton";
 import { useNavigate } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
 
 const Organization = () => {
   const [loading, setLoading] = useState(false);
@@ -40,25 +41,29 @@ const Organization = () => {
           setLoading(false);
           console.log("Signup successful:", response.data);
           navigate("/sign-in");
+          toast.success(response.data.message)
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
           setLoading(false);
-          if (error.response) {
-            // Server responded with a non-2xx status code
-            setErrors({
-              organization: "Failed to submit form. Please try again later.",
-            });
-          } else if (error.request) {
-            // The request was made but no response was received
-            setErrors({
-              organization:
-                "Network error. Please check your internet connection.",
-            });
-          } else {
-            // Something else happened while setting up the request
-            setErrors({ organization: "An unexpected error occurred." });
-          }
+          toast.error(error.response.data.message, {
+            transition: Bounce
+          })
+          // if (error.response) {
+          //   // Server responded with a non-2xx status code
+          //   setErrors({
+          //     organization: "Failed to submit form. Please try again later.",
+          //   });
+          // } else if (error.request) {
+          //   // The request was made but no response was received
+          //   setErrors({
+          //     organization:
+          //       "Network error. Please check your internet connection.",
+          //   });
+          // } else {
+          //   // Something else happened while setting up the request
+          //   setErrors({ organization: "An unexpected error occurred." });
+          // }
           setSubmitting(false);
         });
 

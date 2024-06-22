@@ -51,7 +51,7 @@ const ForgotPassword = () => {
             Reset your paswword
           </h1>
           <p className="text-[#9C9C9C] text-[1.125rem] leading-7 font-semibold">
-            Enter your email address,and we'll send you a link to get back into
+            Enter your email address,and we&apos;ll send you a link to get back into
             your account.
           </p>
         </div>

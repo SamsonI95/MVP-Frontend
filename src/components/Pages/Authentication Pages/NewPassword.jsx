@@ -37,6 +37,9 @@ const NewPassword = () => {
       } catch (error) {
         console.error("Error resetting password:", error);
         setLoading(false);
+        navigate("/sign-up/identification");
+        toast.success(error.response.data.message)
+      }, 1000);
       }
     },
     // onSubmit: (values) => {
