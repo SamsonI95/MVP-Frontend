@@ -50,7 +50,7 @@ const Header = () => {
                 <button className="text-sm font-semibold p-2">Sign In</button>
               </Link>
               <Link to="/sign-up/step-1">
-                <button className="text-sm font-semibold text-white bg-buttonPrimary rounded-[8px] p-2 shadow-customInset hover:bg-buttonPrimaryHover">
+                <button className="w-[100px] h-[48px] text-sm font-semibold text-white bg-buttonPrimary rounded-[8px] p-2 shadow-customInset hover:bg-buttonPrimaryHover">
                   Sign Up
                 </button>
               </Link>
