@@ -9,6 +9,7 @@ import InputField from "../../../formFields/InputField";
 import { validateName } from "../../../../Data/formikUtils";
 import ProgressBar from "../../../Page Components/ProgressBar";
 import FormButton from "../../../Buttons/FormButton";
+import { toast } from "react-toastify";
 // import axios from "axios";
 
 const Identification = () => {
@@ -28,6 +29,7 @@ const Identification = () => {
       dispatch({ type: 'SET_LAST_NAME', payload: values.lastName });
       setLoading(false);
       navigate("/sign-up/organization");
+      toast.success('User Data Savde!')
 
       // Simulate a delay for form submission
       // setTimeout(() => {
@@ -45,7 +47,7 @@ const Identification = () => {
       >
         <div className="flex flex-col justify-center items-start w-full gap-[16px]">
           <h1 className="text-[#101010] text-[2rem] leading-10 font-bold mb-[40px]">
-            Let's know more about you
+            Let&apos;s know more about you
           </h1>
           <InputField
             label="First Name"

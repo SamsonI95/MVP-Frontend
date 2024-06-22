@@ -9,6 +9,7 @@ import { createPassword } from "../../../../Data/formikUtils";
 import ProgressBar from "../../../Page Components/ProgressBar";
 import FormButton from "../../../Buttons/FormButton";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 //import axios from "axios";
 
 const CreatePassword = () => {
@@ -28,6 +29,7 @@ const CreatePassword = () => {
         dispatch({ type: 'SET_CONFIRM_PASSWORD', payload: values.confirmPassword });
         setLoading(false);
         navigate("/sign-up/identification");
+        toast.success('Password Created!')
       // Simulate a delay for form submission
       // setTimeout(() => {
       //   setLoading(false);

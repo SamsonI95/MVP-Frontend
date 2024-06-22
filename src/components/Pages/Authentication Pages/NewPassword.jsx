@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //Component(s)
 import { ScaleLoader } from "react-spinners"; // loading animantion component used for buttons
@@ -10,6 +10,7 @@ import axios from "axios";
 
 const NewPassword = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -23,6 +24,7 @@ const NewPassword = () => {
       setTimeout(() => {
         setLoading(false);
         navigate("/sign-up/identification");
+        toast.success('New Password Saved!')
       }, 1000);
     },
   });
