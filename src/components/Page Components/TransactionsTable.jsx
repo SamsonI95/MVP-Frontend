@@ -5,11 +5,14 @@ import ethereum from '/svg/Eth (1).svg'
 import { BsDownload } from 'react-icons/bs'
 import { RxArrowTopRight } from 'react-icons/rx'
 import { IoSwapVerticalOutline } from 'react-icons/io5'
+import TransactionDetails from './Modals/TransactionDetails'
 
 const TransactionsTable = () => {
   const [existData, setExistData] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   return (
     <section className='w-full gap-[10px]'>
+      {showModal && (<TransactionDetails setShowModal={setShowModal} />)}
       <div className='px-[16px] py-[4px] md:py-[16px] md:pr-[32px] flex justify-between items-center gap-3 md:gap-6 whitespace-nowrap overflow-auto w-full scroll'>
         <div className='flex justify-center md:justify-between md:px-[32px] gap-2 items-center'>
           <button className='py-[4px] px-[16px] gap-[8px] flex justify-center items-center bg-[#2F4EED] text-white rounded-[50px] text-[1rem] font-semibold leading-6'>All</button>
@@ -28,7 +31,7 @@ const TransactionsTable = () => {
                   <p className='w-full pl-[32px] pr-[10px] py-[16px] gap-[10px] text-[.875rem] text-[#9C9C9C] font-semibold leading-4'>Today</p>
                   <table className='w-full'>
                     <tbody className='w-full'>
-                        <tr className='flex items-center self-stretch gap-[12px] w-full'>
+                        <tr onClick={() => setShowModal(true)} className='cursor-pointer flex items-center self-stretch gap-[12px] w-full'>
                             <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
                                 <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
                                   <RxArrowTopRight className='text-[1.25rem]' />
@@ -49,7 +52,7 @@ const TransactionsTable = () => {
                             </td>
                         </tr>
 
-                        <tr className='flex items-center self-stretch gap-[12px] w-full'>
+                        <tr onClick={() => setShowModal(true)} className='cursor-pointer flex items-center self-stretch gap-[12px] w-full'>
                             <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
                                 <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
                                   <RxArrowTopRight className='text-[1.25rem]' />
@@ -71,7 +74,7 @@ const TransactionsTable = () => {
                         </tr>
 
                         <p className='pl-[32px] pr-[10px] py-[16px] gap-[10px] text-[.875rem] text-[#9C9C9C] font-semibold leading-4'>Yesterday</p>
-                        <tr className='flex items-center self-stretch gap-[12px] w-full'>
+                        <tr onClick={() => setShowModal(true)} className='cursor-pointer flex items-center self-stretch gap-[12px] w-full'>
                             <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
                                 <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
                                   <RxArrowTopRight className='text-[1.25rem]' />
@@ -92,7 +95,7 @@ const TransactionsTable = () => {
                             </td>
                         </tr>
 
-                        <tr className='flex items-center self-stretch gap-[12px] w-full'>
+                        <tr onClick={() => setShowModal(true)} className='cursor-pointer flex items-center self-stretch gap-[12px] w-full'>
                           <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
                               <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
                                 <RxArrowTopRight className='text-[1.25rem]' />
@@ -115,7 +118,7 @@ const TransactionsTable = () => {
 
 
                         <p className='pl-[32px] pr-[10px] py-[16px] gap-[10px] text-[.875rem] text-[#9C9C9C] font-semibold leading-4 w-full'>May 3, 2024</p>
-                        <tr className='flex items-center self-stretch gap-[12px] w-full'>
+                        <tr onClick={() => setShowModal(true)} className='cursor-pointer flex items-center self-stretch gap-[12px] w-full'>
                             <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] sm:px-[32px]'>
                               <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
                                 <RxArrowTopRight className='text-[1.25rem]' />
@@ -136,7 +139,7 @@ const TransactionsTable = () => {
                             </td>
                         </tr>
 
-                        <tr className='flex items-center self-stretch gap-[12px] w-full'>
+                        <tr onClick={() => setShowModal(true)} className='cursor-pointer flex items-center self-stretch gap-[12px] w-full'>
                             <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px]'>
                                 <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
                                   <RxArrowTopRight className='text-[1.25rem]' />
@@ -158,7 +161,7 @@ const TransactionsTable = () => {
                         </tr>
 
 
-                        <tr className='flex items-center self-stretch gap-[12px] w-full'>
+                        <tr onClick={() => setShowModal(true)} className='cursor-pointer flex items-center self-stretch gap-[12px] w-full'>
                             <td className='flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] '>
                                 <div className='relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]'>
                                   <RxArrowTopRight className='text-[1.25rem]' />
