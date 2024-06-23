@@ -2,8 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-//Page(s)
-import Landing from "./components/Pages/Landing";
+//Authentication Page(s)
 import SignIn from "./components/Pages/Authentication Pages/SignIn";
 import VerifyEmail from "./components/Pages/Authentication Pages/SignUp/VerifyEmail";
 import StepOne from "./components/Pages/Authentication Pages/SignUp/StepOne";
@@ -12,8 +11,11 @@ import Identification from "./components/Pages/Authentication Pages/SignUp/Ident
 import Organization from "./components/Pages/Authentication Pages/SignUp/Organization";
 import ForgotPassword from "./components/Pages/Authentication Pages/forgotPassword";
 import NewPassword from "./components/Pages/Authentication Pages/NewPassword";
-import PasswordVerificationCheck from "./components/Pages/Authentication Pages/PasswordVerificationCheck";
+import VerifyResetPassword from "./components/Pages/Authentication Pages/VerifyResetPassword";
 import SuccessVerificationCheck from "./components/Pages/Authentication Pages/SuccessVerificationCheck";
+
+//Page(s)
+import Landing from "./components/Pages/Landing";
 import Layout from "./components/Pages/Layout";
 
 //Page Component
@@ -60,11 +62,11 @@ function App() {
               <Route path="/" element={<Landing />} />
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/new-password" element={<NewPassword />} />
               <Route
                 path="/password-verification-check"
-                element={<PasswordVerificationCheck />}
+                element={<VerifyResetPassword />}
               />
+              <Route path="/new-password" element={<NewPassword />} />
               <Route
                 path="/success-verification"
                 element={<SuccessVerificationCheck />}

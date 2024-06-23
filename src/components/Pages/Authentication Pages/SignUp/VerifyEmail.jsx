@@ -153,15 +153,6 @@ const VerifyEmail = () => {
           btnName={"Verify Email"}
           value={formik.values.code}
         />
-        {/* <button
-          type="submit"
-          className={`${
-            loading ? "bg-[#2F4EED]/30" : "bg-[#2F4EED]"
-          } px-2 py-2 rounded-lg w-full text-white h-[3.5em] gap-[40px]`}
-        >
-          {loading ? <ScaleLoader /> : "Next"}
-          Verify Email
-        </button> */}
         <div className="w-full text-center text-[1rem] leading-6 font-normal flex flex-col sm:flex-row gap-x-3 justify-center items-center">
           <p className="text-[#101010]">Didn’t get your code?</p>
           <Link className="text-[#2F4EED]">

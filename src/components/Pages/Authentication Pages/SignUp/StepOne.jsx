@@ -40,6 +40,9 @@ const StepOne = () => {
         }).finally(() => {
           setLoading(false);
         })
+        .finally(() => {
+          setLoading(false);
+        });
 
       // const config = {
       //   method: "post",
@@ -88,7 +91,7 @@ const StepOne = () => {
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             name={`email`}
-            value={formik.values.email} // Use formik's email value
+            value={formik.values.email} 
             type={`text`}
             error={formik.touched.email && formik.errors.email}
             errorText={formik.errors.email}

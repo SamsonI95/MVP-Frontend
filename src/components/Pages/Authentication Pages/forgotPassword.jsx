@@ -1,33 +1,47 @@
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useFormContext } from "./SignUp/FormContext";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 //Component(s)
-import { ScaleLoader } from "react-spinners"; // loading animantion component used for buttons
 import InputField from "../../formFields/InputField";
 import axios from "axios";
+import { emailPasswordReset } from "../../../Data/formikUtils";
 
 //Image(s)
 import LeftButton from "../../../../public/svg/LeftButton.svg";
+import FormButton from "../../Buttons/FormButton";
 
 const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
+  const { dispatch } = useFormContext();
   const formik = useFormik({
     initialValues: {
       email: "",
     },
-    onSubmit: (values) => {
+    validationSchema: emailPasswordReset,
+    onSubmit: async (values) => {
       setLoading(true);
-      // Simulate a delay for form submission
-      setTimeout(() => {
-        setLoading(false);
-        navigate("/sign-up/identification");
-      }, 1000);
+      const data = { email: values.email };
+      axios
+        .patch("/api/employerauth/forgot", data)
+        .then(() => {
+          dispatch({ type: "SET_EMAIL", payload: values.email });
+          setLoading(false);
+          navigate("/password-verification-check");
+        })
+        .catch((error) => {
+          console.error("Error resetting password:", error);
+          setLoading(false);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     },
   });
   return (
-    <section className="flex flex-col justify-center items-center w-full h-screen gap-[96px]">
+    <section className="flex flex-col justify-center items-center w-full h-[80vh] gap-[96px]">
       <form
         onSubmit={formik.handleSubmit}
         className="flex flex-col justify-center items-start gap-[40px] w-[21.875em] h-[24.25em]"
@@ -52,15 +66,11 @@ const ForgotPassword = () => {
           error={formik.touched.email && formik.errors.email}
           errorText={formik.errors.email}
         />
-        <button
-          type="submit"
-          className={`${
-            loading || !formik.values.code ? "bg-[#2F4EED]/30" : "bg-[#2F4EED]"
-          } px-2 py-2 rounded-lg w-full text-white h-[3.5em] flex justify-center items-center gap-[40px]`}
-          disabled={loading || !formik.values.email}
-        >
-          {loading ? <ScaleLoader /> : "Send Link"}
-        </button>
+        <FormButton
+          loading={loading}
+          btnName={"Send Code"}
+          value={formik.values.email}
+        />
         <div className="w-full text-center text-[1rem] leading-6 font-normal flex flex-col sm:flex-row gap-x-3 justify-center items-center">
           <Link className="text-[#2F4EED]" to="/sign-in">
             <button>

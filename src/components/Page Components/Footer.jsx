@@ -16,12 +16,12 @@ const Footer = () => {
           <Link to="#">
             <img src={TwitterXicon} alt="twitter/x-logo" />
           </Link>
-          <Link to="#">
+          <Link to="https://www.linkedin.com/company/coinomad">
             <img src={LinkedInIcon} alt="linkedin-logo" />
           </Link>
-          <Link to="#">
+          {/* <Link to="#">
             <img src={IgIcon} alt="instagram-logo" />
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
