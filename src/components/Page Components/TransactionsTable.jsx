@@ -8,7 +8,7 @@ import { IoSwapVerticalOutline } from 'react-icons/io5'
 import TransactionDetails from './Modals/TransactionDetails'
 
 const TransactionsTable = () => {
-  const [existData, setExistData] = useState(true);
+  const [existData, setExistData] = useState(false);
   const [showModal, setShowModal] = useState(false);
   return (
     <section className='w-full gap-[10px]'>
