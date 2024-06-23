@@ -11,6 +11,7 @@ const Dashboard = () => {
   const storedUser = secureLocalStorage.getItem('user');
   const user = storedUser ? JSON.parse(storedUser) : null;
   const [isClicked, setIsClicked] = useState('Assets')
+  
   return (
     <section className='w-full lg:w-auto'>
 

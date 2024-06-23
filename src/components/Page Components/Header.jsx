@@ -43,7 +43,7 @@ const Header = () => {
             {isOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
-        <div className="hidden md:flex w-fit items-center justify-evenly space-x-6">
+        {/* <div className="hidden md:flex w-fit items-center justify-evenly space-x-6">
           {renderButtons && (
             <>
               <Link to="/sign-in">

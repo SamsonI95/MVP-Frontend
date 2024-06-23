@@ -6,7 +6,7 @@ import { IoSwapVerticalOutline } from 'react-icons/io5'
 
 const AssetsTable = () => {
 
-    const [existData, setExistData] = useState(true)
+    const [existData, setExistData] = useState(false)
   return (
     <>
         {

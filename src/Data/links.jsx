@@ -8,17 +8,20 @@ export const links = [
         name: 'Dashboard',
         icon: <MdDashboard className='text-[1.35rem]' />,
         route: '/dashboard',
+        header: 'Hey there, {user}!',
     },
     {
         id: 2,
         name: 'Employees',
         icon: <HiOutlineUsers className='text-[1.35rem]' />,
         route: '/employees',
+        header: 'Employees',
     },
     {
         id: 3,
         name: 'Settings',
         icon: <IoSettingsOutline className='text-[1.35rem]' />,
         route: '/settings',
+        header: 'Settings',
     }
 ]
