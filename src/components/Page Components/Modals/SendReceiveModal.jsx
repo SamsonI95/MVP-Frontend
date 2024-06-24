@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Send from './Send'
 import Receive from './Receive'
 import { FaXmark } from 'react-icons/fa6'
 
 const SendReceiveModal = ({sendReceiveModal, setSendReceiveModal}) => {
+
+  const [sendAssets, setSendAssets] = useState(false);
+  const [receiveAssets, setReceiveAssets] = useState(false);
   return (
-    <div className='w-full h-screen modalBg fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-[999]'>
+    <div className='duration-200 w-full h-screen modalBg fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-[999]'>
         <FaXmark onClick={() => setSendReceiveModal('')} className='text-[1.25rem] cursor-pointer text-white font-bold absolute top-[12%] right-[30%]' />
         <div className='bg-white w-[482px] h-[649px] rounded-lg gap-[3px] flex flex-col justify-center items-start'>
           <div className='w-full pt-8 pb-4 flex justify-between items-start gap-[10px] flex-col'>
@@ -19,7 +22,7 @@ const SendReceiveModal = ({sendReceiveModal, setSendReceiveModal}) => {
             </div>
           </div>
           {
-            sendReceiveModal === 'Send' ? (<Send/>) : (<Receive/>)
+            sendReceiveModal === 'Send' ? (<Send sendAssets={sendAssets} setSendAssets={setSendAssets} />) : (<Receive receiveAssets={receiveAssets} setReceiveAssets={setReceiveAssets} />)
           }
         </div>
     </div>
