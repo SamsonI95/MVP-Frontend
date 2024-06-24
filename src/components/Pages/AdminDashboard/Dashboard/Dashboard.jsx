@@ -5,6 +5,7 @@ import AssetsTable from '../../../Page Components/AssetsTable'
 import TransactionsTable from '../../../Page Components/TransactionsTable'
 import secureLocalStorage from 'react-secure-storage'
 import { FiEye } from 'react-icons/fi'
+import SendReceiveModal from '../../../Page Components/Modals/SendReceiveModal'
 
 const Dashboard = () => {
 
@@ -13,6 +14,7 @@ const Dashboard = () => {
   const user = storedUser ? JSON.parse(storedUser) : null;
   const [isClicked, setIsClicked] = useState('Assets');
   const [showBalance, setShowBalance] = useState(false);
+  const [sendReceiveModal, setSendReceiveModal] = useState(null);
   
   return (
     <section className='w-full lg:w-auto'>
@@ -43,12 +45,17 @@ const Dashboard = () => {
         </div>
 
         <div className='flex justify-center items-start gap-[16px]'>
-            <button className='px-2 py-0 w-[140px] h-[40px] bg-[#2F4EED] flex justify-center items-center text-white rounded-[50px]'>
+            <button onClick={() => setSendReceiveModal('Send')} className='px-2 py-0 w-[140px] h-[40px] bg-[#2F4EED] flex justify-center items-center text-white rounded-[50px]'>
               <p className='px-2'>Send</p> <RxArrowTopRight />
             </button>
-            <button className='px-2 py-0 w-[140px] h-[40px] bg-[#2F4EED] flex justify-center items-center text-white rounded-[50px]'>
+            <button onClick={() => setSendReceiveModal('Receive')} className='px-2 py-0 w-[140px] h-[40px] bg-[#2F4EED] flex justify-center items-center text-white rounded-[50px]'>
               <p className='px-2'>Receive</p> <RxArrowBottomLeft />
             </button>
+            
+            {
+              sendReceiveModal && (<SendReceiveModal sendReceiveModal={sendReceiveModal} setSendReceiveModal={setSendReceiveModal} />)
+            }
+
         </div>
       </div>
       <div className='py-[16px] px-0 gap-[10px] flex flex-col justify-center items-start self-stretch'>
