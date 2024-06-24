@@ -4,13 +4,15 @@ import { RxArrowBottomLeft, RxArrowTopRight } from 'react-icons/rx'
 import AssetsTable from '../../../Page Components/AssetsTable'
 import TransactionsTable from '../../../Page Components/TransactionsTable'
 import secureLocalStorage from 'react-secure-storage'
+import { FiEye } from 'react-icons/fi'
 
 const Dashboard = () => {
 
 
   const storedUser = secureLocalStorage.getItem('user');
   const user = storedUser ? JSON.parse(storedUser) : null;
-  const [isClicked, setIsClicked] = useState('Assets')
+  const [isClicked, setIsClicked] = useState('Assets');
+  const [showBalance, setShowBalance] = useState(false);
   
   return (
     <section className='w-full lg:w-auto'>
@@ -21,8 +23,22 @@ const Dashboard = () => {
         <div className='flex flex-col justify-center items-start gap-[16px]'>
           <h2 className='text-[#9C9C9C] text-[1.125rem] font-semibold leading-7'>Total Balance</h2>
           <div className='flex justify-start items-center gap-[16px]'>
-            <h1 className='text-[2.25rem] md:text-[4rem] text-[#151515] font-semibold leading-[48px] tracking-[-0.88px]'>$1,200.00</h1>
-            <HiOutlineEyeSlash className='text-[1.125rem] text-[#151515]'/>
+            {
+              showBalance ? (
+                  <h1 className='text-[2.25rem] md:text-[4rem] text-[#151515] font-semibold leading-[48px] tracking-[.08em]'>$******</h1>
+                ) : (
+                  <h1 className='text-[2.25rem] md:text-[4rem] text-[#151515] font-semibold leading-[48px] tracking-[-0.88px]'>$1,200.00</h1>
+                )
+            }
+            {
+              showBalance ? (
+                <FiEye onClick={() => setShowBalance(false)} className='cursor-pointer text-[1.125rem] text-[#151515]' />
+              ) : (
+                <HiOutlineEyeSlash onClick={() => setShowBalance(true)} className='cursor-pointer text-[1.125rem] text-[#151515]'/>
+              )
+            }
+            
+
           </div>
         </div>
 
