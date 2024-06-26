@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { FiArrowLeft, FiSearch } from 'react-icons/fi'
 import EmployeeTable from '../../../Page Components/EmployeeTable'
+import AddEmployees from '../../../Page Components/Modals/AddEmployees';
 
 const Employees = () => {
 
   const [searchClick, setSearchClick] = useState(false);
+  const [addEmployees, setAddEmployees] = useState(false);
   return (
     <section className='w-full lg:w-auto'>
 
@@ -17,7 +19,7 @@ const Employees = () => {
                 <div onClick={() => setSearchClick(true)} className='flex md:hidden cursor-pointer justify-between items-center h-[40px] px-2 self-stretch gap-2 rounded-[50px] bg-[#F7F7F7] text-[#000000] font-normal leading-6'>
                   <FiSearch className='text-[#1F2937] text-[1.25rem]' />
                 </div>
-                <button className='flex justify-center items-center bg-[#2F4EED] rounded-[50px] px-2 w-[129px] h-[40px] text-white leading-4 text-[.875rem] font-semibold'>Add Employee</button>
+                <button onClick={() => setAddEmployees(true)} className='flex justify-center items-center bg-[#2F4EED] rounded-[50px] px-2 w-[129px] h-[40px] text-white leading-4 text-[.875rem] font-semibold'>Add Employee</button>
               </div>
             ) : (
               <div className='flex gap-2 px-[16px] py-[12px] w-full justify-end items-center md:hidden'>
@@ -56,12 +58,17 @@ const Employees = () => {
             )
           }
 
-          <button className='hidden md:flex justify-center items-center bg-[#2F4EED] rounded-[50px] px-2 w-[129px] h-[40px] text-white leading-4 text-[.875rem] font-semibold'>Add Employee</button>
+          <button onClick={() => setAddEmployees(true)} className='hidden md:flex justify-center items-center bg-[#2F4EED] rounded-[50px] px-2 w-[129px] h-[40px] text-white leading-4 text-[.875rem] font-semibold'>Add Employee</button>
         </div>
       </div>
 
       {/* EMployee Table */}
       <EmployeeTable/>
+
+      {/* Add Employee Modal */}
+      {
+        addEmployees ? (<AddEmployees addEmployees={addEmployees} setAddEmployees={setAddEmployees}/>) : ``
+      }
     </section>
   )
 }
