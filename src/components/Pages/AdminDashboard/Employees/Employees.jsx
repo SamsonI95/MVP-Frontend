@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiArrowLeft, FiSearch } from "react-icons/fi";
 import EmployeeTable from "../../../Page Components/EmployeeTable";
-import Add from "../../../Page Components/Modals/Add";
+import AddEmployee from "../../../Page Components/Modals/AddEmployee";
 
 const Employees = () => {
   const [searchClick, setSearchClick] = useState(false);
@@ -99,7 +99,7 @@ const Employees = () => {
 
       {/* Add Employee Modal */}
       {addEmployees ? (
-        <Add
+        <AddEmployee
           addEmployees={addEmployees}
           setAddEmployees={setAddEmployees}
         />
