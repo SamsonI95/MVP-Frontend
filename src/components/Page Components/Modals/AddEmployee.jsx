@@ -8,10 +8,10 @@ const AddEmployee = ({addEmployees, setAddEmployees}) => {
 
     const [assets, setAssets] = useState(false);
   return (
-    <div className={addEmployees ? `w-full h-full modalBg fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-[999] duration-300` : `w-full h-full modalBg fixed top-0 left-0 right-[-200%] bottom-0 flex justify-center items-center z-[999] duration-300`}>
-        <div className={`absolute bg-white w-[450px] h-[1024px] flex flex-col justify-center items-start duration-300 ${addEmployees ? `right-0 top-0` : `right-[-200%] top-0`}`}>
+    <div className='trans w-full h-full modalBg fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-[999]'>
+        <div className={`absolute bg-white w-[450px] h-[1024px] flex flex-col justify-start items-start trans ${addEmployees ? `right-0 top-0` : `right-[-200%] top-0`}`}>
             <div className='flex justify-end items-center gap-[152px] py-[18px] px-[24px] w-full'>
-            <FaXmark onClick={() => setAddEmployees(false)} className='cursor-pointer text-[1.125rem] text-[#151515] font-bold' />
+                <FaXmark onClick={() => setAddEmployees(false)} className='cursor-pointer text-[1.125rem] text-[#151515] font-bold' />
             </div>
             <div className='w-full flex flex-col items-start gap-1 py-4 px-6'>
                 <h1 className='text-[#151515] text-[1.75rem] font-bold leading-9 tracking-[-.56px]'>Add employee</h1>
@@ -35,12 +35,8 @@ const AddEmployee = ({addEmployees, setAddEmployees}) => {
                         <label className='text-[#151515] text-[.875rem] font-semibold leading-4' htmlFor="Wallet address">Wallet address</label>
                         <input className='outline-none border-none bg-[#F7F7F7] h-[56px] px-4 w-full self-stretch flex items-center text-base placeholder:text-[#838385] font-normal leading-6 text-[#000000] rounded-lg' type="text" placeholder='Enter Wallet address' />
                     </div>
-                    <div className='flex flex-col items-start gap-2 w-full'>
-                        <label className='text-[#151515] text-[.875rem] font-semibold leading-4' htmlFor="Send to">Send to</label>
-                        <input className='outline-none border-none bg-[#F7F7F7] h-[56px] px-4 w-full self-stretch flex items-center text-base placeholder:text-[#838385] font-normal leading-6 text-[#000000] rounded-lg' type="text" placeholder='Enter address' />
-                    </div>
                     <div className='relative flex flex-col items-start gap-2 w-full'>
-                        <label className='relative text-[#151515] text-[.875rem] font-semibold leading-4' htmlFor="Send from">Send from</label>
+                        <label className='relative text-[#151515] text-[.875rem] font-semibold leading-4' htmlFor="Send from">Assets</label>
                         <div className='outline-none border-none bg-[#F7F7F7] h-[56px] px-4 gap-2 w-full self-stretch flex items-center text-base placeholder:text-[#838385] font-normal leading-6 text-[#000000] rounded-lg'>
                             <input disabled className='outline-none border-none bg-transparent w-full' type="text" placeholder='Select Asset' />
                             <IoIosArrowDown onClick={() => setAssets(prev => !prev)} className={`text-[1.125rem] text-[#151515] font-bold cursor-pointer ${assets ? `rotate-[180deg] duration-200` : `rotate-0 duration-200`}`} />
