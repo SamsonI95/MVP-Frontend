@@ -4,7 +4,7 @@ import ShowAssets from './ShowAssets'
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io'
 import calendar from '/src/assets/calendar.svg'
 
-const AddEmployees = ({addEmployees, setAddEmployees}) => {
+const Add = ({addEmployees, setAddEmployees}) => {
 
     const [assets, setAssets] = useState(false);
   return (
@@ -71,4 +71,4 @@ const AddEmployees = ({addEmployees, setAddEmployees}) => {
   )
 }
 
-export default AddEmployees
+export default Add
