@@ -75,10 +75,10 @@ body {
   width: calc(100% - 240px);
 } */
 
-#sidebar {
+/* #sidebar {
   transition: width 0.3s ease;
 }
 
 #sidebar ul a {
   transition: width 0.3s ease;
-}
+} */
