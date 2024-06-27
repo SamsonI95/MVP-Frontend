@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { FiArrowLeft, FiSearch } from "react-icons/fi";
 import EmployeeTable from "../../../Page Components/EmployeeTable";
-
-import React from "react";
-import { FiSearch } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
-import EmployeeTable from "../../../Page Components/EmployeeTable";
 
 const Employees = () => {
   const [searchClick, setSearchClick] = useState(false);
   return (
     <section className="w-full lg:w-auto">
-      <div className="gap-[24px] py-[16px] px-[10px] md:px-[32px] flex flex-col justify-center items-start self-stretch">
+      {/* <div className="gap-[24px] py-[16px] px-[10px] md:px-[32px] flex flex-col justify-center items-start self-stretch">
         <h1 className="text-[#151515] flex lg:hidden text-[1.75rem] font-bold leading-9 tracking-[-0.56px] py-[16px]">
           Employees
         </h1>
@@ -89,7 +85,7 @@ const Employees = () => {
             Add Employee
           </button>
         </div>
-      </div>
+      </div> */}
 
       <section className="w-full lg:w-auto">
         <div className="gap-[24px] py-[16px] px-[10px] md:px-[32px] flex flex-col justify-center items-start self-stretch">
