@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { FiArrowLeft, FiSearch } from "react-icons/fi";
-import EmployeeTable from "../../../Page Components/EmployeeTable";
-import { IoIosSearch } from "react-icons/io";
+import React, { useState } from 'react'
+import { FiArrowLeft, FiSearch } from 'react-icons/fi'
+import EmployeeTable from '../../../Page Components/EmployeeTable'
+import AddEmployees from '../../../Page Components/Modals/Add';
 
 const Employees = () => {
   const [searchClick, setSearchClick] = useState(false);
