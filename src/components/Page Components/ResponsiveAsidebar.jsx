@@ -12,8 +12,12 @@ const ResponsiveAsidebar = ({ menuClicked, setMenuClicked }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('firstName');
+    
     secureLocalStorage.removeItem('token');
     secureLocalStorage.removeItem('user');
+
     navigate('/sign-in');
   };
 

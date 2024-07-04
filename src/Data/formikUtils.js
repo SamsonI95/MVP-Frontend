@@ -74,4 +74,20 @@ export const emailPasswordReset = Yup.string({
    .email("Enter Your E-mail Address")
    .matches(emailRegExp, "Invalid E-mail Address")
    .required("required")
+});
+
+export const addEmployeesSchema = Yup.object({
+  firstName: Yup.string().required('required'),
+  lastName: Yup.string().required('required'),
+  email: Yup.string().email('Enter a valid email address').matches(emailRegExp, 'Invalid E-mail Address').required('required'),
+  asset: Yup.string().required('required'),
+  walletAddress: Yup.string().required('required'),
+});
+
+export const sendBitcoin = Yup.object({
+  employeeId: Yup.string().required('required'),
+  amount: Yup.number().required('required')
 })
+
+
+

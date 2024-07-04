@@ -40,6 +40,32 @@ body {
   margin: 0 auto; 
 }
 
+.modalContainer {
+  transition: right 0.3s ease-in-out;
+}
+
+.ShowAssets-enter {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.ShowAssets-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.ShowAssets-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ShowAssets-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 200ms, transform 200ms;
+}
+
 /* styling for list used in the landing page */
 .list-checkmarks {
   padding-left: 0;

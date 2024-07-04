@@ -1,27 +1,37 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  darkMode: "selector",
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+module.exports = {
+  darkMode: ["class"],
+  content: [
+    './pages/**/*.{js,jsx}',
+    './components/**/*.{js,jsx}',
+    './app/**/*.{js,jsx}',
+    './src/**/*.{js,jsx}',
+  ],
+  prefix: "",
   theme: {
-    screens: {
-      // {'max': '1535px'}
-      "sm": "320px",
-      "md": "768px",
-      "lg": "1360px",
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
     },
     extend: {
-      colors: {
-        "textSecondary": "#6E6E6E",
-       "buttonPrimary": "#2F4EED",
-       "buttonPrimaryHover": "#3A1DA0",
-        "landingInput": "#F7F7F7",
-        "landingInputText": "#838385",
-        "landingCardBg": "#151515"
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
       },
-      "boxShadow": {
-        "customInset": "0px -4px 0px 0px rgba(0, 0, 0, 0.25) inset",
-      }, 
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
     },
   },
-  plugins: [],
-};
+  plugins: [require("tailwindcss-animate")],
+}

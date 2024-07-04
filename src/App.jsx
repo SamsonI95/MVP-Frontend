@@ -34,9 +34,15 @@ import AdminLayout from "./components/Pages/AdminDashboard/AdminLayout";
 
 // Protected Routing
 import RequireAuth from "./components/RequireAuth";
-import { ToastContainer } from "react-toastify";
+
+
+// import { ToastContainer } from "react-toastify";
 import NotFound from "./components/Pages/NotFound";
 import "react-toastify/dist/ReactToastify.css";
+import Settings from "./components/Pages/AdminDashboard/Settings/Settings";
+import { Toaster } from "./components/ui/toaster";
+import { ToastContainer } from "react-toastify";
+import UpdateDeleteEmployeeModal from "./components/Page Components/Modals/UpdateDeleteEmployeeModal";
 
 function App() {
   return (
@@ -54,6 +60,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
+      <Toaster />
       <FormProvider>
         <Router>
           {/* <HideHeaderFooter HeaderComponent={Header} FooterComponent={Footer}> */}
@@ -81,12 +88,15 @@ function App() {
             </Route>
 
             {/* Dashboard */}
-            {/* <Route element={<RequireAuth />}> */}
+            <Route element={<RequireAuth />}>
               <Route path="/" element={<AdminLayout />}>
                 <Route path="dashboard" element={<Dashboard />} />
-                <Route path="employees" element={<Employees />} />
+                <Route path="employees" element={<Employees />}>
+                  <Route path=":id" element={<UpdateDeleteEmployeeModal/>}></Route>
+                </Route>
+                <Route path="settings" element={<Settings/>}></Route>
               </Route>
-            {/* </Route> */}
+            </Route>
 
             {/* 404 Page */}
             <Route path="*" element={<NotFound/>}></Route>
