@@ -12,7 +12,7 @@ const AdminLayout = () => {
 
   useEffect(() => {
     const storedUser = secureLocalStorage.getItem('user');
-    const user = storedUser ? JSON.parse(storedUser) : null;
+    const user = storedUser ? storedUser : null;
     let newHeader = '';
 
     switch(location.pathname) {
