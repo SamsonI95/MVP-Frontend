@@ -8,13 +8,22 @@ const ShowAssets = ({ onAssetClick }) => {
   const user = secureLocalStorage.getItem("user");
 
   const assets = [
-    { name: "Matic", value: user.polygonWalletBalance.balance, icon: polygon, dollarAmount:user.dollarAmountMatic||"200" },
-    { name: "BTC", value: user.bitcoinTotalBalance, icon: bitcoin,  dollarAmount:user.dollarAmountBitcoin||"200"  },
-
+    {
+      name: "Matic",
+      value: user.polygonWalletBalance.balance,
+      icon: polygon,
+      dollarAmount: user.dollarAmountMatic ?? "0.00",
+    },
+    {
+      name: "BTC",
+      value: user.bitcoinTotalBalance,
+      icon: bitcoin,
+      dollarAmount: user.dollarAmountBitcoin ?? "0.00",
+    },
   ];
 
   return (
-    <div className="absolute top-[83px] bg-white w-full shadow-md rounded-lg  overflow-hidden transition-all duration-300">
+    <div className="absolute top-[83px] z-50 bg-white w-full shadow-md rounded-lg  overflow-hidden transition-all duration-300">
       {assets.map((asset, index) => (
         <div
           key={index}
@@ -35,9 +44,11 @@ const ShowAssets = ({ onAssetClick }) => {
             </div>
           </div>
           <div>
-            <h1 className="text-[#151515] text-lg font-bold">${asset.dollarAmount}</h1>
+            <h1 className="text-[#151515] text-lg font-bold">
+              ${asset.dollarAmount}
+            </h1>
             <p className="text-[#9C9C9C] text-[.875rem] leading-4 font-semibold uppercase">
-            {asset.value}  {asset.name}
+              {asset.value} {asset.name}
             </p>
           </div>
         </div>

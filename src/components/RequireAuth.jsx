@@ -10,13 +10,13 @@ import secureLocalStorage from "react-secure-storage";
 const RequireAuth = () => {
   const { auth } = useAuth();
   const user = secureLocalStorage.getItem("user");
-  console.log("user", user);
+  console.log("user", );
   const location = useLocation();
 
   return user.accessToken ? (
     <Outlet />
   ) : (
-    <Navigate to="/sign-in" />
+    <Navigate to="/sign-in" state={{ from: location }} replace />
   );
 };
 

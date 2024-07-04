@@ -8,9 +8,8 @@ import bitcoin from "/svg/Bitcoin Badge.svg";
 import polygon from "/svg/Coinnomad logo.svg";
 
 const Receive = ({ receiveAssets, setReceiveAssets }) => {
-  const [walletType, setwalletType] = useState("");
-  const [coin, setcoin] = useState("Matic");
-  const [copySuccess, setCopySuccess] = useState(false); 
+  const [walletType, setwalletType] = useState("Select Asset");
+  const [copySuccess, setCopySuccess] = useState(false);
   const user = secureLocalStorage.getItem("user");
   const dropdownRef = useRef(null);
 
@@ -55,9 +54,12 @@ const Receive = ({ receiveAssets, setReceiveAssets }) => {
         <div
           ref={dropdownRef}
           onClick={() => setReceiveAssets(!receiveAssets)}
-          className="outline-none border-none justify-between cursor-pointer bg-[#F7F7F7] min-h-[56px] py-3 px-4 gap-2 w-full self-stretch flex items-center text-base placeholder:text-[#838385] font-normal leading-6 text-[#000000] rounded-lg"
+          className="outline-none border-none justify-between cursor-pointer bg-[#F7F7F7] h-[56px]  px-4 gap-2 w-full self-stretch flex items-center text-base placeholder:text-[#838385] font-normal leading-6 text-[#000000] rounded-lg"
         >
-          {coin == "Matic" && (
+          {walletType == "Select Asset" && (
+            <p className="text-[#838385]">Select Asset</p>
+          )}
+          {walletType == "Matic" && (
             <div className="flex gap-x-2">
               <img src={polygon} alt="" />
               <div className="flex flex-col">
@@ -70,7 +72,7 @@ const Receive = ({ receiveAssets, setReceiveAssets }) => {
               </div>
             </div>
           )}
-          {coin == "BTC" && (
+          {walletType == "BTC" && (
             <div className="flex gap-x-2">
               <img src={bitcoin} alt="" />
               <div className="flex flex-col">
@@ -93,25 +95,35 @@ const Receive = ({ receiveAssets, setReceiveAssets }) => {
           />
           {receiveAssets && (
             <div className="absolute top-0 left-0 mt-2 w-full bg-white shadow-lg rounded-lg z-10">
-              <ShowAssets onAssetClick={setcoin} />
+              <ShowAssets onAssetClick={setwalletType} />
             </div>
           )}
         </div>
       </div>
 
-      <img
-        className="w-[350px] h-[350px] object-contain"
-        src={
-          coin == "Matic" ? user.polygonWalletQrCode : user.bitcoinWalletQrCode
-        }
-        loading="lazy"
-        alt="QR Code"
-      />
+      {walletType == "Select Asset" ? (
+        <div className="w-[350px] h-[350px] text-center object-contain text-2xl font-semibold">
+          Select asset
+        </div>
+      ) : (
+        <img
+          className="w-[350px] h-[350px] object-contain"
+          src={
+            walletType == "Matic"
+              ? user.polygonWalletQrCode
+              : walletType == "BTC"
+              ? user.bitcoinWalletQrCode
+              : ""
+          }
+          loading="lazy"
+          alt="QR Code"
+        />
+      )}
       <button
         onClick={() => {
-          if (coin == "Matic") {
+          if (walletType == "Matic") {
             handleCopyAddress(user.polygonWalletAddress);
-          } else {
+          } else if (walletType == "BTC") {
             handleCopyAddress(user.bitcoinWalletAddress);
           }
         }}
