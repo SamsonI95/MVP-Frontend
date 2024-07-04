@@ -1,14 +1,34 @@
 import React, { useState } from 'react'
 import { FiArrowLeft, FiSearch } from 'react-icons/fi'
 import EmployeeTable from '../../../Page Components/EmployeeTable'
-import AddEmployee from '../../../Page Components/Modals/AddEmployee';
-
+import AddEmployees from '../../../Page Components/Modals/AddEmployee';
+import SchedulePayments from '../../../Page Components/Modals/SchedulePayments';
+import UpdateDeleteEmployeeModal from '@/components/Page Components/Modals/UpdateDeleteEmployeeModal';
+import useIdleTimeout from '@/Data/useIdleTimeout';
 
 const Employees = () => {
 
+  useIdleTimeout();
+
+
+  const [existData, setExistData] = useState(true);
+  const [loadEmployees, setLoadEmployees] = useState(false);
   const [searchClick, setSearchClick] = useState(false);
   const [addEmployees, setAddEmployees] = useState(false);
+  const [schEmployees, setSchEmployees] = useState(false);
+  const [assets, setAssets] = useState(false);
+  const [freq, setFreq] = useState(false);
+  const [updateEmployees, setUpdateEmployees] = useState(false);
+  const [eachEmployee, setEachEmployee] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    asset: '',
+    walletAddress: ''
+});
+
   return (
+
     <section className='w-full lg:w-auto'>
 
       <div className='gap-[24px] py-[16px] px-[10px] md:px-[32px] flex flex-col justify-center items-start self-stretch'>
@@ -64,11 +84,21 @@ const Employees = () => {
       </div>
 
       {/* EMployee Table */}
-      <EmployeeTable/>
+      <EmployeeTable existData={existData} setExistData={setExistData} loadEmployees={loadEmployees} setLoadEmployees={setLoadEmployees} eachEmployee={eachEmployee} setEachEmployee={setEachEmployee} updateEmployees={updateEmployees} setUpdateEmployees={setUpdateEmployees} />
 
       {/* Add Employee Modal */}
       {
-        addEmployees ? (<AddEmployee addEmployees={addEmployees} setAddEmployees={setAddEmployees}/>) : ``
+        addEmployees ? (<AddEmployees existData={existData} setExistData={setExistData} loadEmployees={loadEmployees} setLoadEmployees={setLoadEmployees} assets={assets} setAssets={setAssets} schEmployees={schEmployees} setSchEmployees={setSchEmployees} addEmployees={addEmployees} setAddEmployees={setAddEmployees}/>) : ``
+      }
+
+      {/* Schedule Payments */}
+      {
+        schEmployees ? (<SchedulePayments freq={freq} setFreq={setFreq} assets={assets} setAssets={setAssets} schEmployees={schEmployees} setSchEmployees={setSchEmployees} />) : ``
+      }
+
+      {/* Update Delete Employees */}
+      {
+        updateEmployees ? (<UpdateDeleteEmployeeModal existData={existData} setExistData={setExistData} loadEmployees={loadEmployees} setLoadEmployees={setLoadEmployees} eachEmployee={eachEmployee} setEachEmployee={setEachEmployee} updateEmployees={updateEmployees} setUpdateEmployees={setUpdateEmployees} schEmployees={schEmployees} setSchEmployees={setSchEmployees} />) : ``
       }
     </section>
   )
