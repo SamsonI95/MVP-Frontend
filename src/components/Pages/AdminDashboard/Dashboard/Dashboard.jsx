@@ -12,6 +12,7 @@ const Dashboard = () => {
 
   const storedUser = secureLocalStorage.getItem('user');
   const user = storedUser ? JSON.parse(storedUser) : null;
+  const [userName, setuserName] = useState(user)
   const [isClicked, setIsClicked] = useState('Assets');
   const [showBalance, setShowBalance] = useState(false);
   const [sendReceiveModal, setSendReceiveModal] = useState(null);
@@ -20,7 +21,7 @@ const Dashboard = () => {
     <section className='w-full lg:w-auto'>
 
       <div className='gap-[24px] py-[16px] px-[10px] md:px-[32px] flex flex-col justify-center items-start self-stretch'>
-        <h1 className='text-[#151515] flex lg:hidden text-[1.75rem] font-bold leading-9 tracking-[-0.56px] py-[16px]'>Hey there, {user}!</h1>
+        <h1 className='text-[#151515] flex lg:hidden text-[1.75rem] font-bold leading-9 tracking-[-0.56px] py-[16px]'>Hey there, {user.firstName}!</h1>
 
         <div className='flex flex-col justify-center items-start gap-[16px]'>
           <h2 className='text-[#9C9C9C] text-[1.125rem] font-semibold leading-7'>Total Balance</h2>

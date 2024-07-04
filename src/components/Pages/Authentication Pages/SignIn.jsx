@@ -17,7 +17,6 @@ const SignIn = () => {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/dashboard";
   // console.log('Redirecting to', from);
-  
 
   const [isClicked, setIsClicked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -38,27 +37,27 @@ const SignIn = () => {
         email: values.email,
         password: values.password,
       };
-    
+
       try {
         const response = await axios.post("/api/employerauth/login", data, {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         });
-        console.log('Sign-in Response', response?.data)
+        console.log("Sign-in Response", response?.data);
         const accessToken = response?.data?.data?.accessToken;
-        const user = response?.data?.data?.firstName;
-        console.log('Login response', response);
+        const user = response?.data?.data;
+        console.log("Login response", response);
         setAuth({ user, accessToken });
-        secureLocalStorage.setItem('token', JSON.stringify(accessToken));
-        secureLocalStorage.setItem('user', JSON.stringify(user));
+        secureLocalStorage.setItem("token", JSON.stringify(accessToken));
+        secureLocalStorage.setItem("user", JSON.stringify(user));
         setLoading(false);
         navigate(from, { replace: true });
         toast.success(response.data.message);
       } catch (error) {
         console.error("Error signing in:", error);
         setLoading(false);
-          toast.error(error.response.data.message, {
-            transition: Bounce
-          })
+        toast.error(error.response.data.message, {
+          transition: Bounce,
+        });
         // setError("Failed to sign in. Please check your credentials and try again.");
       }
     },
