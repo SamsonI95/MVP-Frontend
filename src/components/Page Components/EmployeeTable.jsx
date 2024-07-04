@@ -13,7 +13,6 @@ import axios from "axios";
 import { ScaleLoader } from "react-spinners";
 import { toast } from "../ui/use-toast";
 import UpdateDeleteEmployeeModal from "./Modals/UpdateDeleteEmployeeModal";
-// import { Link } from 'react-router-dom';
 
 const EmployeeTable = ({
   existData,
@@ -22,7 +21,7 @@ const EmployeeTable = ({
   setLoadEmployees,
 }) => {
   const [data, setData] = useState([]);
-  const [click, setClick] = useState(false);
+  const [copiedIndex, setCopiedIndex] = useState(null);
   const [updateEmployees, setUpdateEmployees] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
@@ -75,9 +74,6 @@ const EmployeeTable = ({
         toast({
           title: "Copied to clipboard",
         });
-        setInterval(() => {
-          setClick(false);
-        }, 4000);
       })
       .catch((err) => {
         toast({
@@ -85,6 +81,14 @@ const EmployeeTable = ({
           variant: "destructive",
         });
       });
+  };
+
+  const handleCopy = (index, emp) => {
+    setCopiedIndex(index);
+    copyToClipboard(emp.walletAddress);
+    setTimeout(() => {
+      setCopiedIndex(null);
+    }, 4000);
   };
 
   return (
@@ -161,14 +165,11 @@ const EmployeeTable = ({
                   </td>
                   <td className="py-[12px] px-[24px]">
                     <div className="flex justify-center items-start">
-                      {click ? (
+                      {copiedIndex === index ? (
                         <IoCheckmarkOutline className="text-green-400 font-bold text-[1.125rem]" />
                       ) : (
                         <IoCopyOutline
-                          onClick={() => {
-                            copyToClipboard(emp.walletAddress);
-                            setClick(true);
-                          }}
+                          onClick={() => handleCopy(index, emp)}
                           className="text-[#1F2937] font-bold text-[1.125rem]"
                         />
                       )}
@@ -181,9 +182,9 @@ const EmployeeTable = ({
                     {emp?.asset === "BTC" ? (
                       <div className="flex justify-center items-start">
                         <img className="w-6 h-6" src={bitcoin} alt="Bitcoin" />
-                        <td className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
+                        <span className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
                           Bitcoin
-                        </td>
+                        </span>
                       </div>
                     ) : emp?.asset === "ETH" ? (
                       <div className="flex justify-center items-start">
@@ -192,16 +193,16 @@ const EmployeeTable = ({
                           src={ethereum}
                           alt="Ethereum"
                         />
-                        <td className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
+                        <span className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
                           Ethereum
-                        </td>
+                        </span>
                       </div>
                     ) : (
                       <div className="flex justify-center items-start">
                         <img className="w-6 h-6" src={polygon} alt="Polygon" />
-                        <td className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
+                        <span className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
                           Polygon
-                        </td>
+                        </span>
                       </div>
                     )}
                   </td>
