@@ -14,9 +14,14 @@ const Asidebar = ({ clicked, setClicked, setHeader }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    secureLocalStorage.removeItem('token');
-    secureLocalStorage.removeItem('user');
-    navigate('/sign-in');
+    secureLocalStorage.removeItem('firstName');
+    secureLocalStorage.removeItem('accessToken');
+    secureLocalStorage.removeItem('expiry');
+    // secureLocalStorage.removeItem('firstName');
+//     .firstName	U2FsdGVkX19GwwmQ1w4cyLQI06NUgWz5MkeB6eIqjVw=	
+// @secure.j.expiry	U2FsdGVkX19VIPmvZCAAjlPACrt2jwqDKgDNVpSnGCY=	
+// @secure.s.accessToken
+    navigate('/sign-in', { replace: true });
   };
 
   const handleHeaderChange = (header) => {
@@ -25,7 +30,7 @@ const Asidebar = ({ clicked, setClicked, setHeader }) => {
   };
 
   return (
-    <aside id='sidebar' className={`hidden lg:flex flex-col fixed h-full bg-[#F7F7F7] z-50 top-0 left-0 overflow-x-hidden transition-width duration-300 ${clicked ? 'w-[65px]' : 'w-[260px]'}`}>
+    <aside id='sidebar' className={`hidden lg:flex flex-col fixed h-full bg-[#F7F7F7] z-30 top-0 left-0 overflow-x-hidden transition-width duration-300 ${clicked ? 'w-[65px]' : 'w-[235px] xl:w-[260px]'}`}>
       <div className={`flex cursor-pointer ${clicked ? `flex-col` : `flex-row`} justify-between items-center ${clicked ? 'px-[4px] py-[30px]' : 'px-[24px] py-[40px]'} h-[120px] ${clicked ? 'gap-[6px]' : 'gap-[24px]'} whitespace-nowrap`}>
         <RxHamburgerMenu onClick={() => setClicked(prev => !prev)} className='text-[1.25rem]' />
         <Link to={'/dashboard'}>

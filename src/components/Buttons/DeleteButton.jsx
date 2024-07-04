@@ -1,14 +1,14 @@
 import React from "react";
 import { ScaleLoader } from "react-spinners";
 
-const FormButton = ({ btnName, loading, value, width }) => {
+const DeleteButton = ({ btnName, loading, value, width }) => {
   return (
     <button
       type="submit"
       className={
         loading || !value
-          ? `bg-[#2F4EED]/30 px-2 py-2 rounded-lg text-white h-[3.5em] gap-[40px] ${width ? width : `w-full`}`
-          : `bg-[#2F4EED] px-2 py-2 rounded-lg text-white h-[3.5em] gap-[40px] ${width ? width : `w-full`}`
+          ? `bg-[#ED2F2F]/30 px-2 py-2 rounded-lg ${width ? width : `w-full`} text-white h-[3.5em] gap-[40px]`
+          : `bg-[#ED2F2F] px-2 py-2 rounded-lg ${width ? width : `w-full`} text-white h-[3.5em] gap-[40px]`
       }
     >
       {loading ? (
@@ -26,4 +26,4 @@ const FormButton = ({ btnName, loading, value, width }) => {
   );
 };
 
-export default FormButton;
+export default DeleteButton;

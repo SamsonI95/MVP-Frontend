@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
-import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
-import calendar from '/src/assets/calendar.svg';
-import { HiOutlineXMark } from 'react-icons/hi2';
-import InputField from '@/components/formFields/InputField';
-import { useFormik } from 'formik';
-import { addEmployeesSchema } from '@/Data/formikUtils';
-import axios from 'axios';
-import { toast } from '@/components/ui/use-toast';
-import ShowAssets from './ShowAssets';
 import FormButton from '@/components/Buttons/FormButton';
+import InputField from '@/components/formFields/InputField';
+import { toast } from '@/components/ui/use-toast';
+import axios from 'axios';
+import { useFormik } from 'formik';
+import React, { useState } from 'react';
+import { HiOutlineXMark } from 'react-icons/hi2';
+import { IoIosArrowForward } from 'react-icons/io';
 import secureLocalStorage from 'react-secure-storage';
+import calendar from '/src/assets/calendar.svg';
+import DeleteButton from '@/components/Buttons/DeleteButton';
 
-const AddEmployee = ({ setSchEmployees, addEmployees, setAddEmployees, existData, setExistData, loadEmployees, setLoadEmployees }) => {
-    const [loading, setLoading] = useState(false);
-    const [showAssets, setShowAssets] = useState(false);
-    const [selectedAsset, setSelectedAsset] = useState({ name: '', value: '' });
-
+const UpdateDeleteEmployeeModal = ({ updateEmployees, setUpdateEmployees, employeeDetails, setExistData, setLoadEmployees }) => {
+    const [updateloading, setUpdateLoading] = useState(false);
+    const [deleteloading, setDeleteLoading] = useState(false);
     const accessToken = secureLocalStorage.getItem('accessToken');
+    const [active, setActive] = useState('');
 
     const config = {
         headers: {
@@ -26,70 +24,97 @@ const AddEmployee = ({ setSchEmployees, addEmployees, setAddEmployees, existData
 
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
-            email: '',
-            asset: '',
-            walletAddress: ''
+            firstName: employeeDetails.firstName || '',
+            lastName: employeeDetails.lastName || '',
+            email: employeeDetails.email || '',
+            asset: employeeDetails.asset || '',
+            walletAddress: employeeDetails.walletAddress || ''
         },
-        validationSchema: addEmployeesSchema,
         onSubmit: (values) => {
-            setLoading(true);
-        
-            axios.post(`/api/employee/register`, {
-                firstName: values.firstName,
-                lastName: values.lastName,
-                email: values.email,
-                asset: values.asset,
-                walletAddress: values.walletAddress
-            }, config)
-            .then(res => {
-                if (res.data.success === true) {
-                    toast({
-                        title: res.data.message,
-                    });
-                    setAddEmployees(false);
-                    setExistData(true);
-                    setLoadEmployees(true);
-                } else {
-                    toast({
-                        title: "Something went wrong!",
-                        variant: 'destructive'
-                    });
-                }
-            })
-            .catch(err => {
-                setExistData(false);
-                setLoadEmployees(false);
-                console.error('Error registering employee:', err);
+                handleUpdate(formik.values);
+                // handleDelete();
+        }
+    });
+
+    const handleUpdate = (values) => {
+        setUpdateLoading(true);
+        setLoadEmployees(true);
+
+        axios.put(`/api/employee/update/${employeeDetails.employeeId}`, {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            email: values.email,
+            asset: values.asset,
+            walletAddress: values.walletAddress
+        }, config)
+        .then(res => {
+            if (res.data.success === true) {
                 toast({
-                    title: err.response?.data?.message || 'An error occurred',
+                    title: res.data.message,
+                });
+                setUpdateEmployees(false);
+                setExistData(true);
+                setLoadEmployees(false);
+            } else {
+                toast({
+                    title: "Something went wrong!",
                     variant: 'destructive'
                 });
-            })
-            .finally(() => {
-                setLoading(false);
+            }
+        })
+        .catch(err => {
+            console.error('Update error:', err.response?.data || err.message);
+            toast({
+                title: err.response?.data?.message || 'An error occurred',
+                variant: 'destructive'
             });
-        }
-    });        
+            setExistData(false);
+        })
+        .finally(() => {
+            setUpdateLoading(false);
+            setLoadEmployees(false);
+        });
+    };
 
-    const handleAssetClick = (asset) => {
-        setSelectedAsset(asset);
-        formik.setFieldValue('asset', asset.name);
-        setShowAssets(false);
+    const handleDelete = () => {
+        setDeleteLoading(true);
+
+        axios.delete(`/api/employee/delete/${employeeDetails.employeeId}`, config)
+        .then(res => {
+            if (res.data.success === true) {
+                toast({
+                    title: res.data.message,
+                });
+                setUpdateEmployees(false);
+            } else {
+                toast({
+                    title: "Failed to delete employee",
+                    variant: 'destructive'
+                });
+            }
+        })
+        .catch(err => {
+            console.error('Delete error:', err.response?.data || err.message);
+            toast({
+                title: err.response?.data?.message || 'An error occurred',
+                variant: 'destructive'
+            });
+        })
+        .finally(() => {
+            setDeleteLoading(false);
+        });
     };
 
     return (
         <>
-            {addEmployees && (
+            {updateEmployees && (
                 <div className="w-full h-full fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-40 modalBg">
                     <div className="z-40 overflow-y-auto absolute bg-white w-[450px] max-h-full flex flex-col justify-start items-start duration-200 top-0 modalContainer right-0">
                         <div className='flex justify-end items-center gap-[152px] py-[18px] px-[24px] w-full'>
-                            <HiOutlineXMark onClick={() => setAddEmployees(false)} className='cursor-pointer text-[1.75rem] text-[#1F2937]' />
+                            <HiOutlineXMark onClick={() => setUpdateEmployees(false)} className='cursor-pointer text-[1.75rem] text-[#1F2937]' />
                         </div>
                         <div className='w-full flex flex-col items-start gap-1 py-4 px-6'>
-                            <h1 className='text-[#151515] text-[1.75rem] font-bold leading-9 tracking-[-.56px]'>Add employee</h1>
-                            <p className='text-[1rem] text-[#9C9C9C] font-semibold leading-6'>Enter employee details</p>
+                            <h1 className='text-[#151515] text-[1.75rem] font-bold leading-9 tracking-[-.56px]'>Employee Details</h1>
                         </div>
                         <form className='w-full flex flex-col items-start gap-8 p-6' onSubmit={formik.handleSubmit}>
                             <InputField
@@ -132,17 +157,6 @@ const AddEmployee = ({ setSchEmployees, addEmployees, setAddEmployees, existData
                                 type="text"
                                 error={formik.touched.walletAddress && formik.errors.walletAddress}
                             />
-                            <div className='relative flex flex-col items-start gap-2 w-full'>
-                                <label className='relative text-[#151515] text-[.875rem] font-semibold leading-4' htmlFor="Send from">Assets</label>
-                                <div className='outline-none border-none bg-[#F7F7F7] h-[56px] px-4 gap-2 w-full self-stretch flex items-center text-base placeholder:text-[#838385] font-normal leading-6 text-[#000000] rounded-lg'>
-                                    <input name='asset' disabled className='outline-none border-none bg-transparent w-full' type="text" placeholder='Select Asset' value={formik.values.asset}
-                                        onBlur={formik.handleBlur}
-                                        onChange={formik.handleChange}
-                                    />
-                                    <IoIosArrowDown onClick={() => setShowAssets(prev => !prev)} className={`text-[1.125rem] text-[#151515] font-bold cursor-pointer ${showAssets ? `rotate-[180deg] duration-200` : `rotate-0 duration-200`}`} />
-                                </div>
-                                {showAssets && (<ShowAssets onAssetClick={handleAssetClick} />)}
-                            </div>
                             <div className='bg-[#EAEDFD] rounded-lg flex items-center self-stretch gap-6 py-6 px-4'>
                                 <div className='flex justify-center items-center gap-4'>
                                     <div className='flex items-start gap-4'>
@@ -153,16 +167,23 @@ const AddEmployee = ({ setSchEmployees, addEmployees, setAddEmployees, existData
                                         </div>
                                     </div>
                                     <IoIosArrowForward onClick={() => {
-                                        setAddEmployees(false);
-                                        setSchEmployees(true);
+                                        setUpdateEmployees(false);
                                     }} className='text-[#1F2937] text-[1.8rem] cursor-pointer font-bold' />
                                 </div>
                             </div>
-                            <div className='pt-4 pb-10 px-6 flex w-full flex-col justify-center items-center gap-[10px]'>
+                            <div className='pt-4 pb-10 px-6 flex w-full flex-col justify-center items-center gap-[16px]'>
                                 <FormButton
-                                    btnName="Add"
-                                    disabled={loading}
-                                    loading={loading}
+                                    btnName="Update"
+                                    disabled={updateloading}
+                                    loading={updateloading}
+                                    onClick={() => setActive('update')}
+                                    width={`w-[402px]`}
+                                />
+                                <DeleteButton
+                                    btnName="Remove Employee"
+                                    disabled={deleteloading}
+                                    loading={deleteloading}
+                                    onClick={() => setActive('delete')}
                                     width={`w-[402px]`}
                                 />
                             </div>
@@ -172,6 +193,6 @@ const AddEmployee = ({ setSchEmployees, addEmployees, setAddEmployees, existData
             )}
         </>
     );
-};
+}
 
-export default AddEmployee;
+export default UpdateDeleteEmployeeModal;
