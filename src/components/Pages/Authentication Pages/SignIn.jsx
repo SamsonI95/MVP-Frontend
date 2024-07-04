@@ -22,8 +22,8 @@ const SignIn = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "iebunorun@gmail.com",
+      password: "Samson95",
     },
     validationSchema: signIn,
     onSubmit: async (values) => {
@@ -42,8 +42,9 @@ const SignIn = () => {
         secureLocalStorage.setItem("accessToken", accessToken);
         secureLocalStorage.setItem("firstName", firstName);
         secureLocalStorage.setItem("user", response.data.data);
+        console.log(response.data.data);
         secureLocalStorage.setItem("expiry", response.data.data);
-        setAuth({ user: firstName, accessToken, expiry });
+        // setAuth({ user: firstName, accessToken, expiry });
         setLoading(false);
         navigate(from, { replace: true });
         toast.success(response.data.message);

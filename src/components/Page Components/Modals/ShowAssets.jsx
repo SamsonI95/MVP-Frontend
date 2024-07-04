@@ -7,11 +7,11 @@ const ShowAssets = ({ onAssetClick }) => {
   const assets = [
     { name: 'Matic', value: '$200.00', icon: polygon },
     { name: 'BTC', value: '$200.00', icon: bitcoin },
-    { name: 'ETH', value: '$200.00', icon: ethereum }
+    // { name: 'ETH', value: '$200.00', icon: ethereum }
   ];
 
   return (
-    <div className='absolute top-[83px] bg-white w-full shadow-md rounded-lg h-[204px] overflow-hidden transition-all duration-300'>
+    <div className='absolute top-[83px] bg-white w-full shadow-md rounded-lg  overflow-hidden transition-all duration-300'>
       {assets.map((asset, index) => (
         <div
           key={index}
