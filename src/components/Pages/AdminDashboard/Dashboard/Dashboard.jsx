@@ -12,7 +12,6 @@ import useIdleTimeout from '@/Data/useIdleTimeout';
 const Dashboard = () => {
 
     useIdleTimeout();
-
     const { auth } = useAuth();
     const user = auth.user;
 

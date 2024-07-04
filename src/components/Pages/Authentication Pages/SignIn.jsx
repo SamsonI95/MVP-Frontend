@@ -42,9 +42,7 @@ const SignIn = () => {
                 secureLocalStorage.setItem('accessToken', accessToken);
                 secureLocalStorage.setItem('firstName', firstName);
                 secureLocalStorage.setItem('expiry', expiry);
-
                 setAuth({ user: firstName, accessToken, expiry });
-
                 setLoading(false);
                 navigate(from, { replace: true });
                 toast.success(response.data.message);

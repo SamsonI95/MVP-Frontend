@@ -17,7 +17,7 @@ const AdminLayout = () => {
 
     switch(location.pathname) {
       case '/dashboard':
-        newHeader = `Hey there, ${user ? user.name : ''}!`;
+        newHeader = `Hey there, ${user ? user.firstName : ''}!`;
         break;
       case '/employees':
         newHeader = 'Employees';

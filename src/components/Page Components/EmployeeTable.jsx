@@ -231,7 +231,6 @@ const EmployeeTable = ({
           </p>
         </div>
       )}
-
       {updateEmployees && selectedEmployee && (
         <UpdateDeleteEmployeeModal
           updateEmployees={updateEmployees}
