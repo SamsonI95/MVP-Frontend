@@ -7,7 +7,7 @@ import UpdateDeleteEmployeeModal from "@/components/Page Components/Modals/Updat
 import useIdleTimeout from "@/Data/useIdleTimeout";
 
 const Employees = () => {
-  useIdleTimeout();
+  // useIdleTimeout();
 
   const [existData, setExistData] = useState(true);
   const [loadEmployees, setLoadEmployees] = useState(false);
