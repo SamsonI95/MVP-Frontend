@@ -13,6 +13,7 @@ import axios from "axios";
 import { ScaleLoader } from "react-spinners";
 import { toast } from "../ui/use-toast";
 import UpdateDeleteEmployeeModal from "./Modals/UpdateDeleteEmployeeModal";
+import { truncateWalletAddress } from "@/Data/formikUtils";
 
 const EmployeeTable = ({
   existData,
@@ -27,11 +28,7 @@ const EmployeeTable = ({
 
   const accessToken = secureLocalStorage.getItem("accessToken");
 
-  const truncateWalletAddress = (address) => {
-    const lengthToShow = 15;
-    if (!address) return "";
-    return `${address.substring(0, lengthToShow)}...`;
-  };
+
 
   const config = {
     headers: {

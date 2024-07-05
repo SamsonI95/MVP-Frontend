@@ -8,10 +8,10 @@ const LandingCardComp2 = ({ icon, title, content, width, index }) => {
     "lg:w-[630px]": width === "large",
   });
 
-const marginClass = classNames({
-"lg:mr-[px]": index === 0,
-"lg:mr-[px]": index === 2
-});
+// const marginClass = classNames({
+// "lg:mr-[px]": index === 0,
+// "lg:mr-[px]": index === 2
+// });
 
 const positionClass = classNames({
   "lg:translate-x-[8.2rem]": index === 3

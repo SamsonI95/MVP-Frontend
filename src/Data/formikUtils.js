@@ -91,3 +91,15 @@ export const sendBitcoin = Yup.object({
 
 
 
+export const sendBitcoinAnyone = Yup.object({
+  walletAddress: Yup.string().required('required'),
+  amount: Yup.number().required('required')
+})
+
+
+
+export  const truncateWalletAddress = (address) => {
+  const lengthToShow = 15;
+  if (!address) return "";
+  return `${address.substring(0, lengthToShow)}...`;
+};

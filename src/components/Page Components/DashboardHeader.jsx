@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { HiMiniUser, HiOutlineBell } from 'react-icons/hi2';
+import { useLocation } from 'react-router-dom';
 import secureLocalStorage from 'react-secure-storage';
 
-const DashboardHeader = ({ menuClicked, setMenuClicked }) => {
-  const [header, setHeader] = useState('');
+const DashboardHeader = ({ menuClicked, setMenuClicked, header }) => {
+  const location = useLocation();
 
-  useEffect(() => {
-    const storedHeader = localStorage.getItem('header');
-    if (storedHeader) {
-      setHeader(storedHeader);
-    }
-  }, []);
+
+
 
   // const storedUser = secureLocalStorage.getItem('user');
   // const user = storedUser ? JSON.parse(storedUser) : null;

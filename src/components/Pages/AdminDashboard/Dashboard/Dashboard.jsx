@@ -7,10 +7,9 @@ import secureLocalStorage from "react-secure-storage";
 import { FiEye } from "react-icons/fi";
 import SendReceiveModal from "../../../Page Components/Modals/SendReceiveModal";
 import useAuth from "@/hooks/useAuth";
-import useIdleTimeout from "@/Data/useIdleTimeout";
 
 const Dashboard = () => {
-  useIdleTimeout();
+
   const { auth } = useAuth();
   const user = auth.user;
 

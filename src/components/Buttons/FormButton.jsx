@@ -1,14 +1,20 @@
 import React from "react";
 import { ScaleLoader } from "react-spinners";
 
-const FormButton = ({ btnName, loading, value, width }) => {
+const FormButton = ({ btnName, loading, value, width, disabled }) => {
   return (
     <button
       type="submit"
       className={
         loading || !value
-          ? `bg-[#2F4EED]/30 px-2 py-2 rounded-lg text-white h-[3.5em] gap-[40px] ${width ? width : `w-full`}`
-          : `bg-[#2F4EED] px-2 py-2 rounded-lg text-white h-[3.5em] gap-[40px] ${width ? width : `w-full`}`
+          ? ` ${
+              disabled ? `bg-[#2F4EED]/30` : "bg-[#2F4EED]"
+            } px-2 py-2 rounded-lg text-white h-[3.5em] gap-[40px] ${
+              width ? width : `w-full`
+            }`
+          : `bg-[#2F4EED] px-2 py-2 rounded-lg text-white h-[3.5em] gap-[40px] ${
+              width ? width : `w-full`
+            }`
       }
     >
       {loading ? (
