@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiArrowLeft, FiSearch } from "react-icons/fi";
 import EmployeeTable from "../../../Page Components/EmployeeTable";
 import AddEmployees from "../../../Page Components/Modals/AddEmployee";
 import SchedulePayments from "../../../Page Components/Modals/SchedulePayments";
 import UpdateDeleteEmployeeModal from "@/components/Page Components/Modals/UpdateDeleteEmployeeModal";
-
+import secureLocalStorage from "react-secure-storage";
+import axios from "axios";
+import { ScaleLoader } from "react-spinners";
 
 const Employees = () => {
-
-
   const [existData, setExistData] = useState(true);
-  const [loadEmployees, setLoadEmployees] = useState(false);
+  const [loadEmployees, setLoadEmployees] = useState(true);
+  const [data, setData] = useState([]);
   const [searchClick, setSearchClick] = useState(false);
   const [addEmployees, setAddEmployees] = useState(false);
   const [schEmployees, setSchEmployees] = useState(false);
@@ -24,6 +25,32 @@ const Employees = () => {
     asset: "",
     walletAddress: "",
   });
+
+  const user = secureLocalStorage.getItem("user");
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user.accessToken}`,
+    },
+  };
+
+  const getEmployees = () => {
+    setLoadEmployees(true);
+    axios
+      .get(`/api/employee/getemployees`, config)
+      .then((res) => {
+     
+        setLoadEmployees(false);
+        setData(res.data.data);
+      })
+      .catch((err) => {
+        setLoadEmployees(false);
+      });
+  };
+
+  useEffect(() => {
+    getEmployees();
+  }, [existData]);
 
   return (
     <section className="w-full lg:w-auto">
@@ -114,16 +141,23 @@ const Employees = () => {
       </div>
 
       {/* EMployee Table */}
-      <EmployeeTable
-        existData={existData}
-        setExistData={setExistData}
-        loadEmployees={loadEmployees}
-        setLoadEmployees={setLoadEmployees}
-        eachEmployee={eachEmployee}
-        setEachEmployee={setEachEmployee}
-        updateEmployees={updateEmployees}
-        setUpdateEmployees={setUpdateEmployees}
-      />
+      {loadEmployees ? (
+        <div className="w-full h-[600px] flex justify-center items-center">
+          <ScaleLoader className="text-[#2F4EED]" />
+        </div>
+      ) : (
+        <EmployeeTable
+          existData={existData}
+          setExistData={setExistData}
+          loadEmployees={loadEmployees}
+          setLoadEmployees={setLoadEmployees}
+          eachEmployee={eachEmployee}
+          setEachEmployee={setEachEmployee}
+          updateEmployees={updateEmployees}
+          data={data}
+          setUpdateEmployees={setUpdateEmployees}
+        />
+      )}
 
       {/* Add Employee Modal */}
       {addEmployees ? (

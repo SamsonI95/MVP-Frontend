@@ -5,6 +5,7 @@ const FormButton = ({ btnName, loading, value, width, disabled }) => {
   return (
     <button
       type="submit"
+      
       className={
         loading || !value
           ? ` ${

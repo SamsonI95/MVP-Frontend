@@ -1,6 +1,6 @@
 import FormButton from "@/components/Buttons/FormButton";
 import InputField from "@/components/formFields/InputField";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "react-toastify";
 import axios from "axios";
 import { useFormik } from "formik";
 import React, { useState } from "react";
@@ -15,16 +15,17 @@ const UpdateDeleteEmployeeModal = ({
   setUpdateEmployees,
   employeeDetails,
   setExistData,
+  getEmployees,
   setLoadEmployees,
 }) => {
   const [updateloading, setUpdateLoading] = useState(false);
+  const [isUpdate, setisUpdate] = useState(false);
   const [deleteloading, setDeleteLoading] = useState(false);
-  const accessToken = secureLocalStorage.getItem("accessToken");
-  const [active, setActive] = useState("");
+  const user = secureLocalStorage.getItem("user");
 
   const config = {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${user.accessToken}`,
     },
   };
 
@@ -37,14 +38,16 @@ const UpdateDeleteEmployeeModal = ({
       walletAddress: employeeDetails.walletAddress || "",
     },
     onSubmit: (values) => {
-      handleUpdate(formik.values);
-      // handleDelete();
+      if (isUpdate) {
+        handleUpdate(formik.values);
+      } else {
+        handleDelete(formik.values);
+      }
     },
   });
 
   const handleUpdate = (values) => {
     setUpdateLoading(true);
-    setLoadEmployees(true);
 
     axios
       .put(
@@ -59,31 +62,15 @@ const UpdateDeleteEmployeeModal = ({
         config
       )
       .then((res) => {
-        if (res.data.success === true) {
-          toast({
-            title: res.data.message,
-          });
-          setUpdateEmployees(false);
-          setExistData(true);
-          setLoadEmployees(false);
-        } else {
-          toast({
-            title: "Something went wrong!",
-            variant: "destructive",
-          });
-        }
+        toast.success(res.data.message);
+        setUpdateEmployees(false);
+        setExistData((prev) => !prev);
       })
       .catch((err) => {
-        console.error("Update error:", err.response?.data || err.message);
-        toast({
-          title: err.response?.data?.message || "An error occurred",
-          variant: "destructive",
-        });
-        setExistData(false);
+        toast.error(err.response?.data?.message || "An error occurred");
       })
       .finally(() => {
         setUpdateLoading(false);
-        setLoadEmployees(false);
       });
   };
 
@@ -93,24 +80,12 @@ const UpdateDeleteEmployeeModal = ({
     axios
       .delete(`/api/employee/delete/${employeeDetails.employeeId}`, config)
       .then((res) => {
-        if (res.data.success === true) {
-          toast({
-            title: res.data.message,
-          });
-          setUpdateEmployees(false);
-        } else {
-          toast({
-            title: "Failed to delete employee",
-            variant: "destructive",
-          });
-        }
+        toast.success(res.data.message);
+        setUpdateEmployees(false);
+        setExistData((prev) => !prev);
       })
       .catch((err) => {
-        console.error("Delete error:", err.response?.data || err.message);
-        toast({
-          title: err.response?.data?.message || "An error occurred",
-          variant: "destructive",
-        });
+        toast.error(err.response?.data?.message || "An error occurred");
       })
       .finally(() => {
         setDeleteLoading(false);
@@ -120,8 +95,16 @@ const UpdateDeleteEmployeeModal = ({
   return (
     <>
       {updateEmployees && (
-        <div className="w-full h-full fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-40 modalBg">
-          <div className="z-40 overflow-y-auto absolute bg-white w-[450px] max-h-full flex flex-col justify-start items-start duration-200 top-0 modalContainer right-0">
+        <div
+          onClick={() => setUpdateEmployees(false)}
+          className="w-full cursor-pointer h-full fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-40 modalBg"
+        >
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            className="z-40 cursor-auto overflow-y-auto absolute bg-white w-[450px] max-h-full flex flex-col justify-start items-start duration-200 top-0 modalContainer right-0"
+          >
             <div className="flex justify-end items-center gap-[152px] py-[18px] px-[24px] w-full">
               <HiOutlineXMark
                 onClick={() => setUpdateEmployees(false)}
@@ -210,14 +193,14 @@ const UpdateDeleteEmployeeModal = ({
                   btnName="Update"
                   disabled={updateloading}
                   loading={updateloading}
-                  onClick={() => setActive("update")}
+                  onClick={() => setisUpdate(true)}
                   width={`w-[402px]`}
                 />
                 <DeleteButton
                   btnName="Remove Employee"
                   disabled={deleteloading}
                   loading={deleteloading}
-                  onClick={() => setActive("delete")}
+                  onClick={() => setisUpdate(false)}
                   width={`w-[402px]`}
                 />
               </div>

@@ -1,13 +1,16 @@
 import React from "react";
 import { ScaleLoader } from "react-spinners";
 
-const DeleteButton = ({ btnName, loading, value, width }) => {
+const DeleteButton = ({ btnName, loading, value, width, disabled }) => {
   return (
     <button
       type="submit"
+      disabled={disabled}
       className={
         loading || !value
-          ? `bg-[#ED2F2F]/30 px-2 py-2 rounded-lg ${width ? width : `w-full`} text-white h-[3.5em] gap-[40px]`
+          ? `bg-[#ED2F2F]   ${
+            disabled ? `bg-[#ED2F2F]/30` : "bg-[#ED2F2F]"
+          }px-2 py-2 rounded-lg ${width ? width : `w-full`} text-white h-[3.5em] gap-[40px]`
           : `bg-[#ED2F2F] px-2 py-2 rounded-lg ${width ? width : `w-full`} text-white h-[3.5em] gap-[40px]`
       }
     >
