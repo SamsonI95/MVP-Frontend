@@ -11,6 +11,7 @@ const InputField = ({
   min,
   max,
   onBlur,
+  disabled
 }) => {
     return (
       <div className="flex flex-col justify-start items-start w-full">
@@ -34,6 +35,7 @@ const InputField = ({
           max={max}
           name={name}
           value={value}
+          disabled={disabled}
         >
         </input>
         {error && (
