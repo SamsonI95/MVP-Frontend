@@ -134,6 +134,7 @@ const Send = ({ sendAssets, setSendAssets, setSendReceiveModal }) => {
           </div>
           {sendAssets && <ShowAssets onAssetClick={setwalletType} />}
         </div>
+       
         <InputField
           placeholder={`Enter address`}
           label={`Send to`}

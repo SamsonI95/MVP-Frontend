@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { format, isToday, isYesterday } from "date-fns";
 import bitcoin from "/svg/Bitcoin Badge.svg";
+import matic from "/svg/matic.svg";
 import ethereum from "/svg/Eth (1).svg";
 import { BsDownload } from "react-icons/bs";
 import { RxArrowTopRight, RxArrowBottomLeft } from "react-icons/rx";
@@ -107,7 +108,7 @@ const TransactionsTable = () => {
               type="submit"
             />
           </div>
-        ) : transactions.length === 0 ? (
+        ) : transactions.length == 0 ? (
           <div className="flex flex-col justify-start items-center px-[10px] py-[80px] md:h-[612px] w-full gap-[10px]">
             <div className=" rounded-full p-[10px] bg-[#F7F7F7] gap-[10px] flex justify-center items-center">
               <IoSwapVerticalOutline className="text-[1.25rem] rotate-[45deg]" />
@@ -143,7 +144,7 @@ const TransactionsTable = () => {
                           <img
                             className="absolute w-[16px] top-[-5px] left-[-6px] h-[16px] object-contain"
                             src={
-                              transaction.asset === "BTC" ? bitcoin : ethereum
+                              transaction.asset === "BTC" ? bitcoin : matic
                             }
                             alt={transaction.asset}
                           />
