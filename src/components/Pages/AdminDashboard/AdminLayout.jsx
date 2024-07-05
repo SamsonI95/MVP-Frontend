@@ -43,7 +43,7 @@ const AdminLayout = () => {
       className={`${
         clicked
           ? `lg:w-[94%] xl:w-[95%] lg:left-[60px]`
-          : `lg:w-[78%] xl:w-[80%] lg:left-[230px] xl:left-[260px]`
+          : `lg:w-[83%] xl:w-[84%] lg:left-[230px] xl:left-[260px]`
       } w-full duration-300 lg:relative`}
     >
       <Asidebar clicked={clicked} setClicked={setClicked} />
