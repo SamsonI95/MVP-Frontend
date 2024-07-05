@@ -143,7 +143,9 @@ const Employees = () => {
       {/* EMployee Table */}
       {loadEmployees ? (
         <div className="w-full h-[600px] flex justify-center items-center">
-          <ScaleLoader className="text-[#2F4EED]" />
+          <ScaleLoader
+            color="#2F4EED"
+          />
         </div>
       ) : (
         <EmployeeTable

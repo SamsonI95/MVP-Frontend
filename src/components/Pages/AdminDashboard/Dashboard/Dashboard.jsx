@@ -7,6 +7,7 @@ import secureLocalStorage from "react-secure-storage";
 import { FiEye } from "react-icons/fi";
 import SendReceiveModal from "../../../Page Components/Modals/SendReceiveModal";
 import useAuth from "@/hooks/useAuth";
+import AccountHeaderModal from "@/components/Page Components/Modals/AccountHeaderModal";
 
 const Dashboard = () => {
 

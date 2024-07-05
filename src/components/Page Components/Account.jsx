@@ -201,7 +201,6 @@ const Account = () => {
               {isLoading ? (
                 <ScaleLoader
                   color="#2F4EED"
-                  height={15}
                   className="translate-y-[3px]"
                   type="submit"
                 />

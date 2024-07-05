@@ -128,7 +128,6 @@ const TransactionsTable = () => {
             {" "}
             <ScaleLoader
               color="#2F4EED"
-              height={15}
               className=" mx-auto"
               type="submit"
             />
