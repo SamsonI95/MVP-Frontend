@@ -3,9 +3,10 @@ import { HiMiniUser, HiOutlineXMark } from "react-icons/hi2";
 import { IoCopyOutline } from "react-icons/io5";
 import eth from "/public/svg/Eth (1).svg";
 import bitcoin from "/public/svg/Bitcoin Badge.svg";
+import matic from "/public/svg/matic.svg";
 import ethereum from "/public/svg/Eth (1).svg";
 import { format, formatDistanceToNow, subMonths } from "date-fns";
-import { FaRegCircleCheck } from "react-icons/fa6";
+import { FaRegCircleCheck, FaRegCircleXmark } from "react-icons/fa6";
 import { toast } from "react-toastify";
 const TransactionDetails = ({ setShowModal, transaction }) => {
   if (!transaction) return null;
@@ -43,10 +44,10 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
   const handleCopy = async (walletAddress) => {
     try {
       await navigator.clipboard.writeText(walletAddress);
-      toast.success('Address copied ');
+      toast.success("Address copied ");
     } catch (err) {
-      console.error('Failed to copy: ', err);
-      toast.error('Failed to copy');
+      console.error("Failed to copy: ", err);
+      toast.error("Failed to copy");
     }
   };
 
@@ -82,7 +83,10 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
               <p className="text-[#151515] text-[.875rem] font-semibold leading-4">
                 {truncateWalletAddress(transaction.senderWalletAddress)}
               </p>
-              <IoCopyOutline onClick={() => handleCopy(transaction.senderWalletAddress)} className="text-[#1F2937] cursor-pointer text-[1.125ren]" />
+              <IoCopyOutline
+                onClick={() => handleCopy(transaction.senderWalletAddress)}
+                className="text-[#1F2937] cursor-pointer text-[1.125ren]"
+              />
             </div>
           </div>
 
@@ -97,7 +101,10 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
               <p className="text-[#151515] text-[.875rem] font-semibold leading-4">
                 {truncateWalletAddress(transaction.receiverWalletAddress)}
               </p>
-              <IoCopyOutline onClick={() => handleCopy(transaction.receiverWalletAddress)} className="text-[#1F2937] cursor-pointer text-[1.125ren]" />
+              <IoCopyOutline
+                onClick={() => handleCopy(transaction.receiverWalletAddress)}
+                className="text-[#1F2937] cursor-pointer text-[1.125ren]"
+              />
             </div>
           </div>
         </div>
@@ -113,8 +120,8 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
               <div className="flex items-center gap-2">
                 <img
                   className="flex justify-center items-center object-cover w-4 h-4"
-                  src={transaction.asset === "BTC" ? bitcoin : ethereum}
-                  alt="Ethereum"
+                  src={transaction.asset === "BTC" ? bitcoin : matic}
+                  alt={transaction.asset === "BTC" ? "bitcoin" : "matic"}
                 />
                 <p className="text-[.875rem] text-[#151515] leading-4 font-semibold">
                   {transaction.amount}
@@ -129,8 +136,8 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
               <div className="flex items-center gap-2">
                 <img
                   className="flex justify-center items-center object-cover w-4 h-4"
-                  src={transaction.asset === "BTC" ? bitcoin : ethereum}
-                  alt="Ethereum"
+                  src={transaction.asset === "BTC" ? bitcoin : matic}
+                  alt={transaction.asset === "BTC" ? "bitcoin" : "matic"}
                 />
                 <p className="text-[.875rem] text-[#151515] leading-4 font-semibold">
                   {transaction.asset === "BTC" ? "Bitcoin" : "Polygon"}
@@ -142,7 +149,10 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
                 Transaction ID
               </p>
               <div className="flex items-center gap-2">
-                <IoCopyOutline onClick={() => handleCopy(transaction.hash)} className="text-[#1F2937] cursor-pointer text-[1.125ren]" />
+                <IoCopyOutline
+                  onClick={() => handleCopy(transaction.hash)}
+                  className="text-[#1F2937] cursor-pointer text-[1.125ren]"
+                />
                 <p className="text-[#151515] text-[.875rem] font-semibold leading-4">
                   {truncateWalletAddress(transaction.hash)}
                 </p>
@@ -153,11 +163,24 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
                 Status
               </p>
               <div className="flex items-center gap-2">
-                <FaRegCircleCheck className="text-[#23AE5E] text-[1.125ren]" />
-                <p className="text-[.875rem] leading-4 font-semibold text-[#23AE5E]">
-                  {transaction.status == "Success"
-                    ? "Success"
-                    : transaction.status}
+                {transaction.status == "Success" ? (
+                  <FaRegCircleCheck className="text-[#23AE5E] text-[1.125ren]" />
+                ) : transaction.status == "Pending" ? (
+                  <FaRegCircleCheck className="text-yellow-500 text-[1.125ren]" />
+                ) : (
+                  <FaRegCircleCheck className="text-red-500 text-[1.125ren]" />
+                )}
+
+                <p
+                  className={`text-[.875rem] leading-4 font-semibold ${
+                    transaction.status == "Success"
+                      ? "text-[#23AE5E]"
+                      : transaction.status == "Pending"
+                      ? "text-yellow-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {transaction.status}
                 </p>
               </div>
             </div>
@@ -176,7 +199,10 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
                 Hash
               </p>
               <div className="flex items-center gap-2">
-                <IoCopyOutline onClick={() => handleCopy(transaction.hash)} className="text-[#1F2937] cursor-pointer text-[1.125ren]" />
+                <IoCopyOutline
+                  onClick={() => handleCopy(transaction.hash)}
+                  className="text-[#1F2937] cursor-pointer text-[1.125ren]"
+                />
                 <p className="text-[#151515] text-[.875rem] font-semibold leading-4">
                   {truncateWalletAddress(transaction.hash)}
                 </p>

@@ -31,7 +31,6 @@ const ShowAssets = ({ onAssetClick, setLoading }) => {
             index === 0 ? "rounded-t-lg" : ""
           } ${index === assets.length - 1 ? "rounded-b-lg" : ""}`}
           onClick={() => {
-            setLoading(true);
             onAssetClick(asset.name)}}
         >
           <div className="flex items-center gap-3">
