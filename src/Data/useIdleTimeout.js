@@ -20,7 +20,7 @@
 //         document.addEventListener('visibilitychange', handleVisibilityChange);
 
 //         return () => {
-//             events.forEach(event => document.removeEventListener(event, resetLastActive));
+//             events.forEach(event => document.No ActivityremoveEventListener(event, resetLastActive));
 //             document.removeEventListener('visibilitychange', handleVisibilityChange);
 //         };
 //     }, []);

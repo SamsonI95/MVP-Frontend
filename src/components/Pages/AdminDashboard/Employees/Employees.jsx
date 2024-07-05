@@ -4,10 +4,10 @@ import EmployeeTable from "../../../Page Components/EmployeeTable";
 import AddEmployees from "../../../Page Components/Modals/AddEmployee";
 import SchedulePayments from "../../../Page Components/Modals/SchedulePayments";
 import UpdateDeleteEmployeeModal from "@/components/Page Components/Modals/UpdateDeleteEmployeeModal";
-import useIdleTimeout from "@/Data/useIdleTimeout";
+
 
 const Employees = () => {
-  // useIdleTimeout();
+
 
   const [existData, setExistData] = useState(true);
   const [loadEmployees, setLoadEmployees] = useState(false);

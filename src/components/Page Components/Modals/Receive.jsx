@@ -6,10 +6,12 @@ import { IoIosArrowDown } from "react-icons/io";
 import secureLocalStorage from "react-secure-storage";
 import bitcoin from "/svg/Bitcoin Badge.svg";
 import polygon from "/svg/Coinnomad logo.svg";
+import { ScaleLoader } from "react-spinners";
 
 const Receive = ({ receiveAssets, setReceiveAssets }) => {
   const [walletType, setwalletType] = useState("Select Asset");
   const [copySuccess, setCopySuccess] = useState(false);
+  const [loading, setLoading] = useState(true);
   const user = secureLocalStorage.getItem("user");
   const dropdownRef = useRef(null);
 
@@ -95,11 +97,16 @@ const Receive = ({ receiveAssets, setReceiveAssets }) => {
           />
           {receiveAssets && (
             <div className="absolute top-0 left-0 mt-2 w-full bg-white shadow-lg rounded-lg z-10">
-              <ShowAssets onAssetClick={setwalletType} />
+              <ShowAssets
+                onAssetClick={setwalletType}
+                setLoading={setLoading}
+              />
             </div>
           )}
         </div>
       </div>
+      
+      
 
       {walletType == "Select Asset" ? (
         <div className="w-[350px] h-[350px] text-center object-contain text-2xl font-semibold">
@@ -113,9 +120,11 @@ const Receive = ({ receiveAssets, setReceiveAssets }) => {
               ? user.polygonWalletQrCode
               : walletType == "BTC"
               ? user.bitcoinWalletQrCode
-              : ""
+              : null  
           }
-          loading="lazy"
+          // loading="lazy"
+          // onLoad={() => setLoading(false)}
+          // onError={() => setLoading(false)}
           alt="QR Code"
         />
       )}

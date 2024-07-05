@@ -13,6 +13,7 @@ import secureLocalStorage from "react-secure-storage";
 
 const Send = ({ sendAssets, setSendAssets, setSendReceiveModal }) => {
   const [walletType, setwalletType] = useState("Select Asset");
+  const user= secureLocalStorage.getItem("user")
   const [formValid, setFormValid] = useState(false);
   const [loading, setLoading] = useState(false);
   const dropdownRef = useRef(null);
@@ -33,8 +34,8 @@ const Send = ({ sendAssets, setSendAssets, setSendReceiveModal }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [sendAssets]);
-  const user = secureLocalStorage.getItem("user");
-  const config = {
+
+ const config = {
     headers: {
       Authorization: `Bearer ${user.accessToken}`,
     },

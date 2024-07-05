@@ -4,7 +4,7 @@ import polygon from "/svg/Coinnomad logo.svg";
 import ethereum from "/svg/Eth (1).svg";
 import secureLocalStorage from "react-secure-storage";
 
-const ShowAssets = ({ onAssetClick }) => {
+const ShowAssets = ({ onAssetClick, setLoading }) => {
   const user = secureLocalStorage.getItem("user");
 
   const assets = [
@@ -30,7 +30,9 @@ const ShowAssets = ({ onAssetClick }) => {
           className={`flex justify-between items-center py-3 px-4 duration-200 cursor-pointer hover:bg-[#F7F7F7] ${
             index === 0 ? "rounded-t-lg" : ""
           } ${index === assets.length - 1 ? "rounded-b-lg" : ""}`}
-          onClick={() => onAssetClick(asset.name)}
+          onClick={() => {
+            setLoading(true);
+            onAssetClick(asset.name)}}
         >
           <div className="flex items-center gap-3">
             <img className="h-8 w-8" src={asset.icon} alt={asset.name} />

@@ -1,4 +1,4 @@
-import useIdleTimeout from '@/Data/useIdleTimeout';
+
 import Account from '@/components/Page Components/Account';
 import ChangePassword from '@/components/Page Components/ChangePassword';
 import Notification from '@/components/Page Components/Notification';
@@ -7,7 +7,7 @@ import React, { useState } from 'react'
 
 const Settings = () => {
 
-    useIdleTimeout();
+ 
 
     const [currentTab, setCurrentTab] = useState('Account');
   return (
