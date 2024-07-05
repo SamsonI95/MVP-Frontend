@@ -20,44 +20,19 @@ const EmployeeTable = ({
   setExistData,
   loadEmployees,
   setLoadEmployees,
+  data,
 }) => {
-  const [data, setData] = useState([]);
   const [copiedIndex, setCopiedIndex] = useState(null);
   const [updateEmployees, setUpdateEmployees] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-  const accessToken = secureLocalStorage.getItem("accessToken");
-
-
+  const user = secureLocalStorage.getItem("user");
 
   const config = {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${user.ccessToken}`,
     },
   };
-
-  useEffect(() => {
-    setLoadEmployees(true);
-    axios
-      .get(`/api/employee/getemployees`, config)
-      .then((res) => {
-        if (res.data.success) {
-          setExistData(true);
-          setData(res.data.data);
-          setLoadEmployees(false);
-          console.log("Get it", res.data.data);
-        }
-      })
-      .catch((err) => {
-        console.log("Employee Get", err);
-        setExistData(false);
-        setLoadEmployees(false);
-      })
-      .finally(() => {
-        setExistData(true);
-        setLoadEmployees(false);
-      });
-  }, []);
 
   const handleEditClick = (employee) => {
     setSelectedEmployee(employee);
@@ -90,11 +65,7 @@ const EmployeeTable = ({
 
   return (
     <>
-      {loadEmployees ? (
-        <div className="w-full h-[600px] flex justify-center items-center">
-          <ScaleLoader className="text-[#2F4EED" />
-        </div>
-      ) : existData ? (
+      {data.length > 0 ? (
         <div className="whitespace-nowrap overflow-auto w-full">
           <table className="w-full border-collapse">
             {/* Table header */}
