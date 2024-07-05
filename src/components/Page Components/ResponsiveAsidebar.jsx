@@ -53,37 +53,6 @@ const ResponsiveAsidebar = ({ menuClicked, setMenuClicked }) => {
           </NavLink>
         ))}
       </ul>
-      <div className="my-4 flex flex-col self-stretch items-start bg-[#E5E5E5] h-[1px] w-full"></div>
-      <ul className="flex items-start flex-col self-stretch w-full">
-        <div className="cursor-pointer text-[#6E6E6E] border-none font-semibold leading-4 flex pl-[24px] pr-[0px] py-[12px] justify-between items-center w-full relative whitespace-nowrap">
-          <div className="gap-[16px] flex items-center">
-            <IoMoonSharp className="text-[1.35rem]" />
-            <span className="text-[.875rem]">Dark mode</span>
-          </div>
-        </div>
-        <NavLink
-          to={'/'}
-          className={({ isActive }) =>
-            isActive
-              ? 'text-[#2F4EED] rounded-r-sm font-semibold leading-4 flex px-[24px] py-[12px] justify-between items-center w-full relative whitespace-nowrap'
-              : 'text-[#6E6E6E] border-none font-semibold leading-4 flex pl-[24px] pr-[0px] py-[12px] justify-between items-center w-full relative whitespace-nowrap'
-          }
-        >
-          <div className="gap-[16px] flex items-center">
-            <BsChat className="text-[1.35rem]" />
-            <span className="text-[.875rem]">Support</span>
-          </div>
-        </NavLink>
-        <div
-          onClick={handleLogout}
-          className="cursor-pointer text-[#6E6E6E] border-none font-semibold leading-4 flex pl-[24px] pr-[0px] py-[12px] justify-between items-center w-full relative whitespace-nowrap"
-        >
-          <div className="gap-[16px] flex items-center">
-            <IoLogOutOutline className="text-[1.35rem] text-[#ED2F2F]" />
-            <span className="text-[.875rem]">Logout</span>
-          </div>
-        </div>
-      </ul>
     </aside>
   );
 };
