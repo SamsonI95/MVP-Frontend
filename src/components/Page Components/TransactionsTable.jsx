@@ -131,7 +131,7 @@ const TransactionsTable = () => {
                   <tbody className="w-full">
                     <tr
                       onClick={() => openModal(transaction)}
-                      className="cursor-pointer flex items-center self-stretch gap-[12px] w-full"
+                      className="cursor-pointer hover:bg-[#F7F7F7] duration-200 flex items-center self-stretch gap-[12px] w-full"
                     >
                       <td className="flex items-center self-stretch gap-[12px] w-full py-[12px] px-[32px] ">
                         <div className="relative flex justify-center items-center p-2 rounded-full bg-[#EAEDFD]">

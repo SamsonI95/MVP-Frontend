@@ -7,6 +7,8 @@ import secureLocalStorage from "react-secure-storage";
 import bitcoin from "/svg/Bitcoin Badge.svg";
 import polygon from "/svg/Coinnomad logo.svg";
 import { ScaleLoader } from "react-spinners";
+import { PiHandCoinsLight } from "react-icons/pi";
+
 
 const Receive = ({ receiveAssets, setReceiveAssets }) => {
   const [walletType, setwalletType] = useState("Select Asset");
@@ -109,7 +111,8 @@ const Receive = ({ receiveAssets, setReceiveAssets }) => {
       
 
       {walletType == "Select Asset" ? (
-        <div className="w-[350px] h-[350px] text-center object-contain text-2xl font-semibold">
+        <div className="w-[350px] h-[350px] text-center object-contain text-xl font-semibold flex flex-col justify-center items-center">
+          <PiHandCoinsLight size={30} />
           Select asset
         </div>
       ) : (
