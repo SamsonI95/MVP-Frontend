@@ -77,6 +77,10 @@ const Send = ({ sendAssets, setSendAssets, setSendReceiveModal }) => {
     },
   });
 
+
+
+
+
   return (
     <form
       className="w-full h-full flex flex-col justify-between items-center"
