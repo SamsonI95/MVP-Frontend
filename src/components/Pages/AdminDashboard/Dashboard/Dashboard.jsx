@@ -14,7 +14,9 @@ import { ScaleLoader } from "react-spinners";
 
 const Dashboard = () => {
   const [isClicked, setIsClicked] = useState("Assets");
+  const [reloadpage, setReloadPage] = useState(false)
   const [isLoading, setIsLoading] = useState(true);
+  const [transactions, setTransactions] = useState([]);
   const [showBalance, setShowBalance] = useState(false);
   const [balances, setbalances] = useState({});
   const [sendReceiveModal, setSendReceiveModal] = useState(null);
@@ -24,7 +26,7 @@ const Dashboard = () => {
       Authorization: `Bearer ${user.accessToken}`,
     },
   };
-  useEffect(() => {
+  const getBalances = () => {
     axios
       .get("/api/wallet/balance", config)
       .then((res) => {
@@ -37,7 +39,23 @@ const Dashboard = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  };
+  const getAllTransactions = async () => {
+    try {
+      const res = await axios.get("/api/wallet/transactions", config);
+      console.log(res.data.data);
+      setTransactions(res.data.data);
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response.message || "An error occurred");
+    } finally {
+   
+    }
+  };
+  useEffect(() => {
+    getBalances();
+    getAllTransactions()
+  }, [reloadpage]);
 
   if (isLoading) {
     return (
@@ -105,6 +123,7 @@ const Dashboard = () => {
           {sendReceiveModal && (
             <SendReceiveModal
               sendReceiveModal={sendReceiveModal}
+              setReloadPage={setReloadPage}
               setSendReceiveModal={setSendReceiveModal}
             />
           )}
@@ -140,7 +159,7 @@ const Dashboard = () => {
         {isClicked === "Assets" ? (
           <AssetsTable balances={balances} />
         ) : (
-          <TransactionsTable />
+          <TransactionsTable transactions={transactions} />
         )}
       </div>
     </section>

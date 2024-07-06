@@ -3,7 +3,7 @@ import Send from "./Send";
 import Receive from "./Receive";
 import { FaXmark } from "react-icons/fa6";
 
-const SendReceiveModal = ({ sendReceiveModal, setSendReceiveModal }) => {
+const SendReceiveModal = ({ sendReceiveModal, setSendReceiveModal,setReloadPage }) => {
   const [sendAssets, setSendAssets] = useState(false);
   const [receiveAssets, setReceiveAssets] = useState(false);
   return (
@@ -45,7 +45,7 @@ const SendReceiveModal = ({ sendReceiveModal, setSendReceiveModal }) => {
           </div>
         </div>
         {sendReceiveModal === "Send" ? (
-          <Send sendAssets={sendAssets} setSendAssets={setSendAssets} setSendReceiveModal={setSendReceiveModal} />
+          <Send setReloadPage={setReloadPage} sendAssets={sendAssets} setSendAssets={setSendAssets} setSendReceiveModal={setSendReceiveModal} />
         ) : (
           <Receive
             receiveAssets={receiveAssets}
