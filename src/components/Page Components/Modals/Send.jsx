@@ -10,6 +10,7 @@ import FormButton from "@/components/Buttons/FormButton";
 import bitcoin from "/svg/Bitcoin Badge.svg";
 import polygon from "/svg/Coinnomad logo.svg";
 import secureLocalStorage from "react-secure-storage";
+import ShowAssets2 from "./ShowAssets2";
 
 const Send = ({
   sendAssets,
@@ -18,6 +19,11 @@ const Send = ({
   setReloadPage,
 }) => {
   const [walletType, setwalletType] = useState("Select Asset");
+  const [priceValue, setPriceValue] = useState({
+    dollarAmount: "",
+    value: "",
+    name: "",
+  });
   const user = secureLocalStorage.getItem("user");
   const [formValid, setFormValid] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -72,7 +78,6 @@ const Send = ({
         console.log(response.data);
         if (response.data.success) {
           toast.success(response.data.message);
-         
         }
       } catch (error) {
         console.error("Error signing in:", error);
@@ -132,15 +137,33 @@ const Send = ({
                 </div>
               </div>
             )}
-            <IoIosArrowDown
-              className={`text-[1.125rem] text-[#151515] font-bold cursor-pointer ${
-                sendAssets
-                  ? `rotate-[180deg] duration-200`
-                  : `rotate-0 duration-200`
-              }`}
-            />
+            <div className="flex justify-between items-center gap-x-4">
+              <p className="flex flex-col">
+                <p className="font-semibold">
+                  {priceValue.dollarAmount && "$"}
+                  {priceValue.dollarAmount}
+                </p>
+                <p className="font-semibold text-[12px] ">
+                  {priceValue.value}
+                  <span className=" ml-1 ">{priceValue.name}</span>
+                </p>
+              </p>
+
+              <IoIosArrowDown
+                className={`text-[1.125rem] text-[#151515] font-bold cursor-pointer ${
+                  sendAssets
+                    ? `rotate-[180deg] duration-200`
+                    : `rotate-0 duration-200`
+                }`}
+              />
+            </div>
           </div>
-          {sendAssets && <ShowAssets onAssetClick={setwalletType} />}
+          {sendAssets && (
+            <ShowAssets
+              onAssetClick={setwalletType}
+              setPriceValue={setPriceValue}
+            />
+          )}
         </div>
 
         <InputField
