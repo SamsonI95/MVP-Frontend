@@ -34,7 +34,7 @@ const Settings = () => {
               <div className="bg-[#2F4EED] rounded-full w-[136px] h-[2px] absolute bottom-[-1px]"></div>
             )}
           </h1>
-          <h1
+          {/* <h1
             onClick={() => setCurrentTab("Notification")}
             className={`text-[1rem] font-semibold leading-6 gap-2 pb-2 duration-200 relative cursor-pointer ${
               currentTab === "Notification"
@@ -46,8 +46,8 @@ const Settings = () => {
             {currentTab === "Notification" && (
               <div className="bg-[#2F4EED] rounded-full w-[92px] h-[2px] absolute bottom-[-1px]"></div>
             )}
-          </h1>
-          <h1
+          </h1> */}
+          {/* <h1
             onClick={() => setCurrentTab("Assets")}
             className={`text-[1rem] font-semibold leading-6 gap-2 pb-2 duration-200 relative cursor-pointer ${
               currentTab === "Assets" ? `text-[#2F4EED]` : `text-[#9C9C9C]`
@@ -57,7 +57,7 @@ const Settings = () => {
             {currentTab === "Assets" && (
               <div className="bg-[#2F4EED] rounded-full w-[50px] h-[2px] absolute bottom-[-1px]"></div>
             )}
-          </h1>
+          </h1> */}
         </div>
       </div>
       <div className="flex flex-col md:flex-row h-[856px] w-full py-4 px-8 gap-8 items-start">
@@ -65,10 +65,6 @@ const Settings = () => {
           <Account />
         ) : currentTab === "Change-Password" ? (
           <ChangePassword />
-        ) : currentTab === "Notification" ? (
-          <Notification />
-        ) : currentTab === "Assets" ? (
-          <SettingsAssets />
         ) : (
           ""
         )}
