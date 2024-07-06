@@ -14,7 +14,7 @@ import { ScaleLoader } from "react-spinners";
 
 const Dashboard = () => {
   const [isClicked, setIsClicked] = useState("Assets");
-  const [reloadpage, setReloadPage] = useState(false)
+  const [reloadpage, setReloadPage] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState([]);
   const [showBalance, setShowBalance] = useState(false);
@@ -49,12 +49,11 @@ const Dashboard = () => {
       console.error(err);
       toast.error(err.response.message || "An error occurred");
     } finally {
-   
     }
   };
   useEffect(() => {
     getBalances();
-    getAllTransactions()
+    getAllTransactions();
   }, [reloadpage]);
 
   if (isLoading) {

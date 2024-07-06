@@ -40,8 +40,16 @@ const TransactionsTable = ({ transactions }) => {
         formattedTime: format(new Date(transaction.timestamp), "hh:mm a"),
       }))
       .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-  }, [transactions]);
-
+    }, [transactions]);
+    
+    const [bitcoinTransaction, setBitcoinTransaction] = useState(sortedTransactions.filter(
+     (transaction) => transaction.asset === "BTC"
+   ))
+   
+     const [polygonTransactions, setPolygonTransactions] = useState(sortedTransactions.filter(
+       (transaction) => transaction.asset === "Polygon"
+     ))
+    
   const truncateWalletAddress = (address) => {
     // Check if the address is valid and of the correct format
 
@@ -56,6 +64,7 @@ const TransactionsTable = ({ transactions }) => {
     setShowModal(true);
   };
   const [tabs, setTabs] = useState("All");
+  
   return (
     <section className="w-full gap-[10px]">
       {showModal && (
@@ -124,7 +133,7 @@ const TransactionsTable = ({ transactions }) => {
             {tabs == "Bitcoin" && (
               <BitcoinTransaction
                 sortedTransactions={sortedTransactions}
-                transactions={transactions}
+                transactions={bitcoinTransaction}
                 openModal={openModal}
                 truncateWalletAddress={truncateWalletAddress}
               />
@@ -132,7 +141,7 @@ const TransactionsTable = ({ transactions }) => {
             {tabs == "Matic" && (
               <MaticTransaction
                 sortedTransactions={sortedTransactions}
-                transactions={transactions}
+                transactions={polygonTransactions}
                 openModal={openModal}
                 truncateWalletAddress={truncateWalletAddress}
               />

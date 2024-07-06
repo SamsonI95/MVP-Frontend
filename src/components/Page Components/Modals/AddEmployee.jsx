@@ -12,6 +12,7 @@ import FormButton from "@/components/Buttons/FormButton";
 import secureLocalStorage from "react-secure-storage";
 import bitcoin from "/svg/Bitcoin Badge.svg";
 import polygon from "/svg/Coinnomad logo.svg";
+import ShowAssets2 from "./ShowAssets2";
 
 const AddEmployee = ({
   setSchEmployees,
@@ -229,7 +230,7 @@ const AddEmployee = ({
                     }`}
                   />
                 </div>
-                {showAssets && <ShowAssets onAssetClick={setwalletType} />}
+                {showAssets && <ShowAssets2 onAssetClick={setwalletType} />}
               </div>
 
               <div className="bg-[#EAEDFD] rounded-lg flex items-center self-stretch gap-6 py-6 px-4">

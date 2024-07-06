@@ -8,6 +8,7 @@ import bitcoin from "/svg/Bitcoin Badge.svg";
 import polygon from "/svg/Coinnomad logo.svg";
 import { ScaleLoader } from "react-spinners";
 import { PiHandCoinsLight } from "react-icons/pi";
+import ShowAssets2 from "./ShowAssets2";
 
 
 const Receive = ({ receiveAssets, setReceiveAssets }) => {
@@ -99,7 +100,7 @@ const Receive = ({ receiveAssets, setReceiveAssets }) => {
           />
           {receiveAssets && (
             <div className="absolute top-0 left-0 mt-2 w-full bg-white shadow-lg rounded-lg z-10">
-              <ShowAssets
+              <ShowAssets2
                 onAssetClick={setwalletType}
                 setLoading={setLoading}
               />

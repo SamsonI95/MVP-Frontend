@@ -8,15 +8,14 @@ import { formatNumber } from "@/Data/formikUtils";
 const MaticTransaction = ({
   sortedTransactions,
   openModal,
+  transactions,
   truncateWalletAddress,
 }) => {
-  const polygonTransactions = sortedTransactions.filter(
-    (transaction) => transaction.asset === "Polygon"
-  );
+ 
   return (
     <div>
       <div className="whitespace-nowrap overflow-auto w-full">
-        {polygonTransactions.map((transaction, index) => (
+        {transactions.map((transaction, index) => (
           <div key={index}>
             {index === 0 ||
             sortedTransactions[index - 1].formattedDate !==
