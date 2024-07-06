@@ -64,7 +64,7 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
       >
         <div className="flex justify-between items-center w-full px-[24px]">
           <h1 className="text-[#151515] text-[1.5rem] font-bold leading-[32px] tracking-[-0.48px]">
-            Receive
+       {  transaction.type=="Outgoing" ?"Send":"Receive"}
           </h1>
           <HiOutlineXMark
             onClick={() => setShowModal(false)}
