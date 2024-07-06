@@ -64,7 +64,7 @@ const AssetsTable = ({ balances }) => {
                     ${formatNumber(balances.dollarBitcoinBalance) ?? "0"}
                   </h1>
                   <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
-                    {formatNumber(balances.bitcoinWalletBalance)} BTC
+                    {balances.bitcoinWalletBalance} BTC
                   </p>
                 </td>
               </tr>
@@ -94,7 +94,7 @@ const AssetsTable = ({ balances }) => {
                     ${formatNumber(balances?.dollarMaticBalance ?? 0)}
                   </h1>
                   <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
-                    {formatNumber(balances?.polygonWalletBalance)} Matic
+                    {balances?.polygonWalletBalance} Matic
                   </p>
                 </td>
               </tr>
