@@ -77,7 +77,7 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
         <div className="flex flex-col md:flex-row gap-6 items-start px-[24px] py-[16px] w-full">
           <div className="flex flex-col items-start gap-2 w-full">
             <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
-              From {transaction.type === "Outgoing" &&"(you)"}
+              From {transaction.type === "Outgoing" && "(you)"}
             </p>
             <div className="flex items-center gap-3">
               <div className="bg-[#2F4EED] w-6 h-6 text-white p-1 flex justify-center items-center rounded-full">
@@ -95,7 +95,7 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
 
           <div className="flex flex-col items-star gap-2 w-full">
             <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
-              To {transaction.type === "Incoming" &&"(you)"}
+              To {transaction.type === "Incoming" && "(you)"}
             </p>
             <div className="flex items-center gap-3">
               <div className="bg-[#2F4EED] w-6 h-6 text-white p-1 flex justify-center items-center rounded-full">
