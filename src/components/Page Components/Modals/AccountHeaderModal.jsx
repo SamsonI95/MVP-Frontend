@@ -119,7 +119,7 @@ const AccountHeaderModal = ({ isClicked, setIsClicked }) => {
           Settings
         </p>
       </div>
-      <div className="flex justify-between items-center self-stretch w-full px-4 py-3 gap-3 duration-200 hover:bg-[#F7F7F7] cursor-pointer">
+      {/* <div className="flex justify-between items-center self-stretch w-full px-4 py-3 gap-3 duration-200 hover:bg-[#F7F7F7] cursor-pointer">
         <div className="flex items-center gap-2">
           <IoMoonOutline className="text-[1.35rem] text-[#2F4EED]" />
           <p className="text-[#151515] text-[.875rem] font-semibold leading-4">
@@ -132,7 +132,7 @@ const AccountHeaderModal = ({ isClicked, setIsClicked }) => {
         <p className="text-[#151515] text-[.875rem] font-semibold leading-4">
           Support
         </p>
-      </div>
+      </div> */}
       <div
         onClick={handleLogout}
         className="flex items-center w-full px-4 py-3 gap-3 duration-200 hover:bg-[#F7F7F7] cursor-pointer"
