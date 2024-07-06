@@ -3,6 +3,7 @@ import matic from "/svg/matic.svg";
 import bitcoin from "/svg/Bitcoin Badge.svg";
 
 import { RxArrowTopRight, RxArrowBottomLeft } from "react-icons/rx";
+import { formatNumber } from "@/Data/formikUtils";
 
 const MaticTransaction = ({
   sortedTransactions,
@@ -73,8 +74,8 @@ const MaticTransaction = ({
                       }`}
                     >
                       {transaction.type === "Outgoing"
-                        ? `-$${transaction.amountInDollars || 0.5}`
-                        : `+$${transaction.amountInDollars || 0.5}`}
+                        ? `-$${formatNumber(transaction.amountInUSD) || 0.5}`
+                        : `+$${formatNumber(transaction.amountInUSD) || 0.5}`}
                     </h1>
                     <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
                       {transaction.amount}{" "}
