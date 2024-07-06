@@ -53,14 +53,16 @@ const Employees = () => {
     getEmployees();
   }, [existData]);
 
-  const [searchQuery, setSearchQuery] = useState('');
-  
+  const [searchQuery, setSearchQuery] = useState("");
+
   const handleSearch = (event) => {
     const query = event.target.value;
     setSearchQuery(query);
 
     const filtered = data.filter((item) =>
-      `${item.firstName} ${item.lastName} ${item.email} ${item.walletAddress}`.toLowerCase().includes(query.toLowerCase())
+      `${item.firstName} ${item.lastName} ${item.email} ${item.walletAddress}`
+        .toLowerCase()
+        .includes(query.toLowerCase())
     );
     setFilteredData(filtered);
   };
@@ -158,9 +160,7 @@ const Employees = () => {
       {/* Employee Table */}
       {loadEmployees ? (
         <div className="w-full h-[600px] flex justify-center items-center">
-          <ScaleLoader
-            color="#2F4EED"
-          />
+          <ScaleLoader color="#2F4EED" />
         </div>
       ) : (
         <EmployeeTable
