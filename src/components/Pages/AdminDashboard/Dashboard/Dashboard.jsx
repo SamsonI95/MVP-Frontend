@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineEyeSlash } from "react-icons/hi2";
 import { RxArrowBottomLeft, RxArrowTopRight } from "react-icons/rx";
 import AssetsTable from "../../../Page Components/AssetsTable";
@@ -8,21 +8,73 @@ import { FiEye } from "react-icons/fi";
 import SendReceiveModal from "../../../Page Components/Modals/SendReceiveModal";
 import useAuth from "@/hooks/useAuth";
 import AccountHeaderModal from "@/components/Page Components/Modals/AccountHeaderModal";
+import axios from "axios";
+import { formatNumber } from "@/Data/formikUtils";
+import { ScaleLoader } from "react-spinners";
 
 const Dashboard = () => {
-
-  const { auth } = useAuth();
-  const user = auth.user;
-
   const [isClicked, setIsClicked] = useState("Assets");
+  const [reloadpage, setReloadPage] = useState(false)
+  const [isLoading, setIsLoading] = useState(true);
+  const [transactions, setTransactions] = useState([]);
   const [showBalance, setShowBalance] = useState(false);
+  const [balances, setbalances] = useState({});
   const [sendReceiveModal, setSendReceiveModal] = useState(null);
+  const user = secureLocalStorage.getItem("user");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user.accessToken}`,
+    },
+  };
+  const getBalances = () => {
+    axios
+      .get("/api/wallet/balance", config)
+      .then((res) => {
+        console.log(res.data.data);
+        setbalances(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+  const getAllTransactions = async () => {
+    try {
+      const res = await axios.get("/api/wallet/transactions", config);
+      console.log(res.data.data);
+      setTransactions(res.data.data);
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response.message || "An error occurred");
+    } finally {
+   
+    }
+  };
+  useEffect(() => {
+    getBalances();
+    getAllTransactions()
+  }, [reloadpage]);
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center">
+        {" "}
+        <ScaleLoader
+          color="#2F4EED"
+          height={25}
+          className="translate-y-[3px]"
+          type="submit"
+        />
+      </div>
+    );
+  }
   return (
     <section className="w-full lg:w-auto">
       <div className="gap-[24px] py-[16px] px-[10px] md:px-[32px] flex flex-col justify-center items-start self-stretch">
         <h1 className="text-[#151515] flex lg:hidden text-[1.75rem] font-bold leading-9 tracking-[-0.56px] py-[16px]">
-          Hey there, {user}!
+          Hey there, {user.firstName}!
         </h1>
         <div className="flex flex-col justify-center items-start gap-[16px]">
           <h2 className="text-[#9C9C9C] text-[1.125rem] font-semibold leading-7">
@@ -35,7 +87,11 @@ const Dashboard = () => {
               </h1>
             ) : (
               <h1 className="text-[2.25rem] md:text-[4rem] text-[#151515] font-semibold leading-[48px] tracking-[-0.88px]">
-                $1,200.00
+                $
+                {formatNumber(
+                  Number(formatNumber(balances.dollarBitcoinBalance)) +
+                    Number(formatNumber(balances.dollarMaticBalance))
+                )}
               </h1>
             )}
             {showBalance ? (
@@ -67,6 +123,7 @@ const Dashboard = () => {
           {sendReceiveModal && (
             <SendReceiveModal
               sendReceiveModal={sendReceiveModal}
+              setReloadPage={setReloadPage}
               setSendReceiveModal={setSendReceiveModal}
             />
           )}
@@ -99,7 +156,11 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="pt-[16px] flex items-start self-stretch w-full">
-        {isClicked === "Assets" ? <AssetsTable /> : <TransactionsTable />}
+        {isClicked === "Assets" ? (
+          <AssetsTable balances={balances} />
+        ) : (
+          <TransactionsTable transactions={transactions} />
+        )}
       </div>
     </section>
   );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FiArrowLeft, FiSearch } from "react-icons/fi";
 import EmployeeTable from "../../../Page Components/EmployeeTable";
 import AddEmployees from "../../../Page Components/Modals/AddEmployee";
-import SchedulePayments from "../../../Page Components/Modals/SchedulePayments";
+import SchedulePayments from "../../../Page Components/Modals/SchedulePayments/SchedulePayments";
 import UpdateDeleteEmployeeModal from "@/components/Page Components/Modals/UpdateDeleteEmployeeModal";
 import secureLocalStorage from "react-secure-storage";
 import axios from "axios";

@@ -103,7 +103,7 @@ const UpdateDeleteEmployeeModal = ({
             onClick={(e) => {
               e.stopPropagation();
             }}
-            className="z-40 cursor-auto overflow-y-auto absolute bg-white w-[450px] max-h-full flex flex-col justify-start items-start duration-200 top-0 modalContainer right-0"
+            className="z-40 cursor-auto overflow-y-auto absolute bg-white w-[450px] h-screen flex flex-col justify-start items-start duration-200 top-0 modalContainer right-0"
           >
             <div className="flex justify-end items-center gap-[152px] py-[18px] px-[24px] w-full">
               <HiOutlineXMark
@@ -117,7 +117,7 @@ const UpdateDeleteEmployeeModal = ({
               </h1>
             </div>
             <form
-              className="w-full flex flex-col items-start gap-8 p-6"
+              className="w-full flex flex-col justify-between items-start gap-8 p-6"
               onSubmit={formik.handleSubmit}
             >
               <InputField
@@ -162,7 +162,7 @@ const UpdateDeleteEmployeeModal = ({
                   formik.touched.walletAddress && formik.errors.walletAddress
                 }
               />
-              <div className="bg-[#EAEDFD] rounded-lg flex items-center self-stretch gap-6 py-6 px-4">
+              {/* <div className="bg-[#EAEDFD] rounded-lg flex items-center self-stretch gap-6 py-6 px-4">
                 <div className="flex justify-center items-center gap-4">
                   <div className="flex items-start gap-4">
                     <img
@@ -187,7 +187,7 @@ const UpdateDeleteEmployeeModal = ({
                     className="text-[#1F2937] text-[1.8rem] cursor-pointer font-bold"
                   />
                 </div>
-              </div>
+              </div> */}
               <div className="pt-4 pb-10 px-6 flex w-full flex-col justify-center items-center gap-[16px]">
                 <FormButton
                   btnName="Update"

@@ -11,9 +11,14 @@ import bitcoin from "/svg/Bitcoin Badge.svg";
 import polygon from "/svg/Coinnomad logo.svg";
 import secureLocalStorage from "react-secure-storage";
 
-const Send = ({ sendAssets, setSendAssets, setSendReceiveModal }) => {
+const Send = ({
+  sendAssets,
+  setSendAssets,
+  setSendReceiveModal,
+  setReloadPage,
+}) => {
   const [walletType, setwalletType] = useState("Select Asset");
-  const user= secureLocalStorage.getItem("user")
+  const user = secureLocalStorage.getItem("user");
   const [formValid, setFormValid] = useState(false);
   const [loading, setLoading] = useState(false);
   const dropdownRef = useRef(null);
@@ -35,7 +40,7 @@ const Send = ({ sendAssets, setSendAssets, setSendReceiveModal }) => {
     };
   }, [sendAssets]);
 
- const config = {
+  const config = {
     headers: {
       Authorization: `Bearer ${user.accessToken}`,
     },
@@ -63,16 +68,19 @@ const Send = ({ sendAssets, setSendAssets, setSendReceiveModal }) => {
           },
           config
         );
+
         console.log(response.data);
         if (response.data.success) {
           toast.success(response.data.message);
-          setSendReceiveModal(null);
+         
         }
       } catch (error) {
         console.error("Error signing in:", error);
-        toast.error(error?.response?.message || "Something went wrong");
+        toast.error(error?.response?.data.message || "Something went wrong");
       } finally {
         setLoading(false);
+        setReloadPage((prev) => !prev);
+        setSendReceiveModal(null);
       }
     },
   });
@@ -134,7 +142,7 @@ const Send = ({ sendAssets, setSendAssets, setSendReceiveModal }) => {
           </div>
           {sendAssets && <ShowAssets onAssetClick={setwalletType} />}
         </div>
-       
+
         <InputField
           placeholder={`Enter address`}
           label={`Send to`}

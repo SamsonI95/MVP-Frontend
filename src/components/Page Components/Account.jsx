@@ -187,7 +187,7 @@ const Account = () => {
           </h1>
           <Link
             className="text-[#2F4EED] text-base font-semibold leading-[18px]"
-            to={""}
+            to={"/employees"}
           >
             View all
           </Link>

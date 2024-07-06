@@ -14,6 +14,7 @@ import { ScaleLoader } from "react-spinners";
 import { toast } from "../ui/use-toast";
 import UpdateDeleteEmployeeModal from "./Modals/UpdateDeleteEmployeeModal";
 import { truncateWalletAddress } from "@/Data/formikUtils";
+import SchedulePayments from "./Modals/SchedulePayments/SchedulePayments";
 
 const EmployeeTable = ({
   existData,
@@ -24,6 +25,7 @@ const EmployeeTable = ({
 }) => {
   const [copiedIndex, setCopiedIndex] = useState(null);
   const [updateEmployees, setUpdateEmployees] = useState(false);
+  const [schedulePayments, setSchedulePayments] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   const user = secureLocalStorage.getItem("user");
@@ -120,7 +122,7 @@ const EmployeeTable = ({
               {data.map((emp, index) => (
                 <tr
                   key={index}
-                  className="border-b cursor-pointer hover:bg-[#F7F7F7] border-[#E9E9E9]"
+                  className="border-b  hover:bg-[#F7F7F7] border-[#E9E9E9]"
                 >
                   <td className="py-[12px] px-[32px] text-[.875rem] text-[#151515] font-semibold">
                     {emp.firstName}
@@ -175,14 +177,23 @@ const EmployeeTable = ({
                     )}
                   </td>
                   <td className="py-[12px] px-[32px] text-[.875rem] text-[#151515] font-semibold">
-                    {/* {emp.paymentStatus} */}-
+                    <p className="bg-[#E9F7EF] rounded-[5px] py-1 px-3 items-center gap-1 text-[#23AE5E] text-[.875rem] font-semibold leading-4 text-center">Scheduled</p>
+                    {/* <p className="bg-[#FFF2F0] rounded-[5px] py-1 px-3 items-center gap-1 text-[#ED2F2F] text-[.875rem] font-semibold leading-4 text-center">Unscheduled</p> */}
                   </td>
-                  <td className="py-[12px] px-[32px] text-[.875rem] text-[#151515] font-semibold">
+                  <td className="py-[12px] gap-[16px] flex px-[32px]">
                     <button
-                      className="btn btn-warning"
+                      className="py-1 px-3 rounded-[5px] border border-[#2F4EED] text-[#2F4EED] text-[.75rem] font-medium cursor-pointer"
                       onClick={() => handleEditClick(emp)}
                     >
                       Edit
+                    </button>
+                    <button
+                      onClick={() => {
+                        setSchedulePayments(true);
+                      }} 
+                      className="py-1 px-3 rounded-[5px] bg-[#2F4EED] text-white text-[.75rem] font-medium cursor-pointer"
+                    >
+                      Schedule Payments
                     </button>
                   </td>
                 </tr>
@@ -209,6 +220,15 @@ const EmployeeTable = ({
           setLoadEmployees={setLoadEmployees}
         />
       )}
+
+      {
+        schedulePayments && (
+          <SchedulePayments
+            setSchedulePayments={setSchedulePayments}
+            schedulePayments={schedulePayments}
+          />
+        )
+      }
     </>
   );
 };
