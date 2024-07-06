@@ -12,6 +12,7 @@ const Employees = () => {
   const [existData, setExistData] = useState(true);
   const [loadEmployees, setLoadEmployees] = useState(true);
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [searchClick, setSearchClick] = useState(false);
   const [addEmployees, setAddEmployees] = useState(false);
   const [schEmployees, setSchEmployees] = useState(false);
@@ -39,9 +40,9 @@ const Employees = () => {
     axios
       .get(`/api/employee/getemployees`, config)
       .then((res) => {
-     
         setLoadEmployees(false);
         setData(res.data.data);
+        setFilteredData(res.data.data);
       })
       .catch((err) => {
         setLoadEmployees(false);
@@ -51,6 +52,18 @@ const Employees = () => {
   useEffect(() => {
     getEmployees();
   }, [existData]);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    const filtered = data.filter((item) =>
+      `${item.firstName} ${item.lastName} ${item.email} ${item.walletAddress}`.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
 
   return (
     <section className="w-full lg:w-auto">
@@ -93,7 +106,9 @@ const Employees = () => {
             <input
               className="hidden md:flex w-[350px] flex-col items-start bg-transparent outline-none border-none"
               type="text"
-              placeholder="Place"
+              value={searchQuery}
+              onChange={handleSearch}
+              placeholder="Search Employees e.g firstName"
             />
           </div>
 
@@ -140,7 +155,7 @@ const Employees = () => {
         </div>
       </div>
 
-      {/* EMployee Table */}
+      {/* Employee Table */}
       {loadEmployees ? (
         <div className="w-full h-[600px] flex justify-center items-center">
           <ScaleLoader
@@ -156,7 +171,7 @@ const Employees = () => {
           eachEmployee={eachEmployee}
           setEachEmployee={setEachEmployee}
           updateEmployees={updateEmployees}
-          data={data}
+          data={filteredData}
           setUpdateEmployees={setUpdateEmployees}
         />
       )}
