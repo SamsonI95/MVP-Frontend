@@ -11,8 +11,11 @@ import { toast } from "react-toastify";
 const TransactionDetails = ({ setShowModal, transaction }) => {
   if (!transaction) return null;
 
-  const truncateWalletAddress = (address) => {
-    return `${address.slice(0, 6)}...${address.slice(-6)}`;
+  const truncateString = (value) => {
+    if (!value) {
+      return "No transaction ID or hash";
+    }
+    return `${value.slice(0, 6)}...${value.slice(-6)}`;
   };
   const formatDate = (timeDate) => {
     const timestamp = new Date(timeDate);
@@ -64,7 +67,7 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
       >
         <div className="flex justify-between items-center w-full px-[24px]">
           <h1 className="text-[#151515] text-[1.5rem] font-bold leading-[32px] tracking-[-0.48px]">
-            Receive
+            {transaction.type == "Outgoing" ? "Send" : "Receive"}
           </h1>
           <HiOutlineXMark
             onClick={() => setShowModal(false)}
@@ -74,14 +77,14 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
         <div className="flex flex-col md:flex-row gap-6 items-start px-[24px] py-[16px] w-full">
           <div className="flex flex-col items-start gap-2 w-full">
             <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
-              From
+              From {transaction.type === "Outgoing" &&"(you)"}
             </p>
             <div className="flex items-center gap-3">
               <div className="bg-[#2F4EED] w-6 h-6 text-white p-1 flex justify-center items-center rounded-full">
                 <HiMiniUser className="text-[1.125rem]" />
               </div>
               <p className="text-[#151515] text-[.875rem] font-semibold leading-4">
-                {truncateWalletAddress(transaction.senderWalletAddress)}
+                {truncateString(transaction.senderWalletAddress)}
               </p>
               <IoCopyOutline
                 onClick={() => handleCopy(transaction.senderWalletAddress)}
@@ -92,14 +95,14 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
 
           <div className="flex flex-col items-star gap-2 w-full">
             <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
-              To(you)
+              To {transaction.type === "Incoming" &&"(you)"}
             </p>
             <div className="flex items-center gap-3">
               <div className="bg-[#2F4EED] w-6 h-6 text-white p-1 flex justify-center items-center rounded-full">
                 <HiMiniUser className="text-[1.125rem]" />
               </div>
               <p className="text-[#151515] text-[.875rem] font-semibold leading-4">
-                {truncateWalletAddress(transaction.receiverWalletAddress)}
+                {truncateString(transaction.receiverWalletAddress)}
               </p>
               <IoCopyOutline
                 onClick={() => handleCopy(transaction.receiverWalletAddress)}
@@ -150,11 +153,11 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
               </p>
               <div className="flex items-center gap-2">
                 <IoCopyOutline
-                  onClick={() => handleCopy(transaction.hash)}
+                  onClick={() => handleCopy(transaction.transactionId)}
                   className="text-[#1F2937] cursor-pointer text-[1.125ren]"
                 />
                 <p className="text-[#151515] text-[.875rem] font-semibold leading-4">
-                  {truncateWalletAddress(transaction.hash)}
+                  {truncateString(transaction.transactionId)}
                 </p>
               </div>
             </div>
@@ -204,7 +207,7 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
                   className="text-[#1F2937] cursor-pointer text-[1.125ren]"
                 />
                 <p className="text-[#151515] text-[.875rem] font-semibold leading-4">
-                  {truncateWalletAddress(transaction.hash)}
+                  {truncateString(transaction.hash)}
                 </p>
               </div>
             </div>

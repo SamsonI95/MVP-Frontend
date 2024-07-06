@@ -2,12 +2,14 @@ import React, { useEffect, useMemo, useState } from "react";
 import matic from "/svg/matic.svg";
 import bitcoin from "/svg/Bitcoin Badge.svg";
 
-
 import { RxArrowTopRight, RxArrowBottomLeft } from "react-icons/rx";
+import { formatNumber } from "@/Data/formikUtils";
 
-
-
-const AllTransaction = ({ sortedTransactions,  openModal,truncateWalletAddress }) => {
+const AllTransaction = ({
+  sortedTransactions,
+  openModal,
+  truncateWalletAddress,
+}) => {
   return (
     <div>
       <div className="whitespace-nowrap overflow-auto w-full">
@@ -69,8 +71,8 @@ const AllTransaction = ({ sortedTransactions,  openModal,truncateWalletAddress }
                       }`}
                     >
                       {transaction.type === "Outgoing"
-                        ? `-$${transaction.amountInDollars || 0.5}`
-                        : `+$${transaction.amountInDollars || 0.5}`}
+                        ? `-$${formatNumber(transaction.amountInUSD) || 0}`
+                        : `+$${formatNumber(transaction.amountInUSD )|| 0}`}
                     </h1>
                     <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
                       {transaction.amount}{" "}

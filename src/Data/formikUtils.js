@@ -103,3 +103,12 @@ export  const truncateWalletAddress = (address) => {
   if (!address) return "";
   return `${address.substring(0, lengthToShow)}...`;
 };
+
+
+ export const formatNumber = (numberString) => {
+    // Parse the number to float
+    const number = parseFloat(numberString);
+
+    // Format with commas and two decimal places
+    return number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+  };

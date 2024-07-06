@@ -4,10 +4,12 @@ import polygon from "/svg/Coinnomad logo.svg";
 import ethereum from "/svg/Eth (1).svg";
 import { IoSwapVerticalOutline } from "react-icons/io5";
 import secureLocalStorage from "react-secure-storage";
+import { formatNumber } from "@/Data/formikUtils";
 
-const AssetsTable = () => {
+const AssetsTable = ({ balances }) => {
   const [existData, setExistData] = useState(false);
-  const user=secureLocalStorage.getItem('user');
+  const user = secureLocalStorage.getItem("user");
+
   return (
     <>
       {!existData ? (
@@ -53,16 +55,16 @@ const AssetsTable = () => {
                   </div>
                 </td>
                 <td className="text-[1.125rem] text-[#151515] font-bold leading-7 px-[32px] md:px-[12px] py-[10px] flex items-start self-stretch gap-[10px] w-full">
-                  <p className="w-[100px] whitespace-nowrap overflow-hidden text-ellipsis">
-                    $3,677.06
+                  <p className="w-[100px] whitespace-nowrap overflow-hidden ">
+                    ${formatNumber(balances?.bitcoinAmountInDollars ?? 0)}
                   </p>
                 </td>
                 <td className="flex flex-col justify-center px-[30px] md:px-[12px] py-[10px] w-full items-start self-stretch gap-[10px]">
                   <h1 className="text-[1.125rem] font-bold text-[#151515] leading-7 uppercase w-[50%] text-ellipsis">
-                    ${user.dollarAmountBitcoin ?? "0"}.00
+                    ${formatNumber(balances.dollarBitcoinBalance) ?? "0"}
                   </h1>
                   <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
-                   {user.bitcoinTotalBalance} BTC
+                    {balances.bitcoinWalletBalance} BTC
                   </p>
                 </td>
               </tr>
@@ -84,19 +86,18 @@ const AssetsTable = () => {
                 </td>
                 <td className="text-[1.125rem] text-[#151515] font-bold leading-7 px-[32px] md:px-[12px] py-[10px] flex items-start self-stretch gap-[10px] w-full">
                   <p className="w-[100px] whitespace-nowrap overflow-hidden text-ellipsis">
-                    $3,677.06
+                    ${formatNumber(balances?.polygonAmountInDollars ?? 0)}
                   </p>
                 </td>
                 <td className="flex flex-col justify-center px-[30px] md:px-[12px] py-[10px] w-full items-start self-stretch gap-[10px]">
                   <h1 className="text-[1.125rem] font-bold text-[#151515] leading-7 uppercase">
-                    ${user.dollarAmountMatic ?? "0"}.00
+                    ${formatNumber(balances?.dollarMaticBalance ?? 0)}
                   </h1>
                   <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
-                   {user.polygonWalletBalance.balance} Matic
+                    {balances?.polygonWalletBalance} Matic
                   </p>
                 </td>
               </tr>
-            
             </tbody>
           </table>
         </div>

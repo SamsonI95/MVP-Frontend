@@ -15,33 +15,12 @@ import AllTransaction from "./AllTransaction";
 import MaticTransaction from "./MaticTransaction";
 import BitcoinTransaction from "./BitcoinTransaction";
 
-const TransactionsTable = () => {
+const TransactionsTable = ({ transactions }) => {
   const [showModal, setShowModal] = useState(false);
-  const [transactions, setTransactions] = useState([]);
+
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const user = secureLocalStorage.getItem("user");
   const [loading, setLoading] = useState(true);
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user.accessToken}`,
-    },
-  };
-  useEffect(() => {
-    const getAllTransactions = async () => {
-      try {
-        const res = await axios.get("/api/wallet/transactions", config);
-        console.log(res.data.data);
-        setTransactions(res.data.data);
-      } catch (err) {
-        console.error(err);
-        toast.error(err.response.message || "An error occurred");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getAllTransactions();
-  }, []);
 
   const formatDate = (date) => {
     const parsedDate = new Date(date);
@@ -123,16 +102,7 @@ const TransactionsTable = () => {
         </div>
       </div>
       <>
-        {loading ? (
-          <div className=" w-full flex justify-center items-center pt-10">
-            {" "}
-            <ScaleLoader
-              color="#2F4EED"
-              className=" mx-auto"
-              type="submit"
-            />
-          </div>
-        ) : transactions.length == 0 ? (
+        {transactions.length == 0 ? (
           <div className="flex flex-col justify-start items-center px-[10px] py-[80px] md:h-[612px] w-full gap-[10px]">
             <div className=" rounded-full p-[10px] bg-[#F7F7F7] gap-[10px] flex justify-center items-center">
               <IoSwapVerticalOutline className="text-[1.25rem] rotate-[45deg]" />
