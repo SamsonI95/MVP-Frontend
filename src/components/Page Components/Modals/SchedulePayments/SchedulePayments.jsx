@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { HiOutlineXMark } from 'react-icons/hi2'
 import { IoIosArrowDown } from 'react-icons/io'
-import ShowAssets from './ShowAssets'
-import ShowFrequency from './ShowFrequency'
+import ShowAssets from '../ShowAssets'
+import ShowFrequency from '../ShowFrequency'
+import FinishSchedule from './FinishSchedule'
 
-const SchedulePayments = ({freq, setFreq, assets, setAssets, setSchEmployees, schEmployees}) => {
+const SchedulePayments = ({freq, setFreq, assets, setAssets, setSchedulePayments, schedulePayments}) => {
+
+  const [finishSchedule, setFinishSchedule] = useState(false);
   return (
     
     <div className='w-full h-full modalBg fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-[999]'>
-      <div className={`overflow-y-auto absolute bg-white w-[450px] h-full flex flex-col justify-start items-start top-0 ${schEmployees ? `right-0 trans` : `right-[-200%] trans`}`}>
+      <div className={`overflow-y-auto absolute bg-white w-[450px] h-full flex flex-col justify-start items-start top-0 ${schedulePayments ? `right-0 trans` : `right-[-200%] trans`}`}>
         <div className='flex justify-end items-center gap-[152px] py-[18px] px-[24px] w-full'>
-          <HiOutlineXMark onClick={() => setSchEmployees(false)} className='cursor-pointer text-[1.75rem] text-[#1F2937]' />
+          <HiOutlineXMark onClick={() => setSchedulePayments(false)} className='cursor-pointer text-[1.75rem] text-[#1F2937]' />
         </div>
         <div className='w-full flex flex-col items-start gap-1 py-4 px-6'>
           <h1 className='text-[#151515] text-[1.75rem] font-bold leading-9 tracking-[-.56px]'>Schedule Payment</h1>
@@ -41,9 +44,20 @@ const SchedulePayments = ({freq, setFreq, assets, setAssets, setSchEmployees, sc
           </div>
           
           <div className='pt-4 pb-10 px-6 flex w-full flex-col items-start gap-[10px]'>
-            <button className='h-[56px] self-stretch flex justify-center items-center px-2 bg-[#2F4EED] rounded-lg text-base text-white font-semibold leading-[18px]'>Continue</button>
+            <button onClick={(e) => {
+              e.preventDefault();
+              setFinishSchedule(true);
+            }} className='h-[56px] self-stretch flex justify-center items-center px-2 bg-[#2F4EED] rounded-lg text-base text-white font-semibold leading-[18px]'>Continue</button>
           </div>
         </form>
+        {
+          finishSchedule && (
+            <FinishSchedule
+              setFinishSchedule={setFinishSchedule}
+              finishSchedule={finishSchedule}
+            />
+          )
+        }
       </div>
     </div>
   )
