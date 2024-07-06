@@ -6,7 +6,7 @@ import secureLocalStorage from "react-secure-storage";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
 
-const ShowAssets = ({ onAssetClick, setLoading }) => {
+const ShowAssets = ({ onAssetClick, setLoading, setPriceValue }) => {
   const user = secureLocalStorage.getItem("user");
   const [isLoading, setIsLoading] = useState(true);
   const config = {
@@ -79,6 +79,12 @@ const ShowAssets = ({ onAssetClick, setLoading }) => {
             } ${index === assets.length - 1 ? "rounded-b-lg" : ""}`}
             onClick={() => {
               onAssetClick(asset.name);
+              setPriceValue({
+                name: asset.name,
+                value: asset.value,
+                dollarAmount: asset.dollarAmount
+              })
+              
             }}
           >
             <div className="flex items-center gap-3">
