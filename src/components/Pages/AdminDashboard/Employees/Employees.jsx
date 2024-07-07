@@ -110,7 +110,7 @@ const Employees = () => {
               type="text"
               value={searchQuery}
               onChange={handleSearch}
-              placeholder="Search Employees e.g firstName"
+              placeholder="Search Employees e.g first name"
             />
           </div>
 
