@@ -68,6 +68,7 @@ const TransactionsTable = ({ transactions }) => {
   };
   const [tabs, setTabs] = useState("All");
   const headers = [
+    { label: "S/N", key: "SN" },
     { label: "Transaction ID", key: "transactionId" },
     { label: "Transaction hash", key: "transactionhash" },
     { label: "Amount", key: "amount" },
@@ -84,6 +85,7 @@ const TransactionsTable = ({ transactions }) => {
   
 
   const csvDataAll = transactions.map((transaction) => ({
+    sn: transactions.indexOf(transaction) + 1,
     transactionId: transaction.transactionId,
     transactionhash: transaction.hash,
     amountInUSD: transaction.amountInUSD,
@@ -97,6 +99,7 @@ const TransactionsTable = ({ transactions }) => {
   }));
 
   const csvDataPolygon = polygonTransactions.map((transaction) => ({
+    sn: transactions.indexOf(transaction) + 1,
     transactionId: transaction.transactionId,
     transactionhash: transaction.hash,
     amountInUSD: transaction.amountInUSD,
@@ -110,6 +113,7 @@ const TransactionsTable = ({ transactions }) => {
   }));
 
   const csvDataBitcoin = bitcoinTransaction.map((transaction) => ({
+    sn: transactions.indexOf(transaction) + 1,
     transactionId: transaction.transactionId,
     transactionhash: transaction.hash,
     amountInUSD: transaction.amountInUSD,
