@@ -171,7 +171,7 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
                 ) : transaction.status == "Pending" ? (
                   <FaRegCircleCheck className="text-yellow-500 text-[1.125ren]" />
                 ) : (
-                  <FaRegCircleCheck className="text-red-500 text-[1.125ren]" />
+                  <FaRegCircleXmark className="text-red-500 text-[1.125ren]" />
                 )}
 
                 <p

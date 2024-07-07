@@ -81,7 +81,7 @@ const Send = ({
         }
       } catch (error) {
         console.error("Error signing in:", error);
-        toast.error(error?.response?.data.message || "Something went wrong");
+        toast.error("Insufficient Balance"|| "Something went wrong");
       } finally {
         setLoading(false);
         setReloadPage((prev) => !prev);
