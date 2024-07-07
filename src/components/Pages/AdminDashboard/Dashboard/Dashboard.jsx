@@ -11,10 +11,11 @@ import AccountHeaderModal from "@/components/Page Components/Modals/AccountHeade
 import axios from "axios";
 import { formatNumber } from "@/Data/formikUtils";
 import { ScaleLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const [isClicked, setIsClicked] = useState("Assets");
-  const [reloadpage, setReloadPage] = useState(false)
+  const [reloadpage, setReloadPage] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState([]);
   const [showBalance, setShowBalance] = useState(false);
@@ -48,13 +49,11 @@ const Dashboard = () => {
     } catch (err) {
       console.error(err);
       toast.error(err.response.message || "An error occurred");
-    } finally {
-   
-    }
+    } 
   };
   useEffect(() => {
     getBalances();
-    getAllTransactions()
+    getAllTransactions();
   }, [reloadpage]);
 
   if (isLoading) {

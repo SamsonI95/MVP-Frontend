@@ -8,16 +8,15 @@ import { formatNumber } from "@/Data/formikUtils";
 const BitcoinTransaction = ({
   sortedTransactions,
   openModal,
+  transactions,
   truncateWalletAddress,
 }) => {
 
-  const btcTransactions = sortedTransactions.filter(
-    (transaction) => transaction.asset === "BTC"
-  );
+
   return (
     <div>
       <div className="whitespace-nowrap overflow-auto w-full">
-        {btcTransactions.map((transaction, index) => (
+        {transactions.map((transaction, index) => (
           <div key={index}>
             {index === 0 ||
             sortedTransactions[index - 1].formattedDate !==
