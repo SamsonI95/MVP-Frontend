@@ -84,8 +84,8 @@ const TransactionsTable = ({ transactions }) => {
   };
   
 
-  const csvDataAll = transactions.map((transaction) => ({
-    sn: transactions.indexOf(transaction) + 1,
+  const csvDataAll = transactions.map((transaction,index) => ({
+    sn: index + 1,
     transactionId: transaction.transactionId,
     transactionhash: transaction.hash,
     amountInUSD: transaction.amountInUSD,
@@ -98,8 +98,8 @@ const TransactionsTable = ({ transactions }) => {
     recieverWalletAddress: transaction.receiverWalletAddress,
   }));
 
-  const csvDataPolygon = polygonTransactions.map((transaction) => ({
-    sn: transactions.indexOf(transaction) + 1,
+  const csvDataPolygon = polygonTransactions.map((transaction,index) => ({
+    sn: index + 1,
     transactionId: transaction.transactionId,
     transactionhash: transaction.hash,
     amountInUSD: transaction.amountInUSD,
@@ -112,8 +112,8 @@ const TransactionsTable = ({ transactions }) => {
     recieverWalletAddress: transaction.receiverWalletAddress,
   }));
 
-  const csvDataBitcoin = bitcoinTransaction.map((transaction) => ({
-    sn: transactions.indexOf(transaction) + 1,
+  const csvDataBitcoin = bitcoinTransaction.map((transaction, index) => ({
+    sn: index + 1,
     transactionId: transaction.transactionId,
     transactionhash: transaction.hash,
     amountInUSD: transaction.amountInUSD,
