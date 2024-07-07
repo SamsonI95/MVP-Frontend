@@ -84,8 +84,9 @@ const Account = () => {
   return (
     <>
       <div className="flex flex-col items-start gap-[46px] w-[482px]">
-        <div className="flex items-center gap-6">
-          {profilePic ? (
+        <div className="flex items-center justify-center gap-6 w-full
+        ">
+          {/* {profilePic ? (
             <div className="rounded-full w-[140px] h-[140px] flex justify-center items-center">
               <img
                 src={profilePic}
@@ -93,14 +94,14 @@ const Account = () => {
                 className="w-[140px] h-[140px] rounded-full"
               />
             </div>
-          ) : (
+          ) : ( */}
             <div className="rounded-full w-[140px] h-[140px] p-[30px] bg-[#2F4EED] text-white flex justify-center items-center">
               <HiUser className="text-[8rem]" />
             </div>
-          )}
+          {/* )} */}
           <div className="flex flex-col items-start gap-4">
             <div className="flex items-center gap-4">
-              <button className="relative text-[.875rem] font-medium leading-5 z-20 cursor-pointer text-[#151515] bg-[#F7F7F7] rounded-lg px-2 h-[40px] flex items-center justify-center">
+              {/* <button className="relative text-[.875rem] font-medium leading-5 z-20 cursor-pointer text-[#151515] bg-[#F7F7F7] rounded-lg px-2 h-[40px] flex items-center justify-center">
                 Upload Photo
                 <label
                   htmlFor="profile"
@@ -115,10 +116,10 @@ const Account = () => {
                     className="opacity-0 w-full h-full absolute top-0 left-0 cursor-pointer pointer-events-auto"
                   />
                 </label>
-              </button>
+              </button> */}
 
               {/* Delete Dialog */}
-              <DeleteDialogModal
+              {/* <DeleteDialogModal
                 handleRemoveProfilePhoto={handleRemoveProfilePhoto}
                 trigger={
                   <button className="text-[#ED2F2F] flex justify-center items-center rounded-lg font-semibold text-[.875rem] leading-4">
@@ -126,11 +127,11 @@ const Account = () => {
                   </button>
                 }
                 warning={`This action cannot be undone. This will permanently delete your profile picture.`}
-              />
+              /> */}
             </div>
-            <p className="text-[#9C9C9C] text-[.875rem] font-normal leading-5">
+            {/* <p className="text-[#9C9C9C] text-[.875rem] font-normal leading-5">
               Pick a photo up to 4MB
-            </p>
+            </p> */}
           </div>
         </div>
 
