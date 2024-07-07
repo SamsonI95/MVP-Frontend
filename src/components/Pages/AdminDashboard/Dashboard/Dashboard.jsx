@@ -49,8 +49,7 @@ const Dashboard = () => {
     } catch (err) {
       console.error(err);
       toast.error(err.response.message || "An error occurred");
-    } finally {
-    }
+    } 
   };
   useEffect(() => {
     getBalances();

@@ -14,6 +14,9 @@ import { ScaleLoader } from "react-spinners";
 import AllTransaction from "./AllTransaction";
 import MaticTransaction from "./MaticTransaction";
 import BitcoinTransaction from "./BitcoinTransaction";
+import { saveAs } from "file-saver";
+import Papa from "papaparse";
+import { formatNumber } from "@/Data/formikUtils";
 
 const TransactionsTable = ({ transactions }) => {
   const [showModal, setShowModal] = useState(false);
@@ -40,16 +43,16 @@ const TransactionsTable = ({ transactions }) => {
         formattedTime: format(new Date(transaction.timestamp), "hh:mm a"),
       }))
       .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-    }, [transactions]);
-    
-    const [bitcoinTransaction, setBitcoinTransaction] = useState(sortedTransactions.filter(
-     (transaction) => transaction.asset === "BTC"
-   ))
-   
-     const [polygonTransactions, setPolygonTransactions] = useState(sortedTransactions.filter(
-       (transaction) => transaction.asset === "Polygon"
-     ))
-    
+  }, [transactions]);
+
+  const [bitcoinTransaction, setBitcoinTransaction] = useState(
+    sortedTransactions.filter((transaction) => transaction.asset === "BTC")
+  );
+
+  const [polygonTransactions, setPolygonTransactions] = useState(
+    sortedTransactions.filter((transaction) => transaction.asset === "Polygon")
+  );
+
   const truncateWalletAddress = (address) => {
     // Check if the address is valid and of the correct format
 
@@ -64,7 +67,88 @@ const TransactionsTable = ({ transactions }) => {
     setShowModal(true);
   };
   const [tabs, setTabs] = useState("All");
+  const headers = [
+    { label: "Transaction ID", key: "transactionId" },
+    { label: "Transaction hash", key: "transactionhash" },
+    { label: "Amount", key: "amount" },
+    { label: "Asset", key: "asset" },
+    { label: "Date", key: "date" },
+  ];
+
+  const formatDateTime = (dateString) => {
+    const date = new Date(dateString);
+    const options = { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' };
+    const formattedDate = date.toLocaleDateString('en-US', options).replace(',', '') // Remove comma between date and year
+    return formattedDate;
+  };
   
+
+  const csvDataAll = transactions.map((transaction) => ({
+    transactionId: transaction.transactionId,
+    transactionhash: transaction.hash,
+    amountInUSD: transaction.amountInUSD,
+    assetAmount:transaction.amount,
+    asset: transaction.asset,
+    date: formatDateTime(transaction.timestamp),
+    type: transaction.type,
+    status:transaction.status,
+    senderWalletAddress: transaction.senderWalletAddress,
+    recieverWalletAddress: transaction.receiverWalletAddress,
+  }));
+
+  const csvDataPolygon = polygonTransactions.map((transaction) => ({
+    transactionId: transaction.transactionId,
+    transactionhash: transaction.hash,
+    amountInUSD: transaction.amountInUSD,
+    assetAmount:transaction.amount,
+    asset: transaction.asset,
+    date: formatDateTime(transaction.timestamp),
+    type: transaction.type,
+    status:transaction.status,
+    senderWalletAddress: transaction.senderWalletAddress,
+    recieverWalletAddress: transaction.receiverWalletAddress,
+  }));
+
+  const csvDataBitcoin = bitcoinTransaction.map((transaction) => ({
+    transactionId: transaction.transactionId,
+    transactionhash: transaction.hash,
+    amountInUSD: transaction.amountInUSD,
+    assetAmount:transaction.amount,
+    asset: transaction.asset,
+    date: formatDateTime(transaction.timestamp),
+    type: transaction.type,
+    status:transaction.status,
+    senderWalletAddress: transaction.senderWalletAddress,
+    recieverWalletAddress: transaction.receiverWalletAddress,
+  }));
+
+  const csvReport = {
+    headers,
+    data:
+      tabs === "All"
+        ? csvDataAll
+        : tabs === "Polygon"
+        ? csvDataPolygon
+        : csvDataBitcoin,
+  };
+  const handleDownload = () => {
+    if (tabs === "All") {
+      const csv = Papa.unparse(csvReport, { header: true });
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      saveAs(blob, "transactions.csv");
+    } else if (tabs === "Bitcoin") {
+      const csvBitcoin = Papa.unparse(csvReport, { header: true });
+      const blobBitcoin = new Blob([csvBitcoin], {
+        type: "text/csv;charset=utf-8",
+      });
+      saveAs(blobBitcoin, "Bitcointransactions.csv");
+    } else {
+      const csvPolygon = Papa.unparse(csvReport, { header: true });
+      const blob = new Blob([csvPolygon], { type: "text/csv;charset=utf-8" });
+      saveAs(blob, "Polygontransactions.csv");
+    }
+  };
+
   return (
     <section className="w-full gap-[10px]">
       {showModal && (
@@ -106,7 +190,10 @@ const TransactionsTable = ({ transactions }) => {
             Matic
           </button>
         </div>
-        <div className="bg-[#E9E9E9] w-10 h-10 rounded-full px-[10px] md:px-[8px] flex justify-center items-center cursor-pointer">
+        <div
+          onClick={handleDownload}
+          className="bg-[#E9E9E9] w-10 h-10 rounded-full px-[10px] md:px-[8px] flex justify-center items-center cursor-pointer"
+        >
           <BsDownload className="text-[1rem] text-[#1F2937] font-black" />
         </div>
       </div>

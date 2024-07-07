@@ -5,6 +5,7 @@ import ethereum from "/svg/Eth (1).svg";
 import secureLocalStorage from "react-secure-storage";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
+import { formatNumber } from "@/Data/formikUtils";
 
 const ShowAssets = ({ onAssetClick, setLoading, setPriceValue }) => {
   const user = secureLocalStorage.getItem("user");
@@ -103,10 +104,10 @@ const ShowAssets = ({ onAssetClick, setLoading, setPriceValue }) => {
               <div className="s">
                 {" "}
                 <h1 className="text-[#151515] text-lg font-bold">
-                  ${asset.dollarAmount}
+                  ${formatNumber(asset.dollarAmount)}
                 </h1>
                 <p className="text-[#9C9C9C] text-[.875rem] leading-4 font-semibold uppercase">
-                  {asset.value} {asset.name}
+                  {formatNumber(asset.value,4)} {asset.name}
                 </p>
               </div>
             </div>

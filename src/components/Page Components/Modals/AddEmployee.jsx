@@ -166,18 +166,7 @@ const AddEmployee = ({
                 type="text"
                 error={formik.touched.email && formik.errors.email}
               />
-              <InputField
-                label="Wallet Address"
-                placeholder="Enter Wallet Address"
-                onBlur={formik.handleBlur}
-                onChange={formik.handleChange}
-                name="walletAddress"
-                value={formik.values.walletAddress}
-                type="text"
-                error={
-                  formik.touched.walletAddress && formik.errors.walletAddress
-                }
-              />
+            
               <div
                 ref={dropdownRef}
                 onClick={() => {
@@ -232,6 +221,19 @@ const AddEmployee = ({
                 </div>
                 {showAssets && <ShowAssets2 onAssetClick={setwalletType} />}
               </div>
+
+              <InputField
+                label="Wallet Address"
+                placeholder="Enter Wallet Address"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                name="walletAddress"
+                value={formik.values.walletAddress}
+                type="text"
+                error={
+                  formik.touched.walletAddress && formik.errors.walletAddress
+                }
+              />
 
               <div className="bg-[#EAEDFD] rounded-lg flex items-center self-stretch gap-6 py-6 px-4">
                 <div className="flex justify-center items-center gap-4">

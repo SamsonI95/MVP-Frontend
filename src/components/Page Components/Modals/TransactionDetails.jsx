@@ -13,7 +13,7 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
 
   const truncateString = (value) => {
     if (!value) {
-      return "No transaction ID or hash";
+      return "No transaction hash";
     }
     return `${value.slice(0, 6)}...${value.slice(-6)}`;
   };
@@ -171,7 +171,7 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
                 ) : transaction.status == "Pending" ? (
                   <FaRegCircleCheck className="text-yellow-500 text-[1.125ren]" />
                 ) : (
-                  <FaRegCircleCheck className="text-red-500 text-[1.125ren]" />
+                  <FaRegCircleXmark className="text-red-500 text-[1.125ren]" />
                 )}
 
                 <p
