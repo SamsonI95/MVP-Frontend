@@ -9,7 +9,7 @@ import polygon from "/svg/Coinnomad logo.svg";
 import { ScaleLoader } from "react-spinners";
 import { PiHandCoinsLight } from "react-icons/pi";
 import ShowAssets2 from "./ShowAssets2";
-
+import { truncateWalletAddress } from "@/Data/formikUtils";
 
 const Receive = ({ receiveAssets, setReceiveAssets }) => {
   const [walletType, setwalletType] = useState("Select Asset");
@@ -108,8 +108,6 @@ const Receive = ({ receiveAssets, setReceiveAssets }) => {
           )}
         </div>
       </div>
-      
-      
 
       {walletType == "Select Asset" ? (
         <div className="w-[350px] h-[350px] text-center object-contain text-xl font-semibold flex flex-col justify-center items-center">
@@ -124,7 +122,7 @@ const Receive = ({ receiveAssets, setReceiveAssets }) => {
               ? user.polygonWalletQrCode
               : walletType == "BTC"
               ? user.bitcoinWalletQrCode
-              : null  
+              : null
           }
           // loading="lazy"
           // onLoad={() => setLoading(false)}
@@ -140,10 +138,23 @@ const Receive = ({ receiveAssets, setReceiveAssets }) => {
             handleCopyAddress(user.bitcoinWalletAddress);
           }
         }}
-        className="h-[56px] self-stretch flex justify-center items-center px-2 bg-[#F7F7F7] rounded-lg text-base text-[#151515] font-semibold leading-[18px] gap-[10px]"
+        className="h-[56px] self-stretch gap-x-3 flex justify-center items-center px-2 bg-[#F7F7F7] rounded-lg text-base text-[#151515] font-semibold leading-[18px] gap-[10px]"
       >
-        {copySuccess ? "Copied!" : "Copy Address"}
-        <IoCopyOutline className="text-[#1F2937] font-bold text-[1.125rem]" />
+        <p className="">
+          {truncateWalletAddress(
+            walletType == "Matic"
+              ? user.polygonWalletAddress
+              : walletType == "BTC"
+              ? user.bitcoinWalletAddress
+              : null
+          )}{" "}
+        </p>
+        {"Copy Address"}
+        {copySuccess ? (
+          "Copied!"
+        ) : (
+          <IoCopyOutline className="text-[#1F2937] font-bold text-[1.125rem]" />
+        )}
       </button>
     </div>
   );

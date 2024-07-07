@@ -99,13 +99,20 @@ export const sendBitcoinAnyone = Yup.object({
 
 
 export  const truncateWalletAddress = (address) => {
-  const lengthToShow = 15;
+  // const lengthToShow = 15;
   if (!address) return "";
-  return `${address.substring(0, lengthToShow)}...`;
+  return `${address.slice(0, 6)}...${address.slice(-6)}`;
+  // return `${address.substring(0, lengthToShow)}...`;
 };
 
 
+
+
  export const formatNumber = (numberString, numfixed = 2) => {
+    // Check if the input is a number
+    if (typeof numberString !== "number") {
+      return;
+    }
     // Parse the number to float
     const number = parseFloat(numberString);
 
