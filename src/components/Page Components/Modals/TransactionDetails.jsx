@@ -13,7 +13,7 @@ const TransactionDetails = ({ setShowModal, transaction }) => {
 
   const truncateString = (value) => {
     if (!value) {
-      return "No transaction ID or hash";
+      return "No transaction hash";
     }
     return `${value.slice(0, 6)}...${value.slice(-6)}`;
   };
