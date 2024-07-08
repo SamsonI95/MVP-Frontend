@@ -20,8 +20,8 @@ import { formatNumber } from "@/Data/formikUtils";
 
 const TransactionsTable = ({ transactions }) => {
   const [showModal, setShowModal] = useState(false);
-
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [tabs, setTabs] = useState("All");
   const user = secureLocalStorage.getItem("user");
   const [loading, setLoading] = useState(true);
 
@@ -35,6 +35,7 @@ const TransactionsTable = ({ transactions }) => {
       return format(parsedDate, "MMMM d, yyyy");
     }
   };
+
   const sortedTransactions = useMemo(() => {
     return transactions
       .map((transaction) => ({
@@ -45,28 +46,23 @@ const TransactionsTable = ({ transactions }) => {
       .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
   }, [transactions]);
 
-  const [bitcoinTransaction, setBitcoinTransaction] = useState(
-    sortedTransactions.filter((transaction) => transaction.asset === "BTC")
+  const bitcoinTransaction = useMemo(
+    () => sortedTransactions.filter((transaction) => transaction.asset === "BTC"),
+    [sortedTransactions]
   );
 
-  const [polygonTransactions, setPolygonTransactions] = useState(
-    sortedTransactions.filter((transaction) => transaction.asset === "Polygon")
+  const polygonTransactions = useMemo(
+    () => sortedTransactions.filter((transaction) => transaction.asset === "Polygon"),
+    [sortedTransactions]
   );
 
-  const truncateWalletAddress = (address) => {
-    // Check if the address is valid and of the correct format
-
-    // Truncate the address to the desired format
-    const truncatedAddress = `${address.slice(0, 6)}...${address.slice(-6)}`;
-
-    return truncatedAddress;
-  };
+  const truncateWalletAddress = (address) => `${address.slice(0, 6)}...${address.slice(-6)}`;
 
   const openModal = (transaction) => {
     setSelectedTransaction(transaction);
     setShowModal(true);
   };
-  const [tabs, setTabs] = useState("All");
+
   const headers = [
     { label: "S/N", key: "SN" },
     { label: "Transaction ID", key: "transactionId" },
@@ -78,53 +74,32 @@ const TransactionsTable = ({ transactions }) => {
 
   const formatDateTime = (dateString) => {
     const date = new Date(dateString);
-    const options = { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' };
-    const formattedDate = date.toLocaleDateString('en-US', options).replace(',', '') // Remove comma between date and year
-    return formattedDate;
+    return date.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit'
+    }).replace(',', ''); // Remove comma between date and year
   };
-  
 
-  const csvDataAll = transactions.map((transaction,index) => ({
+  const generateCsvData = (transactions) => transactions.map((transaction, index) => ({
     sn: index + 1,
     transactionId: transaction.transactionId,
     transactionhash: transaction.hash,
     amountInUSD: transaction.amountInUSD,
-    assetAmount:transaction.amount,
+    assetAmount: transaction.amount,
     asset: transaction.asset,
     date: formatDateTime(transaction.timestamp),
     type: transaction.type,
-    status:transaction.status,
+    status: transaction.status,
     senderWalletAddress: transaction.senderWalletAddress,
-    recieverWalletAddress: transaction.receiverWalletAddress,
+    receiverWalletAddress: transaction.receiverWalletAddress,
   }));
 
-  const csvDataPolygon = polygonTransactions.map((transaction,index) => ({
-    sn: index + 1,
-    transactionId: transaction.transactionId,
-    transactionhash: transaction.hash,
-    amountInUSD: transaction.amountInUSD,
-    assetAmount:transaction.amount,
-    asset: transaction.asset,
-    date: formatDateTime(transaction.timestamp),
-    type: transaction.type,
-    status:transaction.status,
-    senderWalletAddress: transaction.senderWalletAddress,
-    recieverWalletAddress: transaction.receiverWalletAddress,
-  }));
-
-  const csvDataBitcoin = bitcoinTransaction.map((transaction, index) => ({
-    sn: index + 1,
-    transactionId: transaction.transactionId,
-    transactionhash: transaction.hash,
-    amountInUSD: transaction.amountInUSD,
-    assetAmount:transaction.amount,
-    asset: transaction.asset,
-    date: formatDateTime(transaction.timestamp),
-    type: transaction.type,
-    status:transaction.status,
-    senderWalletAddress: transaction.senderWalletAddress,
-    recieverWalletAddress: transaction.receiverWalletAddress,
-  }));
+  const csvDataAll = generateCsvData(transactions);
+  const csvDataPolygon = generateCsvData(polygonTransactions);
+  const csvDataBitcoin = generateCsvData(bitcoinTransaction);
 
   const csvReport = {
     headers,
@@ -135,22 +110,12 @@ const TransactionsTable = ({ transactions }) => {
         ? csvDataPolygon
         : csvDataBitcoin,
   };
+
   const handleDownload = () => {
-    if (tabs === "All") {
-      const csv = Papa.unparse(csvReport, { header: true });
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-      saveAs(blob, "transactions.csv");
-    } else if (tabs === "Bitcoin") {
-      const csvBitcoin = Papa.unparse(csvReport, { header: true });
-      const blobBitcoin = new Blob([csvBitcoin], {
-        type: "text/csv;charset=utf-8",
-      });
-      saveAs(blobBitcoin, "Bitcointransactions.csv");
-    } else {
-      const csvPolygon = Papa.unparse(csvReport, { header: true });
-      const blob = new Blob([csvPolygon], { type: "text/csv;charset=utf-8" });
-      saveAs(blob, "Polygontransactions.csv");
-    }
+    const csv = Papa.unparse(csvReport, { header: true });
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const fileName = tabs === "All" ? "AllTransactions.csv" : `${tabs}Transactions.csv`;
+    saveAs(blob, fileName);
   };
 
   return (
@@ -163,36 +128,17 @@ const TransactionsTable = ({ transactions }) => {
       )}
       <div className="px-[16px] py-[4px] md:py-[16px] md:pr-[32px] flex justify-between items-center gap-3 md:gap-6 whitespace-nowrap overflow-auto w-full scroll">
         <div className="flex justify-center md:justify-between md:px-[32px] gap-2 items-center">
-          <button
-            onClick={() => {
-              setTabs("All");
-            }}
-            className={`py-[4px] px-[16px] gap-[8px] flex justify-center items-center ${
-              tabs == "All" ? " bg-[#2F4EED] text-white" : " text-[#9C9C9C]"
-            } rounded-[50px] text-[1rem] font-semibold leading-6`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => {
-              setTabs("Bitcoin");
-            }}
-            className={`py-[4px] px-[16px] gap-[8px] flex justify-center items-center ${
-              tabs == "Bitcoin" ? " bg-[#2F4EED] text-white" : " text-[#9C9C9C]"
-            } text-[1rem] rounded-[50px] font-semibold leading-6`}
-          >
-            Bitcoin
-          </button>
-          <button
-            onClick={() => {
-              setTabs("Matic");
-            }}
-            className={`py-[4px] px-[16px] gap-[8px] flex justify-center items-center ${
-              tabs == "Matic" ? " bg-[#2F4EED] text-white" : " text-[#9C9C9C]"
-            } text-[1rem] rounded-[50px] font-semibold leading-6`}
-          >
-            Matic
-          </button>
+          {["All", "Bitcoin", "Matic"].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setTabs(tab)}
+              className={`py-[4px] px-[16px] gap-[8px] flex justify-center items-center ${
+                tabs === tab ? "bg-[#2F4EED] text-white" : "text-[#9C9C9C]"
+              } rounded-[50px] text-[1rem] font-semibold leading-6`}
+            >
+              {tab}
+            </button>
+          ))}
         </div>
         <div
           onClick={handleDownload}
@@ -201,45 +147,41 @@ const TransactionsTable = ({ transactions }) => {
           <BsDownload className="text-[1rem] text-[#1F2937] font-black" />
         </div>
       </div>
-      <>
-        {transactions.length == 0 ? (
-          <div className="flex flex-col justify-start items-center px-[10px] py-[80px] md:h-[612px] w-full gap-[10px]">
-            <div className=" rounded-full p-[10px] bg-[#F7F7F7] gap-[10px] flex justify-center items-center">
-              <IoSwapVerticalOutline className="text-[1.25rem] rotate-[45deg]" />
-            </div>
-            <p className="text-[#000000] text-[1.125rem] font-semibold leading-7">
-              No Activity
-            </p>
+      {transactions.length === 0 ? (
+        <div className="flex flex-col justify-start items-center px-[10px] py-[80px] md:h-[612px] w-full gap-[10px]">
+          <div className="rounded-full p-[10px] bg-[#F7F7F7] gap-[10px] flex justify-center items-center">
+            <IoSwapVerticalOutline className="text-[1.25rem] rotate-[45deg]" />
           </div>
-        ) : (
-          <div>
-            {tabs == "All" && (
-              <AllTransaction
-                sortedTransactions={sortedTransactions}
-                transactions={transactions}
-                openModal={openModal}
-                truncateWalletAddress={truncateWalletAddress}
-              />
-            )}
-            {tabs == "Bitcoin" && (
-              <BitcoinTransaction
-                sortedTransactions={sortedTransactions}
-                transactions={bitcoinTransaction}
-                openModal={openModal}
-                truncateWalletAddress={truncateWalletAddress}
-              />
-            )}
-            {tabs == "Matic" && (
-              <MaticTransaction
-                sortedTransactions={sortedTransactions}
-                transactions={polygonTransactions}
-                openModal={openModal}
-                truncateWalletAddress={truncateWalletAddress}
-              />
-            )}
-          </div>
-        )}
-      </>
+          <p className="text-[#000000] text-[1.125rem] font-semibold leading-7">No Activity</p>
+        </div>
+      ) : (
+        <div>
+          {tabs === "All" && (
+            <AllTransaction
+              sortedTransactions={sortedTransactions}
+              transactions={transactions}
+              openModal={openModal}
+              truncateWalletAddress={truncateWalletAddress}
+            />
+          )}
+          {tabs === "Bitcoin" && (
+            <BitcoinTransaction
+              sortedTransactions={sortedTransactions}
+              transactions={bitcoinTransaction}
+              openModal={openModal}
+              truncateWalletAddress={truncateWalletAddress}
+            />
+          )}
+          {tabs === "Matic" && (
+            <MaticTransaction
+              sortedTransactions={sortedTransactions}
+              transactions={polygonTransactions}
+              openModal={openModal}
+              truncateWalletAddress={truncateWalletAddress}
+            />
+          )}
+        </div>
+      )}
     </section>
   );
 };
