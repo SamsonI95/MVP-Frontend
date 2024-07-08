@@ -19,7 +19,7 @@ const BitcoinTransaction = ({
         {transactions.map((transaction, index) => (
           <div key={index}>
             {index === 0 ||
-            sortedTransactions[index - 1].formattedDate !==
+            transactions[index - 1].formattedDate !==
               transaction.formattedDate ? (
               <p className="w-full pl-[32px] pr-[10px] py-[16px] gap-[10px] text-[.875rem] text-[#9C9C9C] font-semibold leading-4">
                 {transaction.formattedDate}

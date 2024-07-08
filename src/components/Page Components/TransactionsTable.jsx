@@ -47,16 +47,21 @@ const TransactionsTable = ({ transactions }) => {
   }, [transactions]);
 
   const bitcoinTransaction = useMemo(
-    () => sortedTransactions.filter((transaction) => transaction.asset === "BTC"),
+    () =>
+      sortedTransactions.filter((transaction) => transaction.asset === "BTC"),
     [sortedTransactions]
   );
 
   const polygonTransactions = useMemo(
-    () => sortedTransactions.filter((transaction) => transaction.asset === "Polygon"),
+    () =>
+      sortedTransactions.filter(
+        (transaction) => transaction.asset === "Polygon"
+      ),
     [sortedTransactions]
   );
 
-  const truncateWalletAddress = (address) => `${address.slice(0, 6)}...${address.slice(-6)}`;
+  const truncateWalletAddress = (address) =>
+    `${address.slice(0, 6)}...${address.slice(-6)}`;
 
   const openModal = (transaction) => {
     setSelectedTransaction(transaction);
@@ -74,28 +79,31 @@ const TransactionsTable = ({ transactions }) => {
 
   const formatDateTime = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: '2-digit'
-    }).replace(',', ''); // Remove comma between date and year
+    return date
+      .toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+      })
+      .replace(",", ""); // Remove comma between date and year
   };
 
-  const generateCsvData = (transactions) => transactions.map((transaction, index) => ({
-    sn: index + 1,
-    transactionId: transaction.transactionId,
-    transactionhash: transaction.hash,
-    amountInUSD: transaction.amountInUSD,
-    assetAmount: transaction.amount,
-    asset: transaction.asset,
-    date: formatDateTime(transaction.timestamp),
-    type: transaction.type,
-    status: transaction.status,
-    senderWalletAddress: transaction.senderWalletAddress,
-    receiverWalletAddress: transaction.receiverWalletAddress,
-  }));
+  const generateCsvData = (transactions) =>
+    transactions.map((transaction, index) => ({
+      sn: index + 1,
+      transactionId: transaction.transactionId,
+      transactionhash: transaction.hash,
+      amountInUSD: transaction.amountInUSD,
+      assetAmount: transaction.amount,
+      asset: transaction.asset,
+      date: formatDateTime(transaction.timestamp),
+      type: transaction.type,
+      status: transaction.status,
+      senderWalletAddress: transaction.senderWalletAddress,
+      receiverWalletAddress: transaction.receiverWalletAddress,
+    }));
 
   const csvDataAll = generateCsvData(transactions);
   const csvDataPolygon = generateCsvData(polygonTransactions);
@@ -114,7 +122,8 @@ const TransactionsTable = ({ transactions }) => {
   const handleDownload = () => {
     const csv = Papa.unparse(csvReport, { header: true });
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-    const fileName = tabs === "All" ? "AllTransactions.csv" : `${tabs}Transactions.csv`;
+    const fileName =
+      tabs === "All" ? "AllTransactions.csv" : `${tabs}Transactions.csv`;
     saveAs(blob, fileName);
   };
 
@@ -152,7 +161,9 @@ const TransactionsTable = ({ transactions }) => {
           <div className="rounded-full p-[10px] bg-[#F7F7F7] gap-[10px] flex justify-center items-center">
             <IoSwapVerticalOutline className="text-[1.25rem] rotate-[45deg]" />
           </div>
-          <p className="text-[#000000] text-[1.125rem] font-semibold leading-7">No Activity</p>
+          <p className="text-[#000000] text-[1.125rem] font-semibold leading-7">
+            No Activity
+          </p>
         </div>
       ) : (
         <div>
@@ -166,7 +177,6 @@ const TransactionsTable = ({ transactions }) => {
           )}
           {tabs === "Bitcoin" && (
             <BitcoinTransaction
-              sortedTransactions={sortedTransactions}
               transactions={bitcoinTransaction}
               openModal={openModal}
               truncateWalletAddress={truncateWalletAddress}
@@ -174,7 +184,6 @@ const TransactionsTable = ({ transactions }) => {
           )}
           {tabs === "Matic" && (
             <MaticTransaction
-              sortedTransactions={sortedTransactions}
               transactions={polygonTransactions}
               openModal={openModal}
               truncateWalletAddress={truncateWalletAddress}
