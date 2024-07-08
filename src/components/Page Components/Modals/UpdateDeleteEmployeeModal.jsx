@@ -18,11 +18,11 @@ const UpdateDeleteEmployeeModal = ({
   getEmployees,
   setLoadEmployees,
 }) => {
-  const [updateloading, setUpdateLoading] = useState(false);
-  const [isUpdate, setisUpdate] = useState(false);
-  const [deleteloading, setDeleteLoading] = useState(false);
-  const user = secureLocalStorage.getItem("user");
+  const [updateLoading, setUpdateLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
+  const user = secureLocalStorage.getItem("user");
+  const [isUpdate, setIsUpdate] = useState(true);
   const config = {
     headers: {
       Authorization: `Bearer ${user.accessToken}`,
@@ -38,17 +38,13 @@ const UpdateDeleteEmployeeModal = ({
       walletAddress: employeeDetails.walletAddress || "",
     },
     onSubmit: (values) => {
-      if (isUpdate) {
-        handleUpdate(formik.values);
-      } else {
-        handleDelete(formik.values);
-      }
+      setUpdateLoading(true);
+
+      handleUpdate(values);
     },
   });
 
   const handleUpdate = (values) => {
-    setUpdateLoading(true);
-
     axios
       .put(
         `/api/employee/update/${employeeDetails.employeeId}`,
@@ -76,7 +72,6 @@ const UpdateDeleteEmployeeModal = ({
 
   const handleDelete = () => {
     setDeleteLoading(true);
-
     axios
       .delete(`/api/employee/delete/${employeeDetails.employeeId}`, config)
       .then((res) => {
@@ -162,7 +157,35 @@ const UpdateDeleteEmployeeModal = ({
                   formik.touched.walletAddress && formik.errors.walletAddress
                 }
               />
-              {/* <div className="bg-[#EAEDFD] rounded-lg flex items-center self-stretch gap-6 py-6 px-4">
+              <div className="pt-4 pb-10 px-6 flex w-full flex-col justify-center items-center gap-[16px]">
+                <FormButton
+                  btnName="Update"
+                  disabled={updateLoading}
+                  loading={updateLoading}
+                  width={`w-[402px]`}
+                />
+                <DeleteButton
+                  btnName="Remove Employee"
+                  disabled={deleteLoading}
+                  loading={deleteLoading }
+                  onClick={() =>{
+                    console.log("Delete");
+                    handleDelete()}}
+                  width={`w-[402px]`}
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default UpdateDeleteEmployeeModal;
+
+{
+  /* <div className="bg-[#EAEDFD] rounded-lg flex items-center self-stretch gap-6 py-6 px-4">
                 <div className="flex justify-center items-center gap-4">
                   <div className="flex items-start gap-4">
                     <img
@@ -187,29 +210,5 @@ const UpdateDeleteEmployeeModal = ({
                     className="text-[#1F2937] text-[1.8rem] cursor-pointer font-bold"
                   />
                 </div>
-              </div> */}
-              <div className="pt-4 pb-10 px-6 flex w-full flex-col justify-center items-center gap-[16px]">
-                <FormButton
-                  btnName="Update"
-                  disabled={updateloading}
-                  loading={updateloading}
-                  onClick={() => setisUpdate(true)}
-                  width={`w-[402px]`}
-                />
-                <DeleteButton
-                  btnName="Remove Employee"
-                  disabled={deleteloading}
-                  loading={deleteloading}
-                  onClick={() => setisUpdate(false)}
-                  width={`w-[402px]`}
-                />
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-    </>
-  );
-};
-
-export default UpdateDeleteEmployeeModal;
+              </div> */
+}
