@@ -70,7 +70,7 @@ const AddEmployee = ({
         .catch((err) => {
           setLoadEmployees(false);
           console.error("Error registering employee:", err);
-          toast.error(err.response.message || "An error occurred");
+          toast.error(err.response.data.message || "An error occurred");
         })
         .finally(() => {
           setLoading(false);
