@@ -12,6 +12,8 @@ import axios from "axios";
 import { formatNumber } from "@/Data/formikUtils";
 import { ScaleLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import TransactionSuccessful from "@/components/Page Components/Modals/TransactionSuccessful";
+import TransactionFailed from "@/components/Page Components/Modals/TransactionFailed";
 
 const Dashboard = () => {
   const [isClicked, setIsClicked] = useState("Assets");
@@ -161,6 +163,8 @@ const Dashboard = () => {
           <TransactionsTable transactions={transactions} />
         )}
       </div>
+      {/* <TransactionSuccessful/> */}
+      {/* <TransactionFailed/> */}
     </section>
   );
 };
