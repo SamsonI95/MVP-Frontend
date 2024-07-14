@@ -170,7 +170,6 @@ const TransactionsTable = ({ transactions }) => {
           {tabs === "All" && (
             <AllTransaction
               sortedTransactions={sortedTransactions}
-              transactions={transactions}
               openModal={openModal}
               truncateWalletAddress={truncateWalletAddress}
             />

@@ -78,7 +78,7 @@ const BitcoinTransaction = ({
                         : `+$${formatNumber(transaction.amountInUSD ) || 0.5}`}
                     </h1>
                     <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
-                      {transaction.amount}{" "}
+                      {formatNumber(transaction.amount, 4)}{" "}
                       {transaction.asset === "BTC"
                         ? transaction.asset
                         : "Matic"}

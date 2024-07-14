@@ -11,7 +11,7 @@ import polygon from "/public/svg/Coinnomad logo.svg";
 import ethereum from "/public/svg/Eth (1).svg";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
-import { toast } from "../ui/use-toast";
+import {toast} from "react-toastify"
 import UpdateDeleteEmployeeModal from "./Modals/UpdateDeleteEmployeeModal";
 import { truncateWalletAddress } from "@/Data/formikUtils";
 import SchedulePayments from "./Modals/SchedulePayments/SchedulePayments";
@@ -35,6 +35,7 @@ const EmployeeTable = ({
       Authorization: `Bearer ${user.ccessToken}`,
     },
   };
+  console.log("data",data);
 
   const handleEditClick = (employee) => {
     setSelectedEmployee(employee);
@@ -45,15 +46,10 @@ const EmployeeTable = ({
     navigator.clipboard
       .writeText(address)
       .then(() => {
-        toast({
-          title: "Copied to clipboard",
-        });
+        toast.success("Address copied");
       })
       .catch((err) => {
-        toast({
-          title: "Failed to copy",
-          variant: "destructive",
-        });
+        toast.error("Failed to copy");
       });
   };
 
@@ -177,7 +173,9 @@ const EmployeeTable = ({
                     )}
                   </td>
                   <td className="py-[12px] px-[32px] text-[.875rem] text-[#151515] font-semibold">
-                    <p className="bg-[#E9F7EF] rounded-[5px] py-1 px-3 items-center gap-1 text-[#23AE5E] text-[.875rem] font-semibold leading-4 text-center">Scheduled</p>
+                    <p className="bg-[#E9F7EF] rounded-[5px] py-1 px-3 items-center gap-1 text-[#23AE5E] text-[.875rem] font-semibold leading-4 text-center">
+                      Scheduled
+                    </p>
                     {/* <p className="bg-[#FFF2F0] rounded-[5px] py-1 px-3 items-center gap-1 text-[#ED2F2F] text-[.875rem] font-semibold leading-4 text-center">Unscheduled</p> */}
                   </td>
                   <td className="py-[12px] gap-[16px] flex px-[32px]">
@@ -190,7 +188,7 @@ const EmployeeTable = ({
                     <button
                       onClick={() => {
                         setSchedulePayments(true);
-                      }} 
+                      }}
                       className="py-1 px-3 rounded-[5px] bg-[#2F4EED] text-white text-[.75rem] font-medium cursor-pointer"
                     >
                       Schedule Payments
@@ -221,14 +219,12 @@ const EmployeeTable = ({
         />
       )}
 
-      {
-        schedulePayments && (
-          <SchedulePayments
-            setSchedulePayments={setSchedulePayments}
-            schedulePayments={schedulePayments}
-          />
-        )
-      }
+      {schedulePayments && (
+        <SchedulePayments
+          setSchedulePayments={setSchedulePayments}
+          schedulePayments={schedulePayments}
+        />
+      )}
     </>
   );
 };

@@ -40,6 +40,7 @@ const Employees = () => {
     axios
       .get(`/api/employee/getemployees`, config)
       .then((res) => {
+        console.log("res",res.data.data);
         setLoadEmployees(false);
         setData(res.data.data);
         setFilteredData(res.data.data);

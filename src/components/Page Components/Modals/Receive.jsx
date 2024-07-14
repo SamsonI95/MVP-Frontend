@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { IoCopyOutline } from "react-icons/io5";
+import { IoCheckmarkOutline, IoCopyOutline } from "react-icons/io5";
 import qrcode from "/public/Coinnomad QR Code.png";
 import ShowAssets from "./ShowAssets";
 import { IoIosArrowDown } from "react-icons/io";
@@ -151,7 +151,7 @@ const Receive = ({ receiveAssets, setReceiveAssets }) => {
         </p>
         {"Copy Address"}
         {copySuccess ? (
-          "Copied!"
+        <IoCheckmarkOutline className="text-green-400 font-bold text-[1.125rem]" />
         ) : (
           <IoCopyOutline className="text-[#1F2937] font-bold text-[1.125rem]" />
         )}
