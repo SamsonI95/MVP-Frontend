@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { BsChat } from "react-icons/bs";
 import { HiMiniUser } from "react-icons/hi2";
 import {
+  IoCheckmarkOutline,
   IoCopyOutline,
   IoLogOutOutline,
   IoMoonOutline,
@@ -83,7 +84,7 @@ const AccountHeaderModal = ({ isClicked, setIsClicked }) => {
               {truncateWalletAddress(user.polygonWalletAddress)}
             </p>
             {copied === user.polygonWalletAddress ? (
-              "copied!"
+             <IoCheckmarkOutline className="text-green-400 font-bold text-[1.125rem]" />
             ) : (
               <IoCopyOutline
                 onClick={() => handleCopy(user.polygonWalletAddress)}
@@ -97,7 +98,8 @@ const AccountHeaderModal = ({ isClicked, setIsClicked }) => {
               {truncateWalletAddress(user.bitcoinWalletAddress)}
             </p>
             {copied === user.bitcoinWalletAddress ? (
-              "copied!"
+              
+              <IoCheckmarkOutline className="text-green-400 font-bold text-[1.125rem]" />
             ) : (
               <IoCopyOutline
                 onClick={() => handleCopy(user.bitcoinWalletAddress)}

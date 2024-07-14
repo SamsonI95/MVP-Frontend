@@ -18,7 +18,7 @@ const MaticTransaction = ({
         {transactions.map((transaction, index) => (
           <div key={index}>
             {index === 0 ||
-            sortedTransactions[index - 1].formattedDate !==
+            transactions[index - 1].formattedDate !==
               transaction.formattedDate ? (
               <p className="w-full pl-[32px] pr-[10px] py-[16px] gap-[10px] text-[.875rem] text-[#9C9C9C] font-semibold leading-4">
                 {transaction.formattedDate}
@@ -77,7 +77,7 @@ const MaticTransaction = ({
                         : `+$${formatNumber(transaction.amountInUSD) || 0.5}`}
                     </h1>
                     <p className="text-[#9C9C9C] text-[.875rem] font-semibold leading-4">
-                      {transaction.amount}{" "}
+                      {formatNumber(transaction.amount, 4)}{" "}
                       {transaction.asset === "BTC"
                         ? transaction.asset
                         : "Matic"}
