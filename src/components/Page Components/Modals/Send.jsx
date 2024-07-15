@@ -83,6 +83,7 @@ const Send = ({
         );
 
         console.log('Response data:', response.data);
+        console.log('Response status:', response.status);
         if (response.data.success) {
           setSendConfirmed(true);
           setSendConfirmationMessage(response.data.message);
@@ -97,7 +98,7 @@ const Send = ({
       } finally {
         setLoading(false);
         setReloadPage((prev) => !prev);
-        setSendReceiveModal(null);
+        // setSendReceiveModal(null);
       }
     },
   });
