@@ -235,7 +235,7 @@ const AddEmployee = ({
                 }
               />
 
-              <div className="bg-[#EAEDFD] rounded-lg flex items-center self-stretch gap-6 py-6 px-4">
+              {/* <div className="bg-[#EAEDFD] rounded-lg flex items-center self-stretch gap-6 py-6 px-4">
                 <div className="flex justify-center items-center gap-4">
                   <div className="flex items-start gap-4">
                     <img
@@ -261,7 +261,7 @@ const AddEmployee = ({
                     className="text-[#1F2937] text-[1.8rem] cursor-pointer font-bold"
                   />
                 </div>
-              </div>
+              </div> */}
               <div className="pt-4 pb-10 px-6 flex w-full flex-col justify-center items-center gap-[10px]">
                 <FormButton
                   btnName="Add"
