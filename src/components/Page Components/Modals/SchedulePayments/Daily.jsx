@@ -8,7 +8,7 @@ import ShowAssets2 from "../ShowAssets2";
 import bitcoin from "/svg/Bitcoin Badge.svg";
 import polygon from "/svg/Coinnomad logo.svg";
 
-const SchedulePayments = ({ setSchedulePayments, schedulePayments }) => {
+const Daily = ({ setSchedulePayments, schedulePayments }) => {
   const [finishSchedule, setFinishSchedule] = useState(false);
   const [freq, setFreq] = useState(false);
   const [frequencyState, setFrequencyState] = useState("Select Frequency");
@@ -222,4 +222,4 @@ const SchedulePayments = ({ setSchedulePayments, schedulePayments }) => {
   );
 };
 
-export default SchedulePayments;
+export default Daily;
