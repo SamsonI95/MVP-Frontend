@@ -34,7 +34,7 @@ const Send = ({
       setSendAssets(false);
     }
   };
-  const [sendConfirmed, setSendConfirmed] = useState(null); // Changed to null to handle the initial state
+  const [sendConfirmed, setSendConfirmed] = useState(null); 
   const [sendConfirmationMessage, setSendConfirmationMessage] = useState('');
 
   useEffect(() => {
