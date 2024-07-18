@@ -7,18 +7,9 @@ import FinishSchedule from "./FinishScheduleDaily";
 import ShowAssets2 from "../ShowAssets2";
 import bitcoin from "/svg/Bitcoin Badge.svg";
 import polygon from "/svg/Coinnomad logo.svg";
-import FinishScheduleDaily from "./FinishScheduleDaily";
-import { capitalizeFirstLetterOfEachWord } from "@/Data/formikUtils";
 
-const SchedulePayments = ({
-  setSchedulePayments,
-  schedulePayments,
-  employeeId,
-  setExistData,
-  userAsset
-}) => {
-  const [finishScheduleDaily, setFinishScheduleDaily] = useState(false);
-  const [amount, setAmount] = useState("");
+const Daily = ({ setSchedulePayments, schedulePayments }) => {
+  const [finishSchedule, setFinishSchedule] = useState(false);
   const [freq, setFreq] = useState(false);
   const [frequencyState, setFrequencyState] = useState("Select Frequency");
   const freqMenu = useRef(null);
@@ -60,7 +51,14 @@ const SchedulePayments = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [freq]);
-
+  function capitalizeFirstLetterOfEachWord(inputString) {
+    return inputString
+      .split(" ")
+      .map((word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join(" ");
+  }
   return (
     <div
       onClick={() => setSchedulePayments(false)}
@@ -137,16 +135,16 @@ const SchedulePayments = ({
                 className="relative text-[#151515] text-[.875rem] font-semibold leading-4"
                 htmlFor="Assets"
               >
-                Asset
+                Assets
               </label>
               <div
                 onClick={() => setAssets((prev) => !prev)}
                 className="outline-none border-none cursor-pointer justify-between bg-[#F7F7F7] h-[56px] px-4 gap-2 w-full self-stretch flex items-center text-base placeholder:text-[#838385] font-normal leading-6 text-[#000000] rounded-lg"
               >
-                {userAsset == "Select Asset" && (
+                {assetsState == "Select Asset" && (
                   <p className="text-[#838385]">Select Asset</p>
                 )}
-                {userAsset == "Polygon" && (
+                {assetsState == "Matic" && (
                   <div className="flex gap-x-2">
                     <img src={polygon} alt="" />
                     <div className="flex flex-col">
@@ -159,7 +157,7 @@ const SchedulePayments = ({
                     </div>
                   </div>
                 )}
-                {userAsset == "BTC" && (
+                {assetsState == "BTC" && (
                   <div className="flex gap-x-2">
                     <img src={bitcoin} alt="" />
                     <div className="flex flex-col">
@@ -172,19 +170,19 @@ const SchedulePayments = ({
                     </div>
                   </div>
                 )}
-                {/* <IoIosArrowDown
+                <IoIosArrowDown
                   className={`text-[1.125rem] text-[#151515] font-bold cursor-pointer ${
                     assets
                       ? `rotate-[180deg] duration-200`
                       : `rotate-0 duration-200`
                   }`}
-                /> */}
+                />
               </div>
-              {/* {assets && (
-                <div >
+              {assets && (
+                <div onClick={() => setAssets((prev) => !prev)}>
                   <ShowAssets2 onAssetClick={setAssetsState} />
                 </div>
-              )} */}
+              )}
             </div>
             <div className="flex flex-col items-start gap-2 w-full">
               <label
@@ -196,8 +194,6 @@ const SchedulePayments = ({
               <input
                 className="outline-none border-none bg-[#F7F7F7] h-[56px] px-4 w-full self-stretch flex items-center text-base placeholder:text-[#838385] font-normal leading-6 text-[#000000] rounded-lg"
                 type="text"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
                 placeholder="Enter Amount"
               />
             </div>
@@ -207,7 +203,7 @@ const SchedulePayments = ({
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setFinishScheduleDaily(true);
+                setFinishSchedule(true);
               }}
               className="h-[56px] self-stretch flex justify-center items-center px-2 bg-[#2F4EED] rounded-lg text-base text-white font-semibold leading-[18px]"
             >
@@ -215,16 +211,10 @@ const SchedulePayments = ({
             </button>
           </div>
         </form>
-        {finishScheduleDaily && (
-          <FinishScheduleDaily
-            setFinishSchedule={setFinishScheduleDaily}
-            finishSchedule={finishScheduleDaily}
-            frequencyState={frequencyState}
-            setSchedulePayments={setSchedulePayments}
-            asset={userAsset}
-            setExistData={setExistData}
-            amount={amount}
-            employeeId={employeeId}
+        {finishSchedule && (
+          <FinishSchedule
+            setFinishSchedule={setFinishSchedule}
+            finishSchedule={finishSchedule}
           />
         )}
       </div>
@@ -232,4 +222,4 @@ const SchedulePayments = ({
   );
 };
 
-export default SchedulePayments;
+export default Daily;

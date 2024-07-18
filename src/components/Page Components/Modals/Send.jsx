@@ -34,7 +34,7 @@ const Send = ({
       setSendAssets(false);
     }
   };
-  const [sendConfirmed, setSendConfirmed] = useState(null); 
+  const [sendConfirmed, setSendConfirmed] = useState(null); // Changed to null to handle the initial state
   const [sendConfirmationMessage, setSendConfirmationMessage] = useState('');
 
   useEffect(() => {
@@ -219,5 +219,6 @@ const Send = ({
     </>
   );
 };
+
 
 export default Send;

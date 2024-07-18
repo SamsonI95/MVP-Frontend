@@ -48,7 +48,6 @@ const AddEmployee = ({
     validationSchema: addEmployeesSchema,
     onSubmit: (values) => {
       setLoading(true);
-
       axios
         .post(
           `/api/employee/register`,
@@ -74,6 +73,7 @@ const AddEmployee = ({
         })
         .finally(() => {
           setLoading(false);
+          setExistData((prev) => !prev);
         });
     },
   });

@@ -11,7 +11,7 @@ import polygon from "/public/svg/Coinnomad logo.svg";
 import ethereum from "/public/svg/Eth (1).svg";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 import UpdateDeleteEmployeeModal from "./Modals/UpdateDeleteEmployeeModal";
 import { truncateWalletAddress } from "@/Data/formikUtils";
 import SchedulePayments from "./Modals/SchedulePayments/SchedulePayments";
@@ -35,7 +35,7 @@ const EmployeeTable = ({
       Authorization: `Bearer ${user.ccessToken}`,
     },
   };
-  console.log("data",data);
+  console.log("data", data);
 
   const handleEditClick = (employee) => {
     setSelectedEmployee(employee);
@@ -60,6 +60,9 @@ const EmployeeTable = ({
       setCopiedIndex(null);
     }, 4000);
   };
+
+  const [employeeId, setEmployeeId] = useState("")
+  const [userAsset, setUserAsset] = useState("")
 
   return (
     <>
@@ -115,87 +118,105 @@ const EmployeeTable = ({
             </thead>
             {/* Table body */}
             <tbody>
-              {data.map((emp, index) => (
-                <tr
-                  key={index}
-                  className="border-b  hover:bg-[#F7F7F7] border-[#E9E9E9]"
-                >
-                  <td className="py-[12px] px-[32px] text-[.875rem] text-[#151515] font-semibold">
-                    {emp.firstName}
-                  </td>
-                  <td className="py-[12px] px-[24px] text-[.875rem] text-[#151515] font-semibold">
-                    {emp.lastName}
-                  </td>
-                  <td className="py-[12px] px-[24px] text-[.875rem] text-[#151515] font-semibold">
-                    {emp.email}
-                  </td>
-                  <td className="py-[12px] px-[24px]">
-                    <div className="flex justify-center items-start">
-                      {copiedIndex === index ? (
-                        <IoCheckmarkOutline className="text-green-400 font-bold text-[1.125rem]" />
+              {data.map((emp, index) => {
+                console.log("empersds", emp.scheduleTransaction);
+                return (
+                  <tr
+                    key={index}
+                    className="border-b  hover:bg-[#F7F7F7] border-[#E9E9E9]"
+                  >
+                    <td className="py-[12px] px-[32px] text-[.875rem] text-[#151515] font-semibold">
+                      {emp.firstName}
+                    </td>
+                    <td className="py-[12px] px-[24px] text-[.875rem] text-[#151515] font-semibold">
+                      {emp.lastName}
+                    </td>
+                    <td className="py-[12px] px-[24px] text-[.875rem] text-[#151515] font-semibold">
+                      {emp.email}
+                    </td>
+                    <td className="py-[12px] px-[24px]">
+                      <div className="flex justify-center items-start">
+                        {copiedIndex === index ? (
+                          <IoCheckmarkOutline className="text-green-400 font-bold text-[1.125rem]" />
+                        ) : (
+                          <IoCopyOutline
+                            onClick={() => handleCopy(index, emp)}
+                            className="text-[#1F2937] font-bold text-[1.125rem]"
+                          />
+                        )}
+                        <p className="text-[#151515] text-[.875rem] font-semibold pl-2">
+                          {truncateWalletAddress(emp.walletAddress)}
+                        </p>
+                      </div>
+                    </td>
+                    <td className="py-[12px] px-[24px]">
+                      {emp?.asset === "BTC" ? (
+                        <div className="flex justify-center items-start">
+                          <img
+                            className="w-6 h-6"
+                            src={bitcoin}
+                            alt="Bitcoin"
+                          />
+                          <span className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
+                            Bitcoin
+                          </span>
+                        </div>
+                      ) : emp?.asset === "ETH" ? (
+                        <div className="flex justify-center items-start">
+                          <img
+                            className="w-6 h-6"
+                            src={ethereum}
+                            alt="Ethereum"
+                          />
+                          <span className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
+                            Ethereum
+                          </span>
+                        </div>
                       ) : (
-                        <IoCopyOutline
-                          onClick={() => handleCopy(index, emp)}
-                          className="text-[#1F2937] font-bold text-[1.125rem]"
-                        />
+                        <div className="flex justify-center items-start">
+                          <img
+                            className="w-6 h-6"
+                            src={polygon}
+                            alt="Polygon"
+                          />
+                          <span className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
+                            Polygon
+                          </span>
+                        </div>
                       )}
-                      <p className="text-[#151515] text-[.875rem] font-semibold pl-2">
-                        {truncateWalletAddress(emp.walletAddress)}
-                      </p>
-                    </div>
-                  </td>
-                  <td className="py-[12px] px-[24px]">
-                    {emp?.asset === "BTC" ? (
-                      <div className="flex justify-center items-start">
-                        <img className="w-6 h-6" src={bitcoin} alt="Bitcoin" />
-                        <span className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
-                          Bitcoin
-                        </span>
-                      </div>
-                    ) : emp?.asset === "ETH" ? (
-                      <div className="flex justify-center items-start">
-                        <img
-                          className="w-6 h-6"
-                          src={ethereum}
-                          alt="Ethereum"
-                        />
-                        <span className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
-                          Ethereum
-                        </span>
-                      </div>
-                    ) : (
-                      <div className="flex justify-center items-start">
-                        <img className="w-6 h-6" src={polygon} alt="Polygon" />
-                        <span className="text-[#9C9C9C] text-[.875rem] font-semibold pl-2">
-                          Polygon
-                        </span>
-                      </div>
-                    )}
-                  </td>
-                  <td className="py-[12px] px-[32px] text-[.875rem] text-[#151515] font-semibold">
-                    <p className="bg-[#E9F7EF] rounded-[5px] py-1 px-3 items-center gap-1 text-[#23AE5E] text-[.875rem] font-semibold leading-4 text-center">
-                      Scheduled
-                    </p>
-                    {/* <p className="bg-[#FFF2F0] rounded-[5px] py-1 px-3 items-center gap-1 text-[#ED2F2F] text-[.875rem] font-semibold leading-4 text-center">Unscheduled</p> */}
-                  </td>
-                  <td className="py-[12px] gap-[16px] flex px-[32px]">
-                    <button
-                      className="py-1 px-3 rounded-[5px] border border-[#2F4EED] text-[#2F4EED] text-[.75rem] font-medium cursor-pointer"
-                      onClick={() => handleEditClick(emp)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => {
-                        setSchedulePayments(true);
-                      }}
-                      className="py-1 px-3 rounded-[5px] bg-[#2F4EED] text-white text-[.75rem] font-medium cursor-pointer"
-                    >
-                      Schedule Payments
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td className="py-[12px] px-[32px] text-[.875rem] text-[#151515] font-semibold">
+                      {emp.scheduleTransaction ? (
+                        <p className="bg-[#E9F7EF] rounded-[5px] py-1 px-3 items-center gap-1 text-[#23AE5E] text-[.875rem] font-semibold leading-4 text-center">
+                          Scheduled
+                        </p>
+                      ) : (
+                        <p className="bg-[#FFF2F0] rounded-[5px] py-1 px-3 items-center gap-1 text-[#ED2F2F] text-[.875rem] font-semibold leading-4 text-center">
+                          Unscheduled
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-[12px] gap-[16px] flex px-[32px]">
+                      <button
+                        className="py-1 px-3 rounded-[5px] border border-[#2F4EED] text-[#2F4EED] text-[.75rem] font-medium cursor-pointer"
+                        onClick={() => handleEditClick(emp)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSchedulePayments(true);
+                          setEmployeeId(emp.employeeId);
+                          setUserAsset(emp.asset)
+                        }}
+                        className="py-1 px-3 rounded-[5px] bg-[#2F4EED] text-white text-[.75rem] font-medium cursor-pointer"
+                      >
+                        Schedule Payments
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -223,6 +244,8 @@ const EmployeeTable = ({
         <SchedulePayments
           setSchedulePayments={setSchedulePayments}
           schedulePayments={schedulePayments}
+          employeeId={employeeId}
+          userAsset={userAsset}
         />
       )}
     </>
