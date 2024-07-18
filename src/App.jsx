@@ -43,6 +43,7 @@ import Settings from "./components/Pages/AdminDashboard/Settings/Settings";
 import { Toaster } from "./components/ui/toaster";
 import { ToastContainer } from "react-toastify";
 import UpdateDeleteEmployeeModal from "./components/Page Components/Modals/UpdateDeleteEmployeeModal";
+import WaitListDisplay from "./components/Pages/WaitListDisplay";
 
 
 
@@ -70,6 +71,7 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Landing />} />
+              <Route path="/waitlist" element={<WaitListDisplay/>}></Route>
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route

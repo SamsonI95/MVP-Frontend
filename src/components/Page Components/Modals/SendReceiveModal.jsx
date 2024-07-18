@@ -7,14 +7,14 @@ const SendReceiveModal = ({ sendReceiveModal, setSendReceiveModal,setReloadPage 
   const [sendAssets, setSendAssets] = useState(false);
   const [receiveAssets, setReceiveAssets] = useState(false);
   return (
-    <div  onClick={() => setSendReceiveModal("")} className="duration-200 w-full h-screen modalBg fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-[999]">
+    <div  onClick={() => setSendReceiveModal("")} className="p-2 duration-200 w-full h-screen modalBg fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center z-[999]">
       <FaXmark
         onClick={() => setSendReceiveModal("")}
         className="text-[1.25rem] cursor-pointer text-white font-bold absolute top-[12%] right-[30%]"
       />
       <div
        onClick={(e) =>  e.stopPropagation()} 
-        className={`bg-white w-[482px] h-[649px] rounded-lg gap-[3px] flex flex-col justify-center items-start ${
+        className={`bg-white w-full md:w-[482px] h-[649px] rounded-lg gap-[3px] flex flex-col justify-center items-start ${
           sendReceiveModal
             ? `scale-[1] opacity-100 duration-200`
             : `scale-0 opacity-0 duration-200`
