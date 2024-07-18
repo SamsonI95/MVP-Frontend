@@ -11,6 +11,9 @@ const TransactionSuccessful = () => {
         <p className="text-[1.125rem] text-[#151515] font-bold leading-6">
           Transaction Successful!
         </p>
+        <div>
+          
+        </div>
         <button className="bg-[#2F4EED] px-2 py-2 rounded-lg text-white h-[3.5em] gap-[40px] w-full mt-6">
           Close
         </button>

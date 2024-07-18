@@ -82,7 +82,7 @@ const Send = ({
           config
         );
 
-        console.log('Response data:', response.data);
+        console.log('Send Response data:', response.data);
         console.log('Response status:', response.status);
         if (response.data.success) {
           setSendConfirmed(true);
@@ -212,7 +212,7 @@ const Send = ({
           <FormButton
             btnName="Send"
             loading={loading}
-            width={`w-[402px]`}
+            width={`w-full md:w-[402px]`}
           />
         </div>
       </form>
