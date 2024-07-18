@@ -219,6 +219,7 @@ const SchedulePayments = ({
           <FinishScheduleDaily
             setFinishSchedule={setFinishScheduleDaily}
             finishSchedule={finishScheduleDaily}
+        
             frequencyState={frequencyState}
             setSchedulePayments={setSchedulePayments}
             asset={userAsset}

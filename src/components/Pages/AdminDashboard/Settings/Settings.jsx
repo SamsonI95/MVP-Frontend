@@ -21,7 +21,7 @@ const Settings = () => {
               <div className="bg-[#2F4EED] rounded-full w-[63px] h-[2px] absolute bottom-[-1px]"></div>
             )}
           </h1>
-          <h1
+          {/* <h1
             onClick={() => setCurrentTab("Change-Password")}
             className={`text-[1rem] font-semibold leading-6 gap-2 pb-2 duration-200 relative cursor-pointer ${
               currentTab === "Change-Password"
@@ -33,7 +33,7 @@ const Settings = () => {
             {currentTab === "Change-Password" && (
               <div className="bg-[#2F4EED] rounded-full w-[136px] h-[2px] absolute bottom-[-1px]"></div>
             )}
-          </h1>
+          </h1> */}
         
         </div>
       </div>

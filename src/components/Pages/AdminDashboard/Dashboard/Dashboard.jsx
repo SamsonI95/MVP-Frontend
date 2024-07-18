@@ -51,7 +51,7 @@ const Dashboard = () => {
     } catch (err) {
       console.error(err);
       toast.error(err.response.message || "An error occurred");
-    } 
+    }
   };
   useEffect(() => {
     getBalances();
@@ -90,8 +90,9 @@ const Dashboard = () => {
               <h1 className="text-[2.25rem] md:text-[4rem] text-[#151515] font-semibold leading-[48px] tracking-[-0.88px]">
                 $
                 {formatNumber(
-                  Number(formatNumber(balances.dollarBitcoinBalance)) +
-                    Number(formatNumber(balances.dollarMaticBalance))
+                  Number(formatNumber(balances.dollarBitcoinBalance)) ??
+                    0.0 + Number(formatNumber(balances.dollarMaticBalance)) ??
+                    0.0
                 )}
               </h1>
             )}

@@ -245,6 +245,7 @@ const EmployeeTable = ({
           setSchedulePayments={setSchedulePayments}
           schedulePayments={schedulePayments}
           employeeId={employeeId}
+          setExistData={setExistData}
           userAsset={userAsset}
         />
       )}
