@@ -107,13 +107,13 @@ export const truncateWalletAddress = (address) => {
 export const formatNumber = (numberString, numfixed = 2) => {
   // Check if the input is a number
   if (typeof numberString !== "number") {
-    return 0.00;
+    return ;
   }
   // Parse the number to float
   const number = parseFloat(numberString);
 
   // Format with commas and two decimal places
-  return number.toFixed(numfixed).replace(/\d(?=(\d{3})+\.)/g, "$&,") ?? 0.00;
+  return number.toFixed(numfixed).replace(/\d(?=(\d{3})+\.)/g, "$&,") ;
 };
 
 export const capitalizeFirstLetterOfEachWord = (inputString) => {
