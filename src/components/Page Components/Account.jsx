@@ -72,8 +72,10 @@ const Account = () => {
       })
       .catch((err) => {
         console.log("Employee Get", err);
+        toast.error(err.response.message||"An error occurred");
       })
       .finally(() => {
+    
         setIsLoading(false);
       });
   };
