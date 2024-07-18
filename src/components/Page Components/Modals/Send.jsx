@@ -107,9 +107,9 @@ const Send = ({
     <>
       {sendConfirmed !== null && (
         sendConfirmed === true ? (
-          <TransactionSuccessful sendConfirmationMessage={sendConfirmationMessage} />
+          <TransactionSuccessful sendConfirmationMessage={sendConfirmationMessage} setSendReceiveModal={setSendReceiveModal}/>
         ) : (
-          <TransactionFailed sendConfirmationMessage={sendConfirmationMessage} />
+          <TransactionFailed sendConfirmationMessage={sendConfirmationMessage} setSendReceiveModal={setSendReceiveModal} />
         )
       )}
       <form
@@ -162,10 +162,10 @@ const Send = ({
                 <p className="flex flex-col">
                   <p className="font-semibold">
                     {priceValue.dollarAmount && "$"}
-                    {formatNumber(priceValue.dollarAmount ?? "")}
+                    {formatNumber(priceValue.dollarAmount ?? 0)}
                   </p>
                   <p className="font-semibold text-[12px] ">
-                    {formatNumber(priceValue.value ?? "", 4)}
+                    {formatNumber(priceValue.value ?? 0, 4)}
                     <span className=" ml-1 ">{priceValue.name}</span>
                   </p>
                 </p>
