@@ -61,6 +61,9 @@ const EmployeeTable = ({
     }, 4000);
   };
 
+  const [employeeId, setEmployeeId] = useState("")
+  const [userAsset, setUserAsset] = useState("")
+
   return (
     <>
       {data.length > 0 ? (
@@ -183,7 +186,7 @@ const EmployeeTable = ({
                       )}
                     </td>
                     <td className="py-[12px] px-[32px] text-[.875rem] text-[#151515] font-semibold">
-                      {emp.scheduleTransaction? (
+                      {emp.scheduleTransaction ? (
                         <p className="bg-[#E9F7EF] rounded-[5px] py-1 px-3 items-center gap-1 text-[#23AE5E] text-[.875rem] font-semibold leading-4 text-center">
                           Scheduled
                         </p>
@@ -203,6 +206,8 @@ const EmployeeTable = ({
                       <button
                         onClick={() => {
                           setSchedulePayments(true);
+                          setEmployeeId(emp.employeeId);
+                          setUserAsset(emp.asset)
                         }}
                         className="py-1 px-3 rounded-[5px] bg-[#2F4EED] text-white text-[.75rem] font-medium cursor-pointer"
                       >
@@ -239,6 +244,8 @@ const EmployeeTable = ({
         <SchedulePayments
           setSchedulePayments={setSchedulePayments}
           schedulePayments={schedulePayments}
+          employeeId={employeeId}
+          userAsset={userAsset}
         />
       )}
     </>

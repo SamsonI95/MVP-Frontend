@@ -3,7 +3,12 @@ import { IoIosArrowDown } from "react-icons/io";
 import ShowAssets from "./ShowAssets";
 import { useFormik } from "formik";
 import axios from "axios";
-import { formatNumber, sendBitcoin, sendBitcoinAnyone, signIn } from "@/Data/formikUtils";
+import {
+  formatNumber,
+  sendBitcoin,
+  sendBitcoinAnyone,
+  signIn,
+} from "@/Data/formikUtils";
 import { toast } from "react-toastify";
 import InputField from "@/components/formFields/InputField";
 import FormButton from "@/components/Buttons/FormButton";
@@ -81,7 +86,7 @@ const Send = ({
         }
       } catch (error) {
         console.error("Error signing in:", error);
-        toast.error("Insufficient Balance"|| "Something went wrong");
+        toast.error("Insufficient Balance" || "Something went wrong");
       } finally {
         setLoading(false);
         setReloadPage((prev) => !prev);
@@ -141,10 +146,10 @@ const Send = ({
               <p className="flex flex-col">
                 <p className="font-semibold">
                   {priceValue.dollarAmount && "$"}
-                  {formatNumber(priceValue.dollarAmount??0)}
+                  {formatNumber(priceValue.dollarAmount ?? 0)}
                 </p>
                 <p className="font-semibold text-[12px] ">
-                  {formatNumber(priceValue.value??0,4)}
+                  {formatNumber(priceValue.value ?? 0, 4)}
                   <span className=" ml-1 ">{priceValue.name}</span>
                 </p>
               </p>

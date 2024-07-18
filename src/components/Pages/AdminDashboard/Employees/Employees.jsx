@@ -52,7 +52,7 @@ const Employees = () => {
 
   useEffect(() => {
     getEmployees();
-  }, [existData]);
+  }, [existData,addEmployees]);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -199,6 +199,7 @@ const Employees = () => {
       {schEmployees ? (
         <SchedulePayments
           freq={freq}
+          setExistData={setExistData}
           setFreq={setFreq}
           assets={assets}
           setAssets={setAssets}

@@ -3,7 +3,7 @@ import { HiOutlineXMark } from "react-icons/hi2";
 import { IoIosArrowDown } from "react-icons/io";
 import ShowAssets from "../ShowAssets";
 import ShowFrequency from "../ShowFrequency";
-import FinishSchedule from "./FinishSchedule";
+import FinishSchedule from "./FinishScheduleDaily";
 import ShowAssets2 from "../ShowAssets2";
 import bitcoin from "/svg/Bitcoin Badge.svg";
 import polygon from "/svg/Coinnomad logo.svg";

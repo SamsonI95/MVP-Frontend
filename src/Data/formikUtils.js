@@ -8,7 +8,7 @@ const passwordRegExp =
 
 const emailRegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-const codeRegex = /^[0-9]*$/
+const codeRegex = /^[0-9]*$/;
 
 export const signIn = Yup.object({
   email: Yup.string().email("Invalid Email Address").required("required"),
@@ -71,51 +71,56 @@ export const validateName = Yup.object({
 
 export const emailPasswordReset = Yup.string({
   email: Yup.string()
-   .email("Enter Your E-mail Address")
-   .matches(emailRegExp, "Invalid E-mail Address")
-   .required("required")
+    .email("Enter Your E-mail Address")
+    .matches(emailRegExp, "Invalid E-mail Address")
+    .required("required"),
 });
 
 export const addEmployeesSchema = Yup.object({
-  firstName: Yup.string().required('required'),
-  lastName: Yup.string().required('required'),
-  email: Yup.string().email('Enter a valid email address').matches(emailRegExp, 'Invalid E-mail Address').required('required'),
-  asset: Yup.string().required('required'),
-  walletAddress: Yup.string().required('required'),
+  firstName: Yup.string().required("required"),
+  lastName: Yup.string().required("required"),
+  email: Yup.string()
+    .email("Enter a valid email address")
+    .matches(emailRegExp, "Invalid E-mail Address")
+    .required("required"),
+  asset: Yup.string().required("required"),
+  walletAddress: Yup.string().required("required"),
 });
 
 export const sendBitcoin = Yup.object({
-  employeeId: Yup.string().required('required'),
-  amount: Yup.number().required('required')
-})
-
-
+  employeeId: Yup.string().required("required"),
+  amount: Yup.number().required("required"),
+});
 
 export const sendBitcoinAnyone = Yup.object({
-  walletAddress: Yup.string().required('required'),
-  amount: Yup.number().required('required')
-})
+  walletAddress: Yup.string().required("required"),
+  amount: Yup.number().required("required"),
+});
 
-
-
-export  const truncateWalletAddress = (address) => {
+export const truncateWalletAddress = (address) => {
   // const lengthToShow = 15;
   if (!address) return "";
   return `${address.slice(0, 6)}...${address.slice(-6)}`;
   // return `${address.substring(0, lengthToShow)}...`;
 };
 
+export const formatNumber = (numberString, numfixed = 2) => {
+  // Check if the input is a number
+  if (typeof numberString !== "number") {
+    return;
+  }
+  // Parse the number to float
+  const number = parseFloat(numberString);
 
+  // Format with commas and two decimal places
+  return number.toFixed(numfixed).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+};
 
-
- export const formatNumber = (numberString, numfixed = 2) => {
-    // Check if the input is a number
-    if (typeof numberString !== "number") {
-      return;
-    }
-    // Parse the number to float
-    const number = parseFloat(numberString);
-
-    // Format with commas and two decimal places
-    return number.toFixed( numfixed).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-  };
+export const capitalizeFirstLetterOfEachWord = (inputString) => {
+  return inputString
+    .split(" ")
+    .map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+};
