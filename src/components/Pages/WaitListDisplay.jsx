@@ -14,12 +14,18 @@ const WaitListDisplay = () => {
     }, []);
 
     return (
-        <section className='w-full h-screen flex flex-col justify-center items-center text-center gap-6'>
+        <section className='w-full h-screen flex flex-col justify-center items-center gap-6'>
             <h1>Email Address Waitlist</h1>
+            <div>
+                Waitlist Count: {list.length}
+            </div>
             <div>
                 {list.length > 0 ? (
                     list.map((l, index) => (
-                        <p className='text-[1.25rem] font-medium text-black leading-8' key={index}>{l.email}</p>
+                        <div className='flex justify-center items-center gap-2' key={index}>
+                            <p>{index + 1}</p>
+                            <p className='text-[1.25rem] font-medium text-black leading-8'>{l.email}</p>
+                        </div>
                     ))
                 ) : (
                     <p>No emails in the waitlist.</p>
