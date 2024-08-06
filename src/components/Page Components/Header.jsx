@@ -33,17 +33,17 @@ const Header = () => {
   return (
     <>
       <div className="flex items-center justify-between sm:py-4 sm:px-5 md:py-6 md:px-8 lg:px-[100px]">
-        <div className="mx-auto">
+        <div>
           <Link to="/" className="sm:py-[16px] py-[24px]">
             <img src={HeaderLogo} alt="logo-icon" />
           </Link>
         </div>
-        {/* <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center">
           <button onClick={toggleMenu} className="text-2xl">
             {isOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
-        {/* <div className="hidden md:flex w-fit items-center justify-evenly space-x-6">
+        <div className="hidden md:flex w-fit items-center justify-evenly space-x-6">
           {renderButtons && (
             <>
               <Link to="/sign-in">
@@ -56,9 +56,9 @@ const Header = () => {
               </Link>
             </>
           )}
-        </div> */}
+        </div>
       </div>
-      {/* {isOpen && (
+      {isOpen && (
         <div className="md:hidden flex flex-col items-center space-y-4 py-4">
           <Link to="/sign-in" onClick={toggleMenu}>
             <button className="text-sm font-semibold p-2">Sign In</button>
@@ -69,7 +69,7 @@ const Header = () => {
             </button>
           </Link>
         </div>
-      )} */}
+      )}
     </>
   );
 };
